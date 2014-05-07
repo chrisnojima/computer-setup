@@ -1,0 +1,14 @@
+- adium
+- chrome
+- evernote
+- gfxCardStatus
+- idea
+- imageoptim
+- iterm
+- jumpcut
+- macvim
+- menumeters
+- robomongo
+- skype
+- sourcetree
+- xcode
