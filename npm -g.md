@@ -1,4 +1,6 @@
 - jshint
+- gulp
+- http-server
 - n
 - node-inspector
 - nodemon
