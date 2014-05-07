@@ -1,4 +1,5 @@
 - adium
+- brew
 - chrome
 - evernote
 - gfxCardStatus
