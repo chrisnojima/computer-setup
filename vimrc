@@ -5,13 +5,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'wincent/Command-T.git'
 Plugin 'adrian.vim'
 Plugin 'matchit.zip'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'kien/rainbow_parentheses.vim.git'
 Plugin 'scrooloose/syntastic.git'
-Plugin 'majutsushi/tagbar.git'
 Plugin 'Lokaltog/vim-easymotion.git'
 Plugin 'maksimr/vim-jsbeautify.git'
 Plugin 'tpope/vim-repeat.git'
