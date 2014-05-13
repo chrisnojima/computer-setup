@@ -15,6 +15,7 @@ Plugin 'maksimr/vim-jsbeautify.git'
 Plugin 'tpope/vim-repeat.git'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-unimpaired.git'
+Plugin 'tpope/vim-fugitive.git'
 Plugin 'airblade/vim-gitgutter.git'
 Plugin 'Raimondi/delimitMate.git'
 Plugin 'kien/ctrlp.vim.git'
@@ -70,8 +71,9 @@ if has("gui_macvim")
 endif
 
 if has("mac") || has("macunix")
- set gfn=Menlo:h14
+ set gfn=Menlo:h24
  set shell=/bin/bash
+ set guifont=Anonymous\ Pro\ for\ Powerline:h16
 elseif has("win16") || has("win32")
  set gfn=Bitstream\ Vera\ Sans\ Mono:h10
 elseif has("linux")
@@ -79,8 +81,8 @@ elseif has("linux")
  set shell=/bin/bash
 endif
 
-hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+"hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
+"set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 
 " Key maps
 let mapleader = ","
@@ -103,3 +105,5 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
