@@ -15,7 +15,15 @@ Plugin 'maksimr/vim-jsbeautify.git'
 Plugin 'tpope/vim-repeat.git'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-unimpaired.git'
+Plugin 'airblade/vim-gitgutter.git'
+Plugin 'Raimondi/delimitMate.git'
+Plugin 'kien/ctrlp.vim.git'
 Plugin 'myusuf3/numbers.vim'
+Plugin 'bling/vim-airline.git'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 call vundle#end()           
 filetype plugin indent on  
 
@@ -92,3 +100,6 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
