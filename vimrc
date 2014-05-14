@@ -5,7 +5,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'adrian.vim'
 Plugin 'matchit.zip'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'kien/rainbow_parentheses.vim.git'
@@ -26,6 +25,10 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'chrisnojima/nojima-vim-snippets.git'
+Plugin 'moll/vim-node.git'
+Plugin 'mileszs/ack.vim.git'
+Plugin 'nathanaelkane/vim-indent-guides.git'
+Plugin 'tomasr/molokai.git'
 call vundle#end()           
 filetype plugin indent on  
 
@@ -66,20 +69,12 @@ set tw=500
 set wrap 
 syntax enable 
 
-colorscheme adrian
-if has("gui_macvim")
-  colorscheme solarized
-endif
+colorscheme molokai
 
 if has("mac") || has("macunix")
  set gfn=Menlo:h24
  set shell=/bin/bash
  set guifont=Anonymous\ Pro\ for\ Powerline:h16
-elseif has("win16") || has("win32")
- set gfn=Bitstream\ Vera\ Sans\ Mono:h10
-elseif has("linux")
- set gfn=Monospace\ 10
- set shell=/bin/bash
 endif
 
 " Key maps
@@ -106,3 +101,4 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:indent_guides_enable_on_vim_startup = 1
