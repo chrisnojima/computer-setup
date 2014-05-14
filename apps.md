@@ -1,4 +1,3 @@
-- ack
 - adium
 - brew
 - chrome
@@ -14,3 +13,11 @@
 - skype
 - sourcetree
 - xcode
+
+brew
+====
+- ack
+- chisel
+- ctags
+- git
+- node
