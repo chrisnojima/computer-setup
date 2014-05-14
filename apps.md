@@ -1,3 +1,4 @@
+- ack
 - adium
 - brew
 - chrome
