@@ -25,6 +25,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'chrisnojima/nojima-vim-snippets.git'
 call vundle#end()           
 filetype plugin indent on  
 
@@ -81,9 +82,6 @@ elseif has("linux")
  set shell=/bin/bash
 endif
 
-"hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-"set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
-
 " Key maps
 let mapleader = ","
 let g:mapleader = ","
@@ -92,6 +90,7 @@ map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 map <leader>w :w<cr>
 map <leader>cd :cd %:p:h<CR>
+map <leader>o <c-w>o<cr>
 
 "Plugin stuff
 let NERDTreeMinimalUI=1
