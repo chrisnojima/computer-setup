@@ -30,6 +30,7 @@ Plugin 'moll/vim-node.git' "helpers for node, jump through requires
 Plugin 'mileszs/ack.vim.git' "better search than grep
 Plugin 'nathanaelkane/vim-indent-guides.git' "visually shows indents
 Plugin 'tomasr/molokai.git' "simple colorscheme
+Plugin 'vim-scripts/Conque-Shell.git' "better shell support
 call vundle#end()           
 filetype plugin indent on "needed by vundle
 
@@ -101,4 +102,5 @@ map <leader>nf :NERDTreeFind<cr>
 map <leader>w :w<cr>
 map <leader>cd :cd %:p:h<CR>
 map <leader>o <c-w>o<cr>
+map <leader>t :silent !open -a /Applications/iTerm.app/ .<CR>
 
