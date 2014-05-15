@@ -77,6 +77,7 @@ set guifont=Anonymous\ Pro\ for\ Powerline:h16
 
 "Plugin Settings ===================================
 let NERDTreeMinimalUI=1 "Hide help text
+let NERDTreeShowBookmarks=1 "show bookmarks on start
 let g:syntastic_check_on_open=1 "auto load syntastic
 let g:syntastic_enable_highlighting=1 "highlight syntax errors
 au BufNewfile,BufRead *.less set ft=less.css "less files treated like css
