@@ -9,7 +9,8 @@ Plugin 'gmarik/Vundle.vim' "plugin manager
 Plugin 'matchit.zip' "smarter %
 Plugin 'scrooloose/nerdtree.git' "file explorer
 Plugin 'kien/rainbow_parentheses.vim.git' "color parentheses
-Plugin 'scrooloose/syntastic.git' "better syntax highlighting Plugin 'Lokaltog/vim-easymotion.git' "move anywhere visually
+Plugin 'scrooloose/syntastic.git' "better syntax highlighting 
+Plugin 'Lokaltog/vim-easymotion.git' "move anywhere visually
 Plugin 'maksimr/vim-jsbeautify.git' "format js
 Plugin 'tpope/vim-repeat.git' "repeat commands better
 Plugin 'tpope/vim-surround.git' "surround things better
@@ -100,3 +101,4 @@ map <leader>nf :NERDTreeFind<cr>
 map <leader>w :w<cr>
 map <leader>cd :cd %:p:h<CR>
 map <leader>o <c-w>o<cr>
+
