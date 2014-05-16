@@ -14,31 +14,31 @@ if has("win32")
 endif
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim' "plugin manager
-Plugin 'matchit.zip' "smarter %
-Plugin 'scrooloose/nerdtree.git' "file explorer
-Plugin 'kien/rainbow_parentheses.vim.git' "color parentheses
-Plugin 'scrooloose/syntastic.git' "better syntax highlighting 
 Plugin 'Lokaltog/vim-easymotion.git' "move anywhere visually
+Plugin 'MarcWeber/vim-addon-mw-utils' "pre-req for snipmate
+Plugin 'Raimondi/delimitMate.git' "injects closing quotes/brackets
+Plugin 'airblade/vim-gitgutter.git' "show git changes in the gutter
+Plugin 'bling/vim-airline.git' "cool statusbar
+Plugin 'chrisnojima/nojima-vim-snippets.git' "my snippets
+Plugin 'garbas/vim-snipmate' "snippet engine
+Plugin 'gmarik/Vundle.vim' "plugin manager
+Plugin 'honza/vim-snippets' "common snippets
+Plugin 'kien/ctrlp.vim.git' "smart search
+Plugin 'kien/rainbow_parentheses.vim.git' "color parentheses
 Plugin 'maksimr/vim-jsbeautify.git' "format js
+Plugin 'matchit.zip' "smarter %
+Plugin 'mileszs/ack.vim.git' "better search than grep
+Plugin 'moll/vim-node.git' "helpers for node, jump through requires
+Plugin 'myusuf3/numbers.vim' "show line numbers as offsets
+Plugin 'nathanaelkane/vim-indent-guides.git' "visually shows indents
+Plugin 'scrooloose/nerdtree.git' "file explorer
+Plugin 'scrooloose/syntastic.git' "better syntax highlighting 
+Plugin 'tomasr/molokai.git' "simple colorscheme
+Plugin 'tomtom/tlib_vim' "pre-req for snipmate
+Plugin 'tpope/vim-fugitive.git' "git integration
 Plugin 'tpope/vim-repeat.git' "repeat commands better
 Plugin 'tpope/vim-surround.git' "surround things better
 Plugin 'tpope/vim-unimpaired.git' "toggle mappings quicker
-Plugin 'tpope/vim-fugitive.git' "git integration
-Plugin 'airblade/vim-gitgutter.git' "show git changes in the gutter
-Plugin 'Raimondi/delimitMate.git' "injects closing quotes/brackets
-Plugin 'kien/ctrlp.vim.git' "smart search
-Plugin 'myusuf3/numbers.vim' "show line numbers as offsets
-Plugin 'bling/vim-airline.git' "cool statusbar
-Plugin 'MarcWeber/vim-addon-mw-utils' "pre-req for snipmate
-Plugin 'tomtom/tlib_vim' "pre-req for snipmate
-Plugin 'garbas/vim-snipmate' "snippet engine
-Plugin 'honza/vim-snippets' "common snippets
-Plugin 'chrisnojima/nojima-vim-snippets.git' "my snippets
-Plugin 'moll/vim-node.git' "helpers for node, jump through requires
-Plugin 'mileszs/ack.vim.git' "better search than grep
-Plugin 'nathanaelkane/vim-indent-guides.git' "visually shows indents
-Plugin 'tomasr/molokai.git' "simple colorscheme
 call vundle#end()           
 filetype plugin indent on "needed by vundle
 
@@ -84,31 +84,31 @@ colorscheme molokai
 set guifont=Anonymous\ Pro\ for\ Powerline:h16
 
 "Plugin Settings ===================================
-let NERDTreeMinimalUI=1 "Hide help text
-let NERDTreeShowBookmarks=1 "show bookmarks on start
-let g:syntastic_check_on_open=1 "auto load syntastic
-let g:syntastic_enable_highlighting=1 "highlight syntax errors
 au BufNewfile,BufRead *.less set ft=less.css "less files treated like css
-au VimEnter * RainbowParenthesesToggle "auto load rainbow
+au Syntax * RainbowParenthesesLoadBraces "show rainbow on {
 au Syntax * RainbowParenthesesLoadRound "show rainbow on (
 au Syntax * RainbowParenthesesLoadSquare "show rainbow on [
-au Syntax * RainbowParenthesesLoadBraces "show rainbow on {
-let g:ctrlp_map = '<c-p>' "control-p mapping
-let g:ctrlp_cmd = 'CtrlP' "control-p command
-let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
+au VimEnter * RainbowParenthesesToggle "auto load rainbow
+let NERDTreeMinimalUI=1 "Hide help text
+let NERDTreeShowBookmarks=1 "show bookmarks on start
 let g:airline#extensions#tabline#enabled = 1 "extensions in airline
 let g:airline_powerline_fonts = 1 "good fonts in airline
+let g:ctrlp_cmd = 'CtrlP' "control-p command
+let g:ctrlp_map = '<c-p>' "control-p mapping
+let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
+let g:syntastic_check_on_open=1 "auto load syntastic
+let g:syntastic_enable_highlighting=1 "highlight syntax errors
 
 " Key maps
 let mapleader = "," "comma better than \
 let g:mapleader = "," "comma better than \
 
-map <leader>nn :NERDTreeToggle<cr>
+map <leader>cd :cd %:p:h<CR>
+map <leader>n <c-w>w
 map <leader>nb :NERDTreeFromBookmark 
 map <leader>nf :NERDTreeFind<cr>
-map <leader>w :w<cr>
-map <leader>cd :cd %:p:h<CR>
+map <leader>nn :NERDTreeToggle<cr>
 map <leader>o <c-w>o<cr>
 map <leader>t :silent !open -a /Applications/iTerm.app/ .<CR>
-
+map <leader>w :w<cr>
