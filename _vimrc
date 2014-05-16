@@ -2,8 +2,17 @@ set nocompatible "needed by vundle
 filetype off "needed by vundle
 
 "Plugins===================================
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+
+if has("mac") || has("macunix")
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+endif
+if has("win32")
+  set rtp+=~/vimfiles/bundle/Vundle.vim/
+  let path='~/vimfiles/bundle'
+  call vundle#begin(path)
+endif
+
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim' "plugin manager
 Plugin 'matchit.zip' "smarter %
@@ -56,7 +65,6 @@ set noswapfile "no backup files
 set novisualbell "no sounds
 set nowb "no backup files
 set nu "show line numbers
-set shell=/bin/bash "set shell to bash
 set shiftwidth=2 "tab width
 set showcmd "show current command on lower right, useful for leader
 set showmatch "show matching brackets
