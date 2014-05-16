@@ -2,6 +2,7 @@
 - brew
 - chrome
 - evernote
+- fishshell
 - gfxCardStatus
 - idea
 - imageoptim
