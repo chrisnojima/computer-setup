@@ -8,3 +8,4 @@ vim setup
 - copy vimrc to .vimrc 
 - vim
 - :PluginInstall
+- windows vundle instructions: https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
