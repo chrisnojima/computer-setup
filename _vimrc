@@ -81,7 +81,13 @@ syntax enable "show syntax
 
 "Style Settings ===================================
 colorscheme molokai
-set guifont=Anonymous\ Pro\ for\ Powerline:h16
+if has("mac") || has("macunix")
+  set guifont=Anonymous\ Pro\ for\ Powerline:h16
+endif
+if has("win32")
+  set guifont=Anonymice_Powerline:h16
+endif
+
 
 "Plugin Settings ===================================
 au BufNewfile,BufRead *.less set ft=less.css "less files treated like css
