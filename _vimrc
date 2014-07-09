@@ -39,6 +39,9 @@ Plugin 'tpope/vim-fugitive.git' "git integration
 Plugin 'tpope/vim-repeat.git' "repeat commands better
 Plugin 'tpope/vim-surround.git' "surround things better
 Plugin 'tpope/vim-unimpaired.git' "toggle mappings quicker
+Plugin 'rking/ag.vim' "the silver searcher
+Plugin 'chrisbra/csv.vim' "csv plugin
+Plugin 'editorconfig/editorconfig-vim' "editorconfig
 call vundle#end()           
 filetype plugin indent on "needed by vundle
 
@@ -88,33 +91,45 @@ if has("win32")
   set guifont=Anonymice_Powerline:h16
 endif
 
-
 "Plugin Settings ===================================
-au BufNewfile,BufRead *.less set ft=less.css "less files treated like css
+au BufNewfile,BufRead *.less set ft=css "less files treated like css
 au Syntax * RainbowParenthesesLoadBraces "show rainbow on {
 au Syntax * RainbowParenthesesLoadRound "show rainbow on (
 au Syntax * RainbowParenthesesLoadSquare "show rainbow on [
 au VimEnter * RainbowParenthesesToggle "auto load rainbow
+
 let NERDTreeMinimalUI=1 "Hide help text
 let NERDTreeShowBookmarks=1 "show bookmarks on start
 let g:airline#extensions#tabline#enabled = 1 "extensions in airline
 let g:airline_powerline_fonts = 1 "good fonts in airline
 let g:ctrlp_cmd = 'CtrlP' "control-p command
 let g:ctrlp_map = '<c-p>' "control-p mapping
+let g:ctrlp_match_window = 'max:100,results:100'
+let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
+let g:syntastic_aggregate_errors = 1 "show all errors
+let g:syntastic_always_populate_loc_list = 1 "so you can jump with ]l
 let g:syntastic_check_on_open=1 "auto load syntastic
+let g:syntastic_enable_highlighting = 1 "more showy
 let g:syntastic_enable_highlighting=1 "highlight syntax errors
+let g:syntastic_error_symbol = '' "fancy
+let g:syntastic_style_error_symbol = '' "fancy
+let g:syntastic_style_warning_symbol = '' "fancy
+let g:syntastic_warning_symbol = '' "fancy
 
 " Key maps
-let mapleader = "," "comma better than \
+:command Q :q
 let g:mapleader = "," "comma better than \
-
+let mapleader = "," "comma better than \
+map <leader>2 :silent !open -a /Applications/iTerm.app/ .<CR>
 map <leader>cd :cd %:p:h<CR>
 map <leader>n <c-w>w
 map <leader>nb :NERDTreeFromBookmark 
 map <leader>nf :NERDTreeFind<cr>
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>o <c-w>o<cr>
-map <leader>t :silent !open -a /Applications/iTerm.app/ .<CR>
+map <leader>t :CtrlPTag<cr>
 map <leader>w :w<cr>
+
+
