@@ -19,7 +19,6 @@ Plugin 'gmarik/Vundle.vim' "plugin manager
 Plugin 'Lokaltog/vim-easymotion.git' "move anywhere visually
 Plugin 'MarcWeber/vim-addon-mw-utils' "pre-req for snipmate
 Plugin 'Raimondi/delimitMate.git' "injects closing quotes/brackets
-Plugin 'airblade/vim-gitgutter.git' "show git changes in the gutter
 Plugin 'bling/vim-airline.git' "cool statusbar
 Plugin 'chrisbra/csv.vim' "csv plugin
 Plugin 'chrisnojima/nojima-vim-snippets.git' "my snippets
@@ -46,6 +45,10 @@ Plugin 'tpope/vim-fugitive.git' "git integration
 Plugin 'tpope/vim-repeat.git' "repeat commands better
 Plugin 'tpope/vim-surround.git' "surround things better
 Plugin 'tpope/vim-unimpaired.git' "toggle mappings quicker
+
+if has("mac") || has("macunix")
+Plugin 'airblade/vim-gitgutter.git' "show git changes in the gutter. insanely slow on windows
+endif
 
 call vundle#end()           
 filetype plugin indent on "needed by vundle
