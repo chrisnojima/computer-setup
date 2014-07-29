@@ -14,34 +14,39 @@ if has("win32")
 endif
 
 " let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim' "plugin manager
+
 Plugin 'Lokaltog/vim-easymotion.git' "move anywhere visually
 Plugin 'MarcWeber/vim-addon-mw-utils' "pre-req for snipmate
 Plugin 'Raimondi/delimitMate.git' "injects closing quotes/brackets
 Plugin 'airblade/vim-gitgutter.git' "show git changes in the gutter
 Plugin 'bling/vim-airline.git' "cool statusbar
+Plugin 'chrisbra/csv.vim' "csv plugin
 Plugin 'chrisnojima/nojima-vim-snippets.git' "my snippets
+Plugin 'editorconfig/editorconfig-vim' "editorconfig
 Plugin 'garbas/vim-snipmate' "snippet engine
-Plugin 'gmarik/Vundle.vim' "plugin manager
 Plugin 'honza/vim-snippets' "common snippets
+Plugin 'joonty/vdebug.git' "debugging php
 Plugin 'kien/ctrlp.vim.git' "smart search
 Plugin 'kien/rainbow_parentheses.vim.git' "color parentheses
+Plugin 'majutsushi/tagbar.git' "show tags
 Plugin 'maksimr/vim-jsbeautify.git' "format js
 Plugin 'matchit.zip' "smarter %
 Plugin 'mileszs/ack.vim.git' "better search than grep
 Plugin 'moll/vim-node.git' "helpers for node, jump through requires
 Plugin 'myusuf3/numbers.vim' "show line numbers as offsets
 Plugin 'nathanaelkane/vim-indent-guides.git' "visually shows indents
+Plugin 'ntpeters/vim-better-whitespace.git' "show trailing whitespace
+Plugin 'rking/ag.vim' "the silver searcher
 Plugin 'scrooloose/nerdtree.git' "file explorer
-Plugin 'scrooloose/syntastic.git' "better syntax highlighting 
+Plugin 'scrooloose/syntastic.git' "better syntax highlighting
 Plugin 'tomasr/molokai.git' "simple colorscheme
 Plugin 'tomtom/tlib_vim' "pre-req for snipmate
 Plugin 'tpope/vim-fugitive.git' "git integration
 Plugin 'tpope/vim-repeat.git' "repeat commands better
 Plugin 'tpope/vim-surround.git' "surround things better
 Plugin 'tpope/vim-unimpaired.git' "toggle mappings quicker
-Plugin 'rking/ag.vim' "the silver searcher
-Plugin 'chrisbra/csv.vim' "csv plugin
-Plugin 'editorconfig/editorconfig-vim' "editorconfig
+
 call vundle#end()           
 filetype plugin indent on "needed by vundle
 
@@ -108,7 +113,7 @@ let g:ctrlp_match_window = 'max:100,results:100'
 let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
-let g:syntastic_aggregate_errors = 1 "show all errors
+let g:syntastic_aggregate_errors = 0 "don't show all errors, too slow
 let g:syntastic_always_populate_loc_list = 1 "so you can jump with ]l
 let g:syntastic_check_on_open=1 "auto load syntastic
 let g:syntastic_enable_highlighting = 1 "more showy
@@ -117,6 +122,10 @@ let g:syntastic_error_symbol = '' "fancy
 let g:syntastic_style_error_symbol = '' "fancy
 let g:syntastic_style_warning_symbol = '' "fancy
 let g:syntastic_warning_symbol = '' "fancy
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_compact = 1
+let g:tagbar_width = 30
 
 " Key maps
 :command Q :q
@@ -125,11 +134,12 @@ let mapleader = "," "comma better than \
 map <leader>2 :silent !open -a /Applications/iTerm.app/ .<CR>
 map <leader>cd :cd %:p:h<CR>
 map <leader>n <c-w>w
-map <leader>nb :NERDTreeFromBookmark 
+map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>o <c-w>o<cr>
 map <leader>t :CtrlPTag<cr>
+map <leader>b :TagbarToggle<cr>
 map <leader>w :w<cr>
 
 
