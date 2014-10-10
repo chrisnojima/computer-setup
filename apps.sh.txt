@@ -1,0 +1,39 @@
+- xcode first
+
+binaries=(
+  ack
+  ant
+  ctags
+  fish
+  git
+  hub
+  node
+  terminal-notifier
+  tree
+  webkit2png
+)
+
+brew install ${binaries[@]}
+////
+brew install caskroom/cask/brew-cask
+
+apps=(
+  alfred
+  adium
+  dropbox
+  evernote
+  gfxcardstatus
+  google-chrome
+  firefox
+  imageoptim
+  iterm2
+  jumpcut
+  macvim
+  menumeters
+  vlc
+  quicklook-json
+)
+
+brew cask install ${apps[@]}
+
+
