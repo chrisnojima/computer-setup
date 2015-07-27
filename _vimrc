@@ -1,58 +1,51 @@
-set nocompatible "needed by vundle
-filetype off "needed by vundle
-
 "Plugins===================================
 
 set shell=/bin/sh
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim' "plugin manager
-Plugin 'tpope/vim-dispatch.git' "async calls
+Plug 'Lokaltog/vim-easymotion' "move anywhere visually
+Plug 'MarcWeber/vim-addon-mw-utils' "pre-req for snipmate
+Plug 'Raimondi/delimitMate' "injects closing quotes/brackets
+Plug 'Shougo/unite.vim' "basically everything
+Plug 'Shougo/vimproc.vim' "used by unite
+Plug 'airblade/vim-gitgutter' "show git changes in the gutter
+Plug 'ap/vim-css-color' "color css
+Plug 'bling/vim-airline' "cool statusbar
+Plug 'chrisbra/csv.vim' "csv plugin
+Plug 'chrisnojima/nojima-vim-snippets' "my snippets
+Plug 'ctrlpvim/ctrlp.vim' "smart search (fork)
+Plug 'editorconfig/editorconfig-vim' "editorconfig
+Plug 'garbas/vim-snipmate' "snippet engine
+Plug 'gregsexton/gitv' "better git history
+Plug 'honza/vim-snippets' "common snippets
+Plug 'kien/rainbow_parentheses.vim' "color parentheses
+Plug 'majutsushi/tagbar' "show tags
+Plug 'maksimr/vim-jsbeautify' "format js
+Plug 'matchit.zip' "smarter %
+Plug 'mileszs/ack.vim' "better search than grep
+Plug 'moll/vim-node' "helpers for node, jump through requires
+Plug 'myusuf3/numbers.vim' "show line numbers as offsets
+Plug 'nathanaelkane/vim-indent-guides' "visually shows indents
+Plug 'ntpeters/vim-better-whitespace' "show trailing whitespace
+Plug 'pangloss/vim-javascript' "better js support
+Plug 'rking/ag.vim' "the silver searcher
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } "file explorer
+Plug 'scrooloose/syntastic' "better syntax highlighting
+Plug 'terryma/vim-multiple-cursors' "multi cursors
+Plug 'tomasr/molokai' "simple colorscheme
+Plug 'tomtom/tlib_vim' "pre-req for snipmate
+Plug 'tpope/vim-abolish' "smarter substitute and abbreviate
+Plug 'tpope/vim-dispatch' "async calls
+Plug 'tpope/vim-fugitive' "git integration
+Plug 'tpope/vim-repeat' "repeat commands better
+Plug 'tpope/vim-surround' "surround things better
+Plug 'tpope/vim-unimpaired' "toggle mappings quicker
 
-Plugin 'Lokaltog/vim-easymotion.git' "move anywhere visually
-Plugin 'MarcWeber/vim-addon-mw-utils' "pre-req for snipmate
-Plugin 'Raimondi/delimitMate.git' "injects closing quotes/brackets
-Plugin 'Shougo/unite.vim.git' "basically everything
-Plugin 'Shougo/vimproc.vim.git' "used by unite
-Plugin 'airblade/vim-gitgutter.git' "show git changes in the gutter
-Plugin 'ap/vim-css-color.git' "color css
-Plugin 'bling/vim-airline.git' "cool statusbar
-Plugin 'chrisbra/csv.vim' "csv plugin
-Plugin 'chrisnojima/nojima-vim-snippets.git' "my snippets
-Plugin 'ctrlpvim/ctrlp.vim.git' "smart search (fork)
-Plugin 'editorconfig/editorconfig-vim' "editorconfig
-Plugin 'garbas/vim-snipmate' "snippet engine
-Plugin 'honza/vim-snippets' "common snippets
-Plugin 'joonty/vdebug.git' "debugging php
-Plugin 'kien/rainbow_parentheses.vim.git' "color parentheses
-Plugin 'majutsushi/tagbar.git' "show tags
-Plugin 'maksimr/vim-jsbeautify.git' "format js
-Plugin 'matchit.zip' "smarter %
-Plugin 'mileszs/ack.vim.git' "better search than grep
-Plugin 'moll/vim-node.git' "helpers for node, jump through requires
-Plugin 'myusuf3/numbers.vim' "show line numbers as offsets
-Plugin 'nathanaelkane/vim-indent-guides.git' "visually shows indents
-Plugin 'ntpeters/vim-better-whitespace.git' "show trailing whitespace
-Plugin 'pangloss/vim-javascript' "better js support
-Plugin 'rking/ag.vim' "the silver searcher
-Plugin 'scrooloose/nerdtree.git' "file explorer
-Plugin 'scrooloose/syntastic.git' "better syntax highlighting
-Plugin 'terryma/vim-multiple-cursors.git' "multi cursors
-Plugin 'tomasr/molokai.git' "simple colorscheme
-Plugin 'tomtom/tlib_vim' "pre-req for snipmate
-Plugin 'tpope/vim-abolish.git' "smarter substitute and abbreviate
-Plugin 'tpope/vim-fugitive.git' "git integration
-Plugin 'tpope/vim-repeat.git' "repeat commands better
-Plugin 'tpope/vim-surround.git' "surround things better
-Plugin 'tpope/vim-unimpaired.git' "toggle mappings quicker
-
-call vundle#end()
-filetype plugin indent on "needed by vundle
+call plug#end()
 
 "Settings ===================================
 set ai "auto indent
+set autoread "auto reload changed files
 set clipboard=unnamed "use system clipboard for yank
 set cmdheight=2 "set command height
 set diffopt=vertical "vertical diffs
@@ -111,6 +104,10 @@ let g:ctrlp_map = '<c-p>' "control-p mapping
 let g:ctrlp_match_window = 'max:20,results:20'
 let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
+let g:ctrlp_lazy_update = 1 "update after you stop typing
+let g:ctrlp_max_files = 0 "unlimited files
+let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_clear_cache_on_exit = 0 "don't clear cache
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
 let g:syntastic_aggregate_errors = 0 "don't show all errors, too slow
 let g:syntastic_always_populate_loc_list = 1 "so you can jump with ]l
@@ -148,6 +145,8 @@ map <leader>h :wincmd h<CR>
 map <leader>j :wincmd j<CR>
 map <leader>k :wincmd k<CR>
 map <leader>l :wincmd l<CR>
+map <leader>q :normal @q<CR>
+map <leader>sass :%!sass-convert --from=CSS --to=SCSS<CR>
 
 :nnoremap n nzz
 :nnoremap N Nzz
