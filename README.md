@@ -1,6 +1,3 @@
-vim-setup
-=========
-
 vim setup
 - install anonymous pro font (edited) from https://github.com/Lokaltog/powerline-fonts/tree/master/AnonymousPro
 - set iterm2 font to above
