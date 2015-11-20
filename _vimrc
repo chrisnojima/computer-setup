@@ -118,7 +118,6 @@ let g:ctrlp_max_files = 0 "unlimited files
 let g:ctrlp_regexp = 0
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_use_caching = 0 " super fast with ag
-unlet g:ctrlp_user_command
 let g:ctrlp_user_command = {
     \ 'types': {
     \ 1: ['.git', 'cd %s && git ls-files'],
