@@ -34,7 +34,6 @@ Plug 'rking/ag.vim' "the silver searcher
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } "file explorer
 Plug 'scrooloose/syntastic' "better syntax highlighting
 Plug 'terryma/vim-multiple-cursors' "multi cursors
-Plug 'tomasr/molokai' "simple colorscheme
 Plug 'sjl/badwolf' " color
 Plug 'tomtom/tlib_vim' "pre-req for snipmate
 Plug 'tpope/vim-abolish' "smarter substitute and abbreviate
