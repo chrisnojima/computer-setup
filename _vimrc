@@ -6,8 +6,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'Lokaltog/vim-easymotion' "move anywhere visually
 Plug 'MarcWeber/vim-addon-mw-utils' "pre-req for snipmate
 Plug 'Raimondi/delimitMate' "injects closing quotes/brackets
-Plug 'Shougo/unite.vim' "basically everything
-Plug 'Shougo/vimproc.vim' "used by unite
 Plug 'airblade/vim-gitgutter' "show git changes in the gutter
 Plug 'ap/vim-css-color' "color css
 Plug 'bling/vim-airline' "cool statusbar
@@ -16,7 +14,6 @@ Plug 'chrisnojima/nojima-vim-snippets' "my snippets
 Plug 'ctrlpvim/ctrlp.vim' "smart search (fork)
 Plug 'editorconfig/editorconfig-vim' "editorconfig
 Plug 'fatih/vim-go' "go niceties
-Plug 'garbas/vim-snipmate' "snippet engine
 Plug 'gregsexton/gitv' "better git history
 Plug 'honza/vim-snippets' "common snippets
 Plug 'kchmck/vim-coffee-script' "coffeescript support
@@ -33,18 +30,21 @@ Plug 'pangloss/vim-javascript' "better js support
 Plug 'rking/ag.vim' "the silver searcher
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } "file explorer
 Plug 'scrooloose/syntastic' "better syntax highlighting
-Plug 'terryma/vim-multiple-cursors' "multi cursors
+Plug 'Shougo/neocomplete' "better completion
+Plug 'tomasr/molokai' "simple colorscheme
 Plug 'sjl/badwolf' " color
-Plug 'tomtom/tlib_vim' "pre-req for snipmate
 Plug 'tpope/vim-abolish' "smarter substitute and abbreviate
 Plug 'tpope/vim-dispatch' "async calls
 Plug 'tpope/vim-fugitive' "git integration
 Plug 'tpope/vim-repeat' "repeat commands better
 Plug 'tpope/vim-surround' "surround things better
 Plug 'tpope/vim-unimpaired' "toggle mappings quicker
-Plug 'Valloric/YouCompleteMe' "auto complete
 Plug 'Xuyuanp/nerdtree-git-plugin' " git aware nerdtree
-
+Plug 'marijnh/tern_for_vim' "smarter js auto complete
+Plug 'wellle/targets.vim' "better text objects
+Plug 'lukaszkorecki/CoffeeTags' "coffeescript support in tagbar
+Plug 'mxw/vim-jsx' "jsx helpers
+Plug 'scrooloose/nerdcommenter' "better comments
 call plug#end()
 
 "Settings ===================================
@@ -105,7 +105,7 @@ let NERDTreeMinimalUI=1 "Hide help text
 let NERDTreeShowBookmarks=1 "show bookmarks on start
 let g:ack_autofold_results = 1
 let g:ackhighlight = 1
-let g:ackprg = 'ag --nogroup --column --max-count=3 --silent'
+let g:ackprg = 'ag --nogroup --column --max-count=3 --silent --vimgrep'
 let g:airline#extensions#tabline#enabled = 1 "extensions in airline
 let g:airline_powerline_fonts = 1 "good fonts in airline
 let g:ctrlp_cmd = 'CtrlP' "control-p command
@@ -129,11 +129,10 @@ let g:ctrlp_user_command = {
     \ --ignore .DS_Store
     \ -g ""'
     \ }
-"
-"
 let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
 let g:go_autodetect_gopath = 0
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
+let g:jsx_ext_required = 0 "let jsx helper work on js
 let g:syntastic_aggregate_errors = 0 "don't show all errors, too slow
 let g:syntastic_always_populate_loc_list = 1 "so you can jump with ]l
 let g:syntastic_check_on_open=1 "auto load syntastic
@@ -142,6 +141,7 @@ let g:syntastic_enable_highlighting=1 "highlight syntax errors
 let g:syntastic_error_symbol = '' "fancy
 let g:syntastic_go_checkers = ['golint', 'gofmt', 'govet']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_javascript_flow_exe = 'flow'
 let g:syntastic_style_error_symbol = '' "fancy
 let g:syntastic_style_warning_symbol = '' "fancy
 let g:syntastic_warning_symbol = '' "fancy
@@ -149,6 +149,18 @@ let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
 let g:tagbar_width = 30
+let g:NERDSpaceDelims=1 "space after comments
+
+let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
+let g:neocomplete#enable_at_startup = 1 " Use neocomplete.
+let g:neocomplete#enable_smart_case = 1 " Use smartcase.
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*' " Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Key maps
 :command! Q :q
@@ -173,27 +185,3 @@ map <leader>q :normal @q<CR>
 
 :nnoremap n nzz
 :nnoremap N Nzz
-
-:cd /a/path/to/start/in
-
-let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
-if matchstr(local_eslint, "^\/\\w") == ''
-    let local_eslint = getcwd() . "/" . local_eslint
-endif
-if executable(local_eslint)
-    let g:syntastic_javascript_eslint_exec = local_eslint
-endif
-
-map <leader>go :Dispatch fish -c "gobuild"<CR>
-map <leader>ios :Dispatch fish -c "goBuildIos"<CR>
-
-let g:syntastic_go_golint_quiet_messages = {
-    \ "regex": '\(should have comment\|possible formatting\|comment on exported \)'
-    \}
-
-let g:syntastic_js_flow_quiet_messages = {
-    \ "regex": '\(Required Module Not Found\)'
-    \}
-
-
-
