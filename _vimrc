@@ -94,8 +94,8 @@ set guifont=Anonymous\ Pro\ for\ Powerline:h16
 "Plugin Settings ===================================
 au BufNewfile,BufRead *.less set ft=scss "less files treated like css
 au BufNewfile,BufRead *.css set ft=scss "less files treated like css
-au BufNewfile,BufRead *.tpl set ft=php "templates as php
 au BufNewfile,BufRead *.iced set ft=coffee "templates as coffee
+au BufNewfile,BufRead *.flow set ft=javascript | :let b:syntastic_checkers = ["flow"]
 au Syntax * RainbowParenthesesLoadBraces "show rainbow on {
 au Syntax * RainbowParenthesesLoadRound "show rainbow on (
 au Syntax * RainbowParenthesesLoadSquare "show rainbow on [
@@ -133,15 +133,13 @@ let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
 let g:go_autodetect_gopath = 0
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
 let g:jsx_ext_required = 0 "let jsx helper work on js
-let g:syntastic_aggregate_errors = 0 "don't show all errors, too slow
+let g:syntastic_aggregate_errors = 1 "don't show all errors, too slow
 let g:syntastic_always_populate_loc_list = 1 "so you can jump with ]l
 let g:syntastic_check_on_open=1 "auto load syntastic
 let g:syntastic_enable_highlighting = 1 "more showy
-let g:syntastic_enable_highlighting=1 "highlight syntax errors
 let g:syntastic_error_symbol = '' "fancy
 let g:syntastic_go_checkers = ['golint', 'gofmt', 'govet']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_javascript_flow_exe = 'flow'
 let g:syntastic_style_error_symbol = '' "fancy
 let g:syntastic_style_warning_symbol = '' "fancy
 let g:syntastic_warning_symbol = '' "fancy
@@ -151,11 +149,19 @@ let g:tagbar_compact = 1
 let g:tagbar_width = 30
 let g:NERDSpaceDelims=1 "space after comments
 
-let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
-let g:neocomplete#enable_at_startup = 1 " Use neocomplete.
-let g:neocomplete#enable_smart_case = 1 " Use smartcase.
-let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*' " Enable omni completion.
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Enable omni completion.
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+set completeopt-=preview
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
