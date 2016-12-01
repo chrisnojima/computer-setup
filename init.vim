@@ -47,6 +47,8 @@ Plug 'mxw/vim-jsx' "better color for jsx
 Plug 'chrisnojima/deoplete-flow' "flow w/ deoplete Plus hacks
 Plug 'mhartington/oceanic-next' " colors
 Plug 'vim-airline/vim-airline-themes' " airline themes
+" Plug 'othree/yajs' " js support
+" Plug 'mxw/vim-jsx' " jsx support
 call plug#end()
 
 "Settings ===================================
@@ -135,8 +137,6 @@ let g:go_autodetect_gopath = 0
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
 let g:jsx_ext_required = 0 "let jsx helper work on js
-let g:neomake_go_maker = ['golint', 'gofmt', 'govet']
-let g:neomake_place_signs = 1
 let g:rainbow_active = 1
 let g:syntastic_aggregate_errors = 1 "don't show all errors, too slow
 let g:syntastic_always_populate_loc_list = 1 "so you can jump with ]l
@@ -154,6 +154,8 @@ let g:tagbar_compact = 1
 let g:tagbar_width = 30
 let g:oceanic_next_terminal_italic = 1
 let g:oceanic_next_terminal_bold = 1
+" let g:airline_theme = 'oceanicnext'
+let g:jsx_ext_required = 0
 
 let g:rainbow_conf = {
 \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -184,6 +186,10 @@ function! StrTrim(txt)
   return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 endfunction
 
+" let g:neomake_logfile='/Users/chrisnojima/go/src/github.com/keybase/client/desktop/neomake.log'
+let g:neomake_go_maker = ['golint', 'gofmt', 'govet']
+let g:neomake_place_signs = 1
+let g:neomake_javascript_eslint_exe='/Users/chrisnojima/go/src/github.com/keybase/client/desktop/node_modules/.bin/eslint'
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
@@ -193,10 +199,10 @@ if g:flow_path != 'flow not found'
           \ 'exe': 'sh',
           \ 'args': ['-c', g:flow_path.' --json 2>/dev/null| flow-vim-quickfix'],
           \ 'errorformat': '%E%f:%l:%c\,%n: %m',
-          \ 'cwd': '%:p:h'
+          \ 'cwd': '/Users/chrisnojima/go/src/github.com/keybase/client/shared'
           \ }
-    let g:neomake_javascript_enabled_makers = ['flow'] + g:neomake_javascript_enabled_makers
-    let g:neomake_jsx_enabled_makers = ['flow'] + g:neomake_jsx_enabled_makers
+    let g:neomake_javascript_enabled_makers = g:neomake_javascript_enabled_makers + ['flow']
+    let g:neomake_jsx_enabled_makers = g:neomake_jsx_enabled_makers + ['flow']
 endif
 
 " This is kinda useful to prevent Neomake from unnecessary runs
@@ -246,9 +252,9 @@ map <leader>q :normal @q<CR>
 " Keybase specific
 " :cd /Users/chrisnojima/go/src/github.com/keybase/client/react-native/react
 " :cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
-:cd /Users/chrisnojima/go/src/github.com/keybase/client/desktop
-:NERDTreeToggle /Users/chrisnojima/go/src/github.com/keybase/client/shared
-:NERDTreeToggle
+:cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
+" :NERDTreeToggle /Users/chrisnojima/go/src/github.com/keybase/client/shared
+" :NERDTreeToggle
 
 map <leader>go :Dispatch fish -c "gobuild"<CR>
 map <leader>ios :Dispatch fish -c "goBuildIos"<CR>
