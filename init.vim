@@ -183,6 +183,7 @@ let g:flow#enable = 0
 let g:flow#flowpath = '/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow'
 
 "Plugin Settings ===================================
+au BufNewfile,BufRead *.json set ft=json5 "json treated as json5
 au BufNewfile,BufRead *.less set ft=scss "less files treated like css
 au BufNewfile,BufRead *.css set ft=scss "less files treated like css
 au BufNewfile,BufRead *.iced set ft=coffee "templates as coffee
@@ -305,8 +306,12 @@ map <leader>f :FlowType<CR>
 nmap <c-p> :Files<CR>
 nmap <c-l> :Buffers<CR>
 inoremap <C-c>  <Esc>
-
+" easy jump to a specific char
+:nmap F <Plug>(easymotion-prefix)s
 :command! -nargs=1 Search Ack! --type-add 'flow:*.flow' -tjs -tflow <q-args> ..
 
 :nnoremap n nzz
 :nnoremap N Nzz
+
+" Keybase specific
+:cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
