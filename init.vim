@@ -1,5 +1,6 @@
 "Plugins===================================
-set shell=/bin/sh
+let $BASH_ENV="~/.bash_aliases"
+set shell=/bin/bash
 call plug#begin('~/.config/nvim/plugged')
 
 function! DoRemote(arg)
@@ -36,8 +37,12 @@ Plug 'itchyny/lightline.vim' "status bar / tabs
 Plug 'w0rp/ale' "linter
 Plug 'sheerun/vim-polyglot' "various language support (js etc)
 Plug 'roman/golden-ratio' "keep window sizes better
-Plug 'flowtype/vim-flow' "flow integration
+" Plug 'flowtype/vim-flow' "flow integration
+Plug 'stevearc/vim-flow-plus', {'commit': '8cfb7956cd61c3add000ec8721940de824a1cc3f'}
 Plug 'sjl/gundo.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 "Settings ===================================
@@ -92,12 +97,15 @@ let g:lightline = {
 \ 'colorscheme': 'wombat',
 \ 'active': {
 \   'left': [['mode', 'paste'], ['filename', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\   'right': [['lineinfo'], ['percent'], ['flow', 'readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
 \ },
 \ 'component_expand': {
 \   'linter_warnings': 'LightlineLinterWarnings',
 \   'linter_errors': 'LightlineLinterErrors',
 \   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_function': {
+\    'flow': 'LightlineFlowCoverage'
 \ },
 \ 'component_type': {
 \   'readonly': 'error',
@@ -108,6 +116,13 @@ let g:lightline = {
 \   'filename': 'MyTabFilename'
 \ },
 \ }
+
+function! LightlineFlowCoverage()
+  if exists('b:flow_coverage_status')
+    return b:flow_coverage_status
+  endif
+  return ''
+endfunction
 
 function! MyTabFilename(n)
   let buflist = tabpagebuflist(a:n)
@@ -242,6 +257,8 @@ let g:gitgutter_sign_added = '∙'
 let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+let g:UltiSnipsSnippetsDir='/Users/chrisnojima/.config/nvim/UltiSnips/'
 
 let g:rainbow_conf = {
 \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -302,16 +319,23 @@ map <leader>j :wincmd j<CR>
 map <leader>k :wincmd k<CR>
 map <leader>l :wincmd l<CR>
 map <leader>q :normal @q<CR>
-map <leader>f :FlowType<CR>
+map <leader>s vi{:sort<CR>
+map <leader>sp a<CR><ESC>[{%i,<ESC>v[{:s/,/,\r/g<CR>kv%=jvi{:sort<CR>[{v%J/jkl<CR>
+map <leader>c v%J<CR>
+map <leader>f :FlowTypeAtPos<CR>
+map <leader>ff :FlowGetDef<CR>
+map <leader>ft :FlowCoverageToggle<CR>
 nmap <c-p> :Files<CR>
 nmap <c-l> :Buffers<CR>
 inoremap <C-c>  <Esc>
 " easy jump to a specific char
 :nmap F <Plug>(easymotion-prefix)s
+:command! -nargs=1 S Ack! --type-add 'flow:*.flow' -tjs -tflow <q-args> ..
 :command! -nargs=1 Search Ack! --type-add 'flow:*.flow' -tjs -tflow <q-args> ..
 
 :nnoremap n nzz
 :nnoremap N Nzz
+:nnoremap :cn :cn<CR>zz
 
 " Keybase specific
 :cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
