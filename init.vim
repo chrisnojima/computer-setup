@@ -331,7 +331,8 @@ map <leader>q :normal @q<CR>
 map <leader>s vi{:sort<CR>
 map <leader>sp a<CR><ESC>[{%i,<ESC>v[{:s/,/,\r/g<CR>kv%=jvi{:sort<CR>[{v%J/jkl<CR>
 map <leader>c v%J<CR>
-map <leader>f :call LanguageClient#textDocument_hover()<CR>
+" map <leader>f :call LanguageClient#textDocument_hover()<CR>
+map <leader>f :FlowTypeAtPos<CR>
 map <leader>ff :FlowGetDef<CR>
 map <leader>ft :FlowCoverageToggle<CR>
 nmap <c-p> :Files<CR>
@@ -348,5 +349,6 @@ inoremap <C-c>  <Esc>
 
 " Keybase specific
 :cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
+
 
 
