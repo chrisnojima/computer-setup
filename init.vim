@@ -304,6 +304,8 @@ let g:LanguageClient_serverCommands = {
     \ }
 " let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_rootMarkers = ['.flowconfig']
+let g:LanguageClient_selectionUI = 'location-list'
+let g:LanguageClient_diagnosticsList = 'Location'
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -339,7 +341,7 @@ nmap <c-p> :Files<CR>
 nmap <c-l> :Buffers<CR>
 inoremap <C-c>  <Esc>
 " easy jump to a specific char
-:nmap F <Plug>(easymotion-prefix)s
+map <leader>F <Plug>(easymotion-prefix)s
 :command! -nargs=1 S Ack! --type-add 'flow:*.flow' -tjs -tflow <q-args> ..
 :command! -nargs=1 Search Ack! --type-add 'flow:*.flow' -tjs -tflow <q-args> ..
 
