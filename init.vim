@@ -312,6 +312,8 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 set completeopt-=preview
 " Key maps
 :command! Q :q
+map q: <Nop>
+nnoremap Q <nop>
 let g:mapleader = "," "comma better than \
 let mapleader = "," "comma better than \
 map <leader>cd :cd %:p:h<CR>
