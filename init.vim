@@ -37,13 +37,12 @@ Plug 'itchyny/lightline.vim' "status bar / tabs
 Plug 'w0rp/ale' "linter
 Plug 'sheerun/vim-polyglot' "various language support (js etc) 
 Plug 'roman/golden-ratio' "keep window sizes better
-" Plug 'flowtype/vim-flow' "flow integration
-Plug 'stevearc/vim-flow-plus', {'commit': '8cfb7956cd61c3add000ec8721940de824a1cc3f'}
+" Plug 'stevearc/vim-flow-plus', {'commit': '8cfb7956cd61c3add000ec8721940de824a1cc3f'}
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Couldn't get this to work
+" Doesn't give correct data until flow runs to completion once
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 call plug#end()
 
@@ -176,29 +175,6 @@ function! s:MaybeUpdateLightline()
   end
 endfunction
 
-nnoremap <leader>an :ALENextWrap<cr>
-nnoremap <leader>ap :ALEPreviousWrap<cr>
-let g:ale_sign_warning = '▲'
-let g:ale_sign_error = '✗'
-highlight link ALEWarningSign String
-highlight link ALEErrorSign Title
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
-" Put this in vimrc or a plugin file of your own.
-" After this is configured, :ALEFix will try and fix your JS code with ESLint.
-let g:ale_fixers = {
-\   'javascript': ['eslint', 'prettier'],
-\}
-
-" Set this setting in vimrc if you want to fix files automatically on save.
-" This is off by default.
-let g:ale_fix_on_save = 1
-
-let g:flow#enable = 0
-let g:flow#flowpath = '/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow'
-
 "Plugin Settings ===================================
 au BufNewfile,BufRead *.json set ft=json5 "json treated as json5
 au BufNewfile,BufRead *.less set ft=scss "less files treated like css
@@ -215,7 +191,16 @@ au FileType go setlocal omnifunc=
 au VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#1b2b34 ctermbg=232
 au VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333333 ctermbg=233
 
-" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_fixers = { 'javascript': ['eslint', 'prettier'] }
+let g:ale_fix_on_save = 1
+let g:flow#enable = 0
+let g:flow#flowpath = '/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow'
 let NERDTreeMinimalUI=1 "Hide help text
 let NERDTreeShowBookmarks=1 "show bookmarks on start
 let g:NERDSpaceDelims=1 "space after comments
@@ -289,9 +274,7 @@ function! StrTrim(txt)
   return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 endfunction
 
-" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-" Use neocomplete.
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 200
 let g:deoplete#source#attribute#min_pattern_length = 0
@@ -311,11 +294,13 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 set completeopt-=preview
 " Key maps
-:command! Q :q
+:command! Q :qa!
 map q: <Nop>
 nnoremap Q <nop>
 let g:mapleader = "," "comma better than \
 let mapleader = "," "comma better than \
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
 map <leader>cd :cd %:p:h<CR>
 map <leader>n <c-w>w
 map <leader>nf :NERDTreeFind<cr>
@@ -335,9 +320,8 @@ map <leader>q :normal @q<CR>
 map <leader>s vi{:sort<CR>
 map <leader>sp a<CR><ESC>[{%i,<ESC>v[{:s/,/,\r/g<CR>kv%=jvi{:sort<CR>[{v%J/jkl<CR>
 map <leader>c v%J<CR>
-" map <leader>f :call LanguageClient#textDocument_hover()<CR>
-map <leader>f :FlowTypeAtPos<CR>
-map <leader>ff :FlowGetDef<CR>
+map <leader>f :call LanguageClient#textDocument_hover()<CR>
+map <leader>ff :call LanguageClient_contextMenu()<CR>
 map <leader>ft :FlowCoverageToggle<CR>
 nmap <c-p> :Files<CR>
 nmap <c-l> :Buffers<CR>
@@ -353,6 +337,3 @@ map <leader>F <Plug>(easymotion-prefix)s
 
 " Keybase specific
 :cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
-
-
-
