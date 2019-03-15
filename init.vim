@@ -35,9 +35,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' "fuzzy finder
 Plug 'itchyny/lightline.vim' "status bar / tabs
 Plug 'w0rp/ale' "linter
-Plug 'sheerun/vim-polyglot' "various language support (js etc) 
+Plug 'sheerun/vim-polyglot' "various language support (js etc)
 Plug 'roman/golden-ratio' "keep window sizes better
-" Plug 'stevearc/vim-flow-plus', {'commit': '8cfb7956cd61c3add000ec8721940de824a1cc3f'}
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -180,14 +179,15 @@ au BufNewfile,BufRead *.json set ft=json5 "json treated as json5
 au BufNewfile,BufRead *.less set ft=scss "less files treated like css
 au BufNewfile,BufRead *.css set ft=scss "less files treated like css
 au BufNewfile,BufRead *.iced set ft=coffee "templates as coffee
-au BufNewfile,BufRead *.flow set ft=javascript | :let b:syntastic_checkers = ["flow"]
+au BufNewfile,BufRead *.flow set ft=javascript
+
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 au FileType javascript setlocal omnifunc=flowcomplete#Complete
-" au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 au FileType python setlocal omnifunc=pythoncomplete#Complete
 au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 au FileType go setlocal omnifunc=
+
 au VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#1b2b34 ctermbg=232
 au VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333333 ctermbg=233
 
@@ -196,17 +196,26 @@ highlight link ALEErrorSign Title
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_linters = { 'javascript': ['eslint'] }
-let g:ale_fixers = { 'javascript': ['eslint', 'prettier'] }
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'scss': ['stylelint'],
+\}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\   'scss': ['prettier', 'stylelint'],
+\}
 let g:ale_fix_on_save = 1
-let g:flow#enable = 0
-let g:flow#flowpath = '/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow'
+" let g:flow#enable = 0
+" let g:flow#flowpath = '/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow'
 let NERDTreeMinimalUI=1 "Hide help text
 let NERDTreeShowBookmarks=1 "show bookmarks on start
 let g:NERDSpaceDelims=1 "space after comments
+
 let g:ack_autofold_results = 1
 let g:ackhighlight = 1
 let g:ackprg = 'rg -i --no-heading --vimgrep '
+
 let g:airline#extensions#tabline#enabled = 1 "extensions in airline
 let g:airline#extensions#whitespace#enabled = 0 "whitespace detection slow
 let g:airline_powerline_fonts = 1 "good fonts in airline
@@ -215,37 +224,39 @@ let g:airline_skip_empty_sections = 1
 let g:airline#extensions#hunks#non_zero_only = 1 " hide gitgutter overview
 let g:airline_section_x = '' " turn off filetype
 let g:airline_section_y = '' " turn off filetype
-let g:ctrlp_cmd = 'CtrlPMixed' "control-p command
-let g:ctrlp_lazy_update = 0 "update after you stop typing
-let g:ctrlp_map = '<c-p>' "control-p mapping
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_match_window = 'max:20,results:20'
-let g:ctrlp_max_files = 0 "unlimited files
-let g:ctrlp_regexp = 0
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_use_caching = 0 " super fast with ag
-let g:ctrlp_user_command = 'rg %s -i --files --color=never'
-let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
+
+" let g:ctrlp_cmd = 'CtrlPMixed' "control-p command
+" let g:ctrlp_lazy_update = 0 "update after you stop typing
+" let g:ctrlp_map = '<c-p>' "control-p mapping
+" let g:ctrlp_match_window = 'bottom,order:ttb'
+" let g:ctrlp_match_window = 'max:20,results:20'
+" let g:ctrlp_max_files = 0 "unlimited files
+" let g:ctrlp_regexp = 0
+" let g:ctrlp_switch_buffer = 0
+" let g:ctrlp_use_caching = 0 " super fast with ag
+" let g:ctrlp_user_command = 'rg %s -i --files --color=never'
+" let g:ctrlp_working_path_mode = 'ra' "start ctrp back to the root of our repo
+
 let g:go_autodetect_gopath = 0
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1 "show indents on startup
-let g:javascript_plugin_flow = 0 "javascript flow syntax support
+" let g:javascript_plugin_flow = 0 "javascript flow syntax support
 let g:jsx_ext_required = 0 "let jsx helper work on js
 let g:rainbow_active = 1
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_compact = 1
-let g:tagbar_width = 30
+" let g:tagbar_autoclose = 1
+" let g:tagbar_autofocus = 1
+" let g:tagbar_compact = 1
+" let g:tagbar_width = 30
 let g:oceanic_next_terminal_italic = 1
 let g:oceanic_next_terminal_bold = 1
-let g:jsx_ext_required = 0
+" let g:jsx_ext_required = 0
 set rtp+=~/.fzf
 let g:gitgutter_sign_added = '∙'
 let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-let g:UltiSnipsSnippetsDir='/Users/chrisnojima/.config/nvim/UltiSnips/'
+" let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+" let g:UltiSnipsSnippetsDir='/Users/chrisnojima/.config/nvim/UltiSnips/'
 let g:polyglot_disabled = ['graphql']
 let g:rainbow_conf = {
 \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -278,13 +289,23 @@ let g:acp_enableAtStartup = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 200
 let g:deoplete#source#attribute#min_pattern_length = 0
-let g:python3_host_prog = '/usr/local/bin/python3'
 let g:deoplete#file#enable_buffer_path = 1
+let g:python3_host_prog = '/usr/local/bin/python3'
 set hidden
+
 let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['flow-language-server', '--flow-path=/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow', '--stdio', '--no-auto-download'],
-    \ 'javascript.jsx': ['flow-language-server', '--flow-path=/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow', '--stdio', '--no-auto-download'],
+    \ 'javascript': ['/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow', 'lsp'],
+    \ 'javascript.jsx': ['/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow', 'lsp'],
     \ }
+" flow language server istnead
+    " \ 'javascript': ['flow-language-server', '--flow-path=/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow', '--stdio', '--no-auto-download'],
+    " \ 'javascript.jsx': ['flow-language-server', '--flow-path=/Users/chrisnojima/go/src/github.com/keybase/client/shared/node_modules/.bin/flow', '--stdio', '--no-auto-download'],
+    " \ }
+" let g:LanguageClient_serverCommands = {
+    " \ 'javascript': ['flow-language-server', '--flow-path=/Users/chrisnojima/.config/yarn/global/node_modules/.bin/flow', '--stdio', '--no-auto-download'],
+    " \ 'javascript.jsx': ['flow-language-server', '--flow-path=/Users/chrisnojima/.config/yarn/global/node_modules/.bin/flow', '--stdio', '--no-auto-download'],
+    " \ }
+
 " let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_rootMarkers = ['.flowconfig']
 let g:LanguageClient_selectionUI = 'location-list'
@@ -322,10 +343,12 @@ map <leader>sp a<CR><ESC>[{%i,<ESC>v[{:s/,/,\r/g<CR>kv%=jvi{:sort<CR>[{v%J/jkl<C
 map <leader>c v%J<CR>
 map <leader>f :call LanguageClient#textDocument_hover()<CR>
 map <leader>ff :call LanguageClient_contextMenu()<CR>
-map <leader>ft :FlowCoverageToggle<CR>
+" map <leader>ft :FlowCoverageToggle<CR>
 nmap <c-p> :Files<CR>
 nmap <c-l> :Buffers<CR>
 inoremap <C-c>  <Esc>
+" do match 1+1<C-A> =2!
+ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 " easy jump to a specific char
 map <leader>F <Plug>(easymotion-prefix)s
 :command! -nargs=1 S Ack! --type-add 'flow:*.flow' -tjs -tflow <q-args> ..
