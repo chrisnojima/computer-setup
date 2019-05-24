@@ -77,6 +77,7 @@ set shiftwidth=4 "tab width
 set showcmd "show current command on lower right, useful for leader
 set showmatch "show matching brackets
 set si "smart indent
+set suffixesadd=.tsx,.d.ts,.js
 set smartcase "override ignorecase when you really want case
 set smarttab "make tabs correct
 set spell "spellcheck
