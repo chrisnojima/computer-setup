@@ -278,14 +278,16 @@ set hidden
 
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-\ 'javascript': ['javascript-typescript-stdio'],
-\ 'javascript.jsx': ['javascript-typescript-stdio'],
-\ 'typescript': ['javascript-typescript-stdio'],
-\ 'typescript.jsx': ['javascript-typescript-stdio']
+\ 'javascript': ['typescript-language-server', '--stdio'],
+\ 'javascript.jsx': ['typescript-language-server', '--stdio'],
+\ 'typescript': ['typescript-language-server', '--stdio'],
+\ 'typescript.jsx': ['typescript-language-server', '--stdio']
 \ }
+let g:LanguageClient_rootMarkers = ['tsconfig.json']
+" let g:LanguageClient_loggingFile = expand('~/Desktop/LanguageClient.log')
 " let g:LanguageClient_loggingLevel = 'DEBUG'
-let g:LanguageClient_selectionUI = 'location-list'
-let g:LanguageClient_diagnosticsList = 'Location'
+" let g:LanguageClient_selectionUI = 'location-list'
+" let g:LanguageClient_diagnosticsList = 'Location'
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
