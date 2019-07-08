@@ -281,7 +281,7 @@ let g:LanguageClient_serverCommands = {
 \ 'javascript': ['typescript-language-server', '--stdio'],
 \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
 \ 'typescript': ['typescript-language-server', '--stdio'],
-\ 'typescript.jsx': ['typescript-language-server', '--stdio']
+\ 'typescript.tsx': ['typescript-language-server', '--stdio']
 \ }
 let g:LanguageClient_rootMarkers = ['tsconfig.json']
 " let g:LanguageClient_loggingFile = expand('~/Desktop/LanguageClient.log')
