@@ -200,13 +200,14 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'typescript': ['eslint'],
 \   'typescript.jsx': ['eslint'],
+\   'typescript.tsx': ['eslint'],
 \   'javascript': ['eslint'],
 \   'scss': ['stylelint'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'typescript': ['eslint', 'prettier'],
-\   'typescript.jsx': ['eslint', 'prettier'],
+\   'typescript.tsx': ['eslint', 'prettier'],
 \   'javascript': ['eslint', 'prettier'],
 \   'scss': ['prettier', 'stylelint'],
 \}
@@ -281,13 +282,14 @@ let g:LanguageClient_serverCommands = {
 \ 'javascript': ['typescript-language-server', '--stdio'],
 \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
 \ 'typescript': ['typescript-language-server', '--stdio'],
+\ 'typescript.jsx': ['typescript-language-server', '--stdio'],
 \ 'typescript.tsx': ['typescript-language-server', '--stdio']
 \ }
 let g:LanguageClient_rootMarkers = ['tsconfig.json']
+let g:LanguageClient_selectionUI = 'location-list'
+let g:LanguageClient_diagnosticsList = 'Location'
 " let g:LanguageClient_loggingFile = expand('~/Desktop/LanguageClient.log')
 " let g:LanguageClient_loggingLevel = 'DEBUG'
-" let g:LanguageClient_selectionUI = 'location-list'
-" let g:LanguageClient_diagnosticsList = 'Location'
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -319,7 +321,8 @@ map <leader>q :normal @q<CR>
 map <leader>s vi{:sort<CR>
 map <leader>sp a<CR><ESC>[{%i,<ESC>v[{:s/,/,\r/g<CR>kv%=jvi{:sort<CR>[{v%J/jkl<CR>
 map <leader>c v%J<CR>
-map <leader>f :call LanguageClient#textDocument_hover()<CR>
+map <leader>f :call LanguageClient_textDocument_hover()<CR>
+map <leader>g :call LanguageClient_textDocument_definition()<CR>
 map <leader>ff :call LanguageClient_contextMenu()<CR>
 nmap <c-p> :Files<CR>
 nmap <c-l> :Buffers<CR>
