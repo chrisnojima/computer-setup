@@ -37,9 +37,10 @@ Plug 'scrooloose/nerdcommenter' "better comments
 Plug 'mhartington/oceanic-next' " colors
 Plug 'w0rp/ale' "linter
 Plug 'sheerun/vim-polyglot' "various language support (js etc)
-Plug 'sjl/gundo.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'sjl/gundo.vim' "viz undo tree
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " auto complete
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' } " LSP
+Plug 'jiangmiao/auto-pairs' " add closing brackets
 call plug#end()
 
 "Settings ===================================
