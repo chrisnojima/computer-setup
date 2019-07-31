@@ -7,39 +7,37 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-Plug 'Lokaltog/vim-easymotion' "move anywhere visually
-Plug 'Raimondi/delimitMate' "injects closing quotes/brackets
+"Visual
 Plug 'airblade/vim-gitgutter' "show git changes in the gutter
-Plug 'editorconfig/editorconfig-vim' "editorconfig
-Plug 'gregsexton/gitv' "better git history
 Plug 'luochen1990/rainbow' " better rainbow
-Plug 'vim-scripts/matchit.zip', { 'for': 'javascript' } "smarter %
-Plug 'mileszs/ack.vim' "better search than grep
-Plug 'myusuf3/numbers.vim' "show line numbers as offsets
 Plug 'nathanaelkane/vim-indent-guides' "visually shows indents
-Plug 'ntpeters/vim-better-whitespace' "show trailing whitespace
-Plug 'rking/ag.vim' "the silver searcher
+Plug 'itchyny/lightline.vim' "status bar / tabs
+Plug 'roman/golden-ratio' "keep window sizes better
+
+"Movement
+Plug 'vim-scripts/matchit.zip', { 'for': 'javascript' } "smarter %
+Plug 'justinmk/vim-sneak' " better movement
+
+"Search
+Plug 'jremmen/vim-ripgrep' " better search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim' "fuzzy finder
+
+"Files
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } "file explorer
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }  " git aware nerdtree
+
+"Utility
 Plug 'tpope/vim-abolish' "smarter substitute and abbreviate
 Plug 'tpope/vim-fugitive' "git integration
 Plug 'tpope/vim-repeat' "repeat commands better
 Plug 'tpope/vim-surround' "surround things better
 Plug 'tpope/vim-unimpaired' "toggle mappings quicker
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }  " git aware nerdtree
-Plug 'wellle/targets.vim' "better text objects
 Plug 'scrooloose/nerdcommenter' "better comments
-Plug 'justinmk/vim-sneak' " better movement
 Plug 'mhartington/oceanic-next' " colors
-Plug 'machakann/vim-sandwich' "better surround
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim' "fuzzy finder
-Plug 'itchyny/lightline.vim' "status bar / tabs
 Plug 'w0rp/ale' "linter
 Plug 'sheerun/vim-polyglot' "various language support (js etc)
-Plug 'roman/golden-ratio' "keep window sizes better
 Plug 'sjl/gundo.vim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 call plug#end()
@@ -72,7 +70,7 @@ set noerrorbells "no sounds
 set noswapfile "no backup files
 set novisualbell "no sounds
 set nowb "no backup files
-set nu "show line numbers
+set nu rnu "show line numbers as hybrid relative
 set shiftwidth=4 "tab width
 set showcmd "show current command on lower right, useful for leader
 set showmatch "show matching brackets
@@ -96,16 +94,13 @@ colorscheme OceanicNext
 let g:lightline = {
 \ 'colorscheme': 'wombat',
 \ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['flow', 'readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\   'left': [['mode', 'paste'], ['relativepath', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
 \ },
 \ 'component_expand': {
 \   'linter_warnings': 'LightlineLinterWarnings',
 \   'linter_errors': 'LightlineLinterErrors',
 \   'linter_ok': 'LightlineLinterOK'
-\ },
-\ 'component_function': {
-\    'flow': 'LightlineFlowCoverage'
 \ },
 \ 'component_type': {
 \   'readonly': 'error',
@@ -116,13 +111,6 @@ let g:lightline = {
 \   'filename': 'MyTabFilename'
 \ },
 \ }
-
-function! LightlineFlowCoverage()
-  if exists('b:flow_coverage_status')
-    return b:flow_coverage_status
-  endif
-  return ''
-endfunction
 
 function! MyTabFilename(n)
   let buflist = tabpagebuflist(a:n)
@@ -179,11 +167,9 @@ au BufNewfile,BufRead *.json set ft=json5 "json treated as json5
 au BufNewfile,BufRead *.less set ft=scss "less files treated like css
 au BufNewfile,BufRead *.css set ft=scss "less files treated like css
 au BufNewfile,BufRead *.iced set ft=coffee "templates as coffee
-au BufNewfile,BufRead *.flow set ft=javascript
 
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-au FileType javascript setlocal omnifunc=flowcomplete#Complete
 au FileType python setlocal omnifunc=pythoncomplete#Complete
 au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 au FileType go setlocal omnifunc=
@@ -215,19 +201,6 @@ let g:ale_fix_on_save = 1
 let NERDTreeMinimalUI=1 "Hide help text
 let NERDTreeShowBookmarks=1 "show bookmarks on start
 let g:NERDSpaceDelims=1 "space after comments
-
-let g:ack_autofold_results = 1
-let g:ackhighlight = 1
-let g:ackprg = 'rg -i --no-heading --vimgrep '
-
-let g:airline#extensions#tabline#enabled = 1 "extensions in airline
-let g:airline#extensions#whitespace#enabled = 0 "whitespace detection slow
-let g:airline_powerline_fonts = 1 "good fonts in airline
-let g:airline_detect_spell = 0 " turn off showing spellcheck
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#hunks#non_zero_only = 1 " hide gitgutter overview
-let g:airline_section_x = '' " turn off filetype
-let g:airline_section_y = '' " turn off filetype
 
 let g:go_autodetect_gopath = 0
 let g:indent_guides_auto_colors = 0
@@ -310,8 +283,6 @@ map <leader>o <c-w>o<cr>
 map <leader>t :tabc<cr>
 map <leader>b :TagbarToggle<cr>
 map <leader>w :w<cr>
-map <leader>jl :%!jsonlint -p<cr>
-map <leader>js :set ft=javascript<cr>
 map <leader>to :tabo<cr>
 map <leader>h :wincmd h<CR>
 map <leader>j :wincmd j<CR>
@@ -329,10 +300,6 @@ nmap <c-l> :Buffers<CR>
 inoremap <C-c>  <Esc>
 " do match 1+1<C-A> =2!
 ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
-" easy jump to a specific char
-map <leader>F <Plug>(easymotion-prefix)s
-:command! -nargs=1 S Ack! --type-add 'flow:*.flow' --type-add 'tsx:*.tsx' --type-add 'ts:*.ts' -ttsx -tts -tjs -tflow <q-args> ..
-:command! -nargs=1 Search Ack! --type-add 'flow:*.flow'  --type-add 'tsx:*.tsx' --type-add 'ts:*.ts' -ttsx -tts -tjs -tflow <q-args> ..
 
 :nnoremap n nzz
 :nnoremap N Nzz
