@@ -1,25 +1,67 @@
 [alias]
-# from http://haacked.com/archive/2014/07/28/github-flow-aliases/
     co = checkout
     ec = config --global -e
     up = !git pull --rebase --prune $@ && git submodule update --init --recursive
-    cob = checkout -b
+    squish = "!f() { git rebase -i HEAD~$1; }; f"
+    cob = "!f() { git checkout -b nojima/$1; }; f"
+    desktop = "!f() { git checkout -b nojima/HOTPOT-$1; }; f"
     cm = !git add -A && git commit -m
+    mm = !git fetch && git merge --no-ff origin/master
     save = !git add -A && git commit -m 'SAVEPOINT'
-    wip = !git add -u && git commit -m "WIP"
+    wip = !git add -u && git commit --no-verify -m "WIP"
     undo = reset HEAD~1 --mixed
     amend = commit -a --amend
     wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
-    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
+    bclean = !git bclean1 && git bclean2
+    bclean1 = "!f() { git branch --no-color --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
+    bclean2 = !git branch -vv --no-color | grep ' gone' | cut -d' ' -f1-3 | xargs -n 1 git branch -D
     bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
-# my own
-    tohub = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
-    suicide = !git clean -fdx && git reset --hard
+    tohub = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\" && open \"https://github.com/keybase/$(basename `git rev-parse --show-toplevel`)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1&diff=unified&name=$(git rev-parse --abbrev-ref HEAD)\""
+    suicide = !git clean -fd && git reset --hard
+    hardsuicide = !git clean -fdx && git reset --hard
+    migrate = "!f(){ CURRENT=$(git symbolic-ref --short HEAD); git checkout -b $1 && git branch --force $CURRENT ${3-\"$CURRENT@{u}\"} && git rebase --onto ${2-master} $CURRENT; }; f"
+    syncfork = !git fetch upstream && git co master && git pull --rebase --all && git push --all origin && git push --tags origin
+    forktag = "!f() { git checkout -b packager-allows-mobile-files-0-$1-$2 v0.$1.$2; }; f"
+    verify = "!f() { git cat-file -p $1 | head -n 1; }; f"
+    cleanonmaster = "!f() { git co master && git desktop $1 && git read-tree $2 && git commit -m 'branch files on master' -n && git reset --hard; }; f"
 [push]
 	default = simple
 [core]
-# this is necessary on osx else vim will exit with code 1 and will confuse git
-	editor = /usr/bin/vim
+	editor = /usr/local/bin/nvim
+    pager = diff-so-fancy | less -r
 [merge]
-# ensure clean linear history
-	ff = only
+    ff = only
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[transfer]
+    fsckobjects = true
+[fetch]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
+[commit]
+    gpgsign = true
+[color]
+	ui = always
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
