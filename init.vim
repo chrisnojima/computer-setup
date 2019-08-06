@@ -301,6 +301,7 @@ nmap <c-l> :Buffers<CR>
 inoremap <C-c>  <Esc>
 " do match 1+1<C-A> =2!
 ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
+:command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
 
 :nnoremap n nzz
 :nnoremap N Nzz
