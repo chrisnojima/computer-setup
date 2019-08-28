@@ -276,6 +276,9 @@ let g:mapleader = "," "comma better than \
 let mapleader = "," "comma better than \
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
+"very magic
+nnoremap / /\v
+cnoremap %s/ %s/\v
 map <leader>cd :cd %:p:h<CR>
 map <leader>n <c-w>w
 map <leader>nf :NERDTreeFind<cr>
