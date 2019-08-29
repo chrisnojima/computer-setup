@@ -51,15 +51,21 @@ endif
 
 set ai "auto indent
 set autoread "auto reload changed files
+set backspace=indent,start,eol "better backspace
 set clipboard=unnamed "use system clipboard for yank
 set cmdheight=2 "set command height
+set cursorline "show current lint
 set diffopt=vertical "vertical diffs
 set expandtab "tabs turn into spaces
 set ffs=unix,dos,mac "acceptable file formats
 set foldcolumn=1 "how wide the fold column is
+set foldlevelstart=99 "start unfolded
+set foldmethod=indent "faster than syntax
+set hidden "hide buffers
 set history=700 "how much history to store
 set hlsearch "highlight as you search
 set ignorecase "ignore case as you search
+set inccommand=split "realtime replace
 set incsearch "incremental search
 set laststatus=2 "always show the statusbar
 set lazyredraw "buffers screen updates
@@ -72,22 +78,23 @@ set noswapfile "no backup files
 set novisualbell "no sounds
 set nowb "no backup files
 set nu rnu "show line numbers as hybrid relative
+set scrolloff=3 " keep some spacing on edges
 set shiftwidth=4 "tab width
 set showcmd "show current command on lower right, useful for leader
 set showmatch "show matching brackets
 set si "smart indent
-set suffixesadd=.tsx,.d.ts,.js
 set smartcase "override ignorecase when you really want case
 set smarttab "make tabs correct
 set spell "spellcheck
+set suffixesadd=.tsx,.d.ts,.js
 set t_vb= " no sounds
 set tabstop=4 "tabs
-set termguicolors
+set termguicolors "full colors
 set tm=500 "no sounds
 set tw=0 "never linebreak
+set virtualedit=block "visual block anywhere
 set wildmenu " visual autocomplete for command menu
 set wrap "wrap lines
-set inccommand=split "realtime replace
 
 syntax enable "show syntax
 colorscheme OceanicNext
@@ -249,7 +256,6 @@ let g:deoplete#auto_complete_delay = 200
 let g:deoplete#source#attribute#min_pattern_length = 0
 let g:deoplete#file#enable_buffer_path = 1
 let g:python3_host_prog = '/usr/local/bin/python3'
-set hidden
 
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
