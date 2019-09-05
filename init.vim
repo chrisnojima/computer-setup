@@ -311,10 +311,45 @@ inoremap <C-c>  <Esc>
 " do match 1+1<C-A> =2!
 ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 :command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
+nnoremap K <nop>
+noremap Y y$
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap :cn :cn<CR>zz
 
-:nnoremap n nzz
-:nnoremap N Nzz
-:nnoremap :cn :cn<CR>zz
+" move lines up/down in visual using JK from wincent
+function! s:Visual()
+  return visualmode() == 'V'
+endfunction
+
+function! s:Move(address, should_move)
+  if s:Visual() && a:should_move
+    execute "'<,'>move " . a:address
+    call feedkeys('gv=', 'n')
+  endif
+  call feedkeys('gv', 'n')
+endfunction
+
+function! Move_up() abort range
+  let l:count=v:count ? -v:count : -1
+  let l:max=(a:firstline - 1) * -1
+  let l:movement=max([l:count, l:max])
+  let l:address="'<" . (l:movement - 1)
+  let l:should_move=l:movement < 0
+  call s:Move(l:address, l:should_move)
+endfunction
+
+function! Move_down() abort range
+  let l:count=v:count ? v:count : 1
+  let l:max=line('$') - a:lastline
+  let l:movement=min([l:count, l:max])
+  let l:address="'>+" . l:movement
+  let l:should_move=l:movement > 0
+  call s:Move(l:address, l:should_move)
+endfunction
+
+xnoremap <silent> K :call Move_up()<CR>
+xnoremap <silent> J :call Move_down()<CR>
 
 " Keybase specific
 :cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
