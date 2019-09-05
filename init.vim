@@ -325,7 +325,7 @@ endfunction
 function! s:Move(address, should_move)
   if s:Visual() && a:should_move
     execute "'<,'>move " . a:address
-    call feedkeys('gv=', 'n')
+    " call feedkeys('gv=', 'n') " dont intent as its too slow
   endif
   call feedkeys('gv', 'n')
 endfunction
