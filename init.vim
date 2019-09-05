@@ -312,7 +312,6 @@ inoremap <C-c>  <Esc>
 ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 :command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
 nnoremap K <nop>
-noremap Y y$
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap :cn :cn<CR>zz
