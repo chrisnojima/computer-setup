@@ -316,7 +316,8 @@ noremap Y y$
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap :cn :cn<CR>zz
-
+map <F2> :mksession! ~/.vim_session <cr> " Quick write session with F2
+map <F3> :source ~/.vim_session <cr>     " And load session with F3
 " move lines up/down in visual using JK from wincent
 function! s:Visual()
   return visualmode() == 'V'
