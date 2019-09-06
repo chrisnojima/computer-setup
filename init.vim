@@ -78,7 +78,6 @@ set noswapfile "no backup files
 set novisualbell "no sounds
 set nowb "no backup files
 set nu rnu "show line numbers as hybrid relative
-set scrolloff=3 " keep some spacing on edges
 set shiftwidth=4 "tab width
 set showcmd "show current command on lower right, useful for leader
 set showmatch "show matching brackets
