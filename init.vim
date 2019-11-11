@@ -192,6 +192,7 @@ let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'typescript': ['eslint'],
+\   'typescriptreact': ['eslint'],
 \   'typescript.jsx': ['eslint'],
 \   'typescript.tsx': ['eslint'],
 \   'javascript': ['eslint'],
@@ -200,6 +201,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'typescript': ['eslint', 'prettier'],
+\   'typescriptreact': ['eslint', 'prettier'],
 \   'typescript.tsx': ['eslint', 'prettier'],
 \   'javascript': ['eslint', 'prettier'],
 \   'scss': ['prettier', 'stylelint'],
@@ -261,6 +263,7 @@ let g:LanguageClient_serverCommands = {
 \ 'javascript': ['typescript-language-server', '--stdio'],
 \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
 \ 'typescript': ['typescript-language-server', '--stdio'],
+\ 'typescriptreact': ['typescript-language-server', '--stdio'],
 \ 'typescript.jsx': ['typescript-language-server', '--stdio'],
 \ 'typescript.tsx': ['typescript-language-server', '--stdio']
 \ }
