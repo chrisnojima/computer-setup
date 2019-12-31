@@ -41,6 +41,20 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Raimondi/delimitMate' "closes brackets
 call plug#end()
 
+"Coc extensions (manual)
+"coc-css
+"coc-highlight
+"coc-html
+"coc-json
+"coc-prettier 
+"coc-tsserver
+":CocConfig
+"
+"
+"{
+"    "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "json"]
+"}
+
 "Settings ===================================
 " Only load this once
 if !has('nvim')
