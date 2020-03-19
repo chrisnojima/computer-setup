@@ -47,6 +47,7 @@ call plug#end()
 "coc-html
 "coc-json
 "coc-prettier 
+"coc-eslint 
 "coc-tsserver
 ":CocConfig
 "
