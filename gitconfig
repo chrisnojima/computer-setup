@@ -1,5 +1,4 @@
-[alias]
-    co = checkout
+[alias] co = checkout
     ec = config --global -e
     up = !git pull --rebase --prune $@ && git submodule update --init --recursive
     squish = "!f() { git rebase -i HEAD~$1; }; f"
