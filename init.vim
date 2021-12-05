@@ -46,8 +46,8 @@ call plug#end()
 "coc-highlight
 "coc-html
 "coc-json
-"coc-prettier 
-"coc-eslint 
+"coc-prettier
+"coc-eslint
 "coc-tsserver
 ":CocConfig
 "
@@ -307,7 +307,7 @@ xnoremap <silent> J :call Move_down()<CR>
 " Keybase specific
 :cd /Users/chrisnojima/go/src/github.com/keybase/client/shared
 
-" coc 
+" coc
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
