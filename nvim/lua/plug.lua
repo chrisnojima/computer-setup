@@ -35,3 +35,19 @@ Plug 'Raimondi/delimitMate' --- closes brackets
 vim.call('plug#end')
 
 vim.cmd 'source ~/.config/nvim/lua/plug-todo.vim'
+
+--- Coc extensions (manual)
+--- coc-css
+--- coc-highlight
+--- coc-html
+--- coc-json
+--- coc-prettier
+--- coc-eslint
+--- coc-tsserver
+--- :CocConfig
+---
+---
+--- {
+---     "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "json"]
+--- }
+---
