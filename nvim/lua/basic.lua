@@ -46,3 +46,5 @@ vim.opt.updatetime = 300 --- faster refresh
 vim.opt.virtualedit = "block" --- visual block anywhere
 vim.opt.wildmenu  = true ---  visual autocomplete for command menu
 vim.opt.wrap  = true --- wrap lines
+
+vim.opt.encoding = "utf8"

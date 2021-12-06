@@ -21,12 +21,6 @@ lua require('colors')
 "    "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "json"]
 "}
 
-"Settings ===================================
-" Only load this once
-if !has('nvim')
-    set encoding=utf8 "we like utf8
-endif
-
 " Lightline
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
@@ -150,17 +144,20 @@ set completeopt-=preview
 :command! Q :qa!
 map q: <Nop>
 nnoremap Q <nop>
-let g:mapleader = "," "comma better than \
-let mapleader = "," "comma better than \
+" let g:mapleader = "," "comma better than \
+" let mapleader = "," "comma better than \
+
+lua require('keys')
+
 "very magic
 nnoremap / /\v
 cnoremap %s/ %s/\v
-map <leader>cd :cd %:p:h<CR>
-map <leader>n <c-w>w
-map <leader>nf :NERDTreeFind<cr>
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>o <c-w>o<cr>
-map <leader>t :tabc<cr>
+" map <leader>cd :cd %:p:h<CR>
+" map <leader>n <c-w>w
+" map <leader>nf :NERDTreeFind<cr>
+" map <leader>nn :NERDTreeToggle<cr>
+" map <leader>o <c-w>o<cr>
+" map <leader>t :tabc<cr>
 map <leader>b :TagbarToggle<cr>
 map <leader>w :w<cr>
 map <leader>to :tabo<cr>
@@ -178,10 +175,6 @@ inoremap <C-c>  <Esc>
 " do match 1+1<C-A> =2!
 ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 :command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
-nnoremap K <nop>
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap :cn :cn<CR>zz
 map <F2> :mksession! ~/.vim_session <cr> " Quick write session with F2
 map <F3> :source ~/.vim_session <cr>     " And load session with F3
 " move lines up/down in visual using JK from wincent
