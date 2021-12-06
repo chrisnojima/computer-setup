@@ -62,9 +62,6 @@ if !has('nvim')
     set encoding=utf8 "we like utf8
 endif
 
-
-syntax enable "show syntax
-colorscheme OceanicNext
 " Lightline
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
@@ -374,3 +371,4 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 autocmd BufWritePre * :%s/\s\+$//e
 
 lua require('basic')
+lua require('colors')
