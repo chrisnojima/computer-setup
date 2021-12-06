@@ -33,3 +33,5 @@ Plug('neoclide/coc.nvim', {branch = 'release'})
 Plug 'Raimondi/delimitMate' --- closes brackets
 
 vim.call('plug#end')
+
+vim.cmd 'source ~/.config/nvim/lua/plug-todo.vim'
