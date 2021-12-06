@@ -62,54 +62,6 @@ if !has('nvim')
     set encoding=utf8 "we like utf8
 endif
 
-set ai "auto indent
-set autoread "auto reload changed files
-set backspace=indent,start,eol "better backspace
-set clipboard=unnamed "use system clipboard for yank
-set cmdheight=2 "set command height
-set cursorline "show current lint
-set diffopt=vertical "vertical diffs
-set expandtab "tabs turn into spaces
-set ffs=unix,dos,mac "acceptable file formats
-set foldcolumn=0 "how wide the fold column is
-set foldlevelstart=99 "start unfolded
-set foldmethod=indent "faster than syntax
-set hidden "hide buffers
-set history=700 "how much history to store
-set hlsearch "highlight as you search
-set ignorecase "ignore case as you search
-set inccommand=split "realtime replace
-set incsearch "incremental search
-set laststatus=2 "always show the statusbar
-set lazyredraw "buffers screen updates
-set lbr "linebreak
-set magic "magic regexp options
-set mat=2 "blink speed
-set nobackup "no backup files
-set noerrorbells "no sounds
-set noswapfile "no backup files
-set novisualbell "no sounds
-set nowb "no backup files
-set nu rnu "show line numbers as hybrid relative
-set shiftwidth=4 "tab width
-set showcmd "show current command on lower right, useful for leader
-set showmatch "show matching brackets
-set shortmess+=c "from coc
-set signcolumn=yes
-set si "smart indent
-set smartcase "override ignorecase when you really want case
-set smarttab "make tabs correct
-set spell "spellcheck
-set suffixesadd=.tsx,.d.ts,.js
-set t_vb= " no sounds
-set tabstop=4 "tabs
-set termguicolors "full colors
-set tm=500 "no sounds
-set tw=0 "never linebreak
-set updatetime=300 "faster refresh
-set virtualedit=block "visual block anywhere
-set wildmenu " visual autocomplete for command menu
-set wrap "wrap lines
 
 syntax enable "show syntax
 colorscheme OceanicNext
@@ -420,3 +372,5 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " strip whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+lua require('basic')
