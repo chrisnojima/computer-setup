@@ -41,50 +41,13 @@ map('n', '<c-l>',  ':Buffers<CR>', {noremap = true})
 map('n', '/',  '/\\v', {noremap = true})
 map('c', '%s/',  '%s/\\v', {noremap = true})
 
--- TODO
+-- quick write sessions with f2/f3
+map('', '<F2>',  ':mksession! ~/.vim_session<CR>', {noremap = true})
+map('', '<F3>',  ':source ~/.vim_session<CR>', {noremap = true})
+
+-- Commands aren't easy to do yet?
 vim.cmd [[
     " Key maps
     :command! Q :qa!
-    map q: <Nop>
-    nnoremap Q <nop>
-
-" do match 1+1<C-A> =2!
-ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
-:command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
-map <F2> :mksession! ~/.vim_session <cr> " Quick write session with F2
-map <F3> :source ~/.vim_session <cr>     " And load session with F3
-" move lines up/down in visual using JK from wincent
-function! s:Visual()
-  return visualmode() == 'V'
-endfunction
-
-function! s:Move(address, should_move)
-  if s:Visual() && a:should_move
-    execute "'<,'>move " . a:address
-    " call feedkeys('gv=', 'n') " dont intent as its too slow
-  endif
-  call feedkeys('gv', 'n')
-endfunction
-
-function! Move_up() abort range
-  let l:count=v:count ? -v:count : -1
-  let l:max=(a:firstline - 1) * -1
-  let l:movement=max([l:count, l:max])
-  let l:address="'<" . (l:movement - 1)
-  let l:should_move=l:movement < 0
-  call s:Move(l:address, l:should_move)
-endfunction
-
-function! Move_down() abort range
-  let l:count=v:count ? v:count : 1
-  let l:max=line('$') - a:lastline
-  let l:movement=min([l:count, l:max])
-  let l:address="'>+" . l:movement
-  let l:should_move=l:movement > 0
-  call s:Move(l:address, l:should_move)
-endfunction
-
-xnoremap <silent> K :call Move_up()<CR>
-xnoremap <silent> J :call Move_down()<CR>
-
+    :command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
 ]]

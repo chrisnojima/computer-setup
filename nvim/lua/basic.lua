@@ -1,3 +1,6 @@
+vim.g.python3_host_prog = "/usr/local/bin/python3"
+vim.g.python_host_prog = "/usr/local/bin/python2"
+
 vim.opt.ai = true
 vim.opt.autoread = true
 vim.opt.backspace = {"indent","start","eol"} --- better backspace

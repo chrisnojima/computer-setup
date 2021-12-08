@@ -1,38 +1,36 @@
-local Plug = vim.fn['plug#']
+require('packer').startup(function()
+  use 'wbthomason/packer.nvim'
+  use 'airblade/vim-gitgutter' --- show git changes in the gutter
+  use 'luochen1990/rainbow' ---  better rainbow
+  use 'nathanaelkane/vim-indent-guides' --- visually shows indents
+  use 'itchyny/lightline.vim' --- status bar / tabs
+  use 'roman/golden-ratio' --- keep window sizes better
+  use 'justinmk/vim-sneak' ---  better movement
+  use {'vim-scripts/matchit.zip', ['for'] = 'javascript'} --- smarter %
 
-vim.call('plug#begin', '~/.config/nvim/plugged')
+  --- Search
+  use 'jremmen/vim-ripgrep' ---  better search
+  use {'junegunn/fzf', dir= '~/.fzf', ['do']= './install --all'}
+  use 'junegunn/fzf.vim' --- fuzzy finder
 
-Plug 'airblade/vim-gitgutter' --- show git changes in the gutter
-Plug 'luochen1990/rainbow' ---  better rainbow
-Plug 'nathanaelkane/vim-indent-guides' --- visually shows indents
-Plug 'itchyny/lightline.vim' --- status bar / tabs
-Plug 'roman/golden-ratio' --- keep window sizes better
-Plug('vim-scripts/matchit.zip', { ['for'] = 'javascript' }) --- smarter %
-Plug 'justinmk/vim-sneak' ---  better movement
+  --- Files
+  use {'scrooloose/nerdtree', on = {'NERDTreeToggle', 'NERDTreeFind'}} --- file explorer
+  use {'Xuyuanp/nerdtree-git-plugin', on = {'NERDTreeToggle', 'NERDTreeFind'}}  ---  git aware nerdtree
 
---- Search
-Plug 'jremmen/vim-ripgrep' ---  better search
-Plug('junegunn/fzf', {dir= '~/.fzf', ['do']= './install --all' })
-Plug 'junegunn/fzf.vim' --- fuzzy finder
+  --- Utility
+  use 'tpope/vim-abolish' --- smarter substitute and abbreviate
+  use 'tpope/vim-fugitive' --- git integration
+  use 'tpope/vim-repeat' --- repeat commands better
+  use 'tpope/vim-surround' --- surround things better
+  use 'tpope/vim-unimpaired' --- toggle mappings quicker
+  use 'scrooloose/nerdcommenter' --- better comments
+  use 'mhartington/oceanic-next' ---  colors
+  use 'sheerun/vim-polyglot' --- various language support (js etc)
+  use 'sjl/gundo.vim' --- viz undo tree
+  use {'neoclide/coc.nvim', branch = 'release'}
+  use 'Raimondi/delimitMate' --- closes brackets
 
---- Files
-Plug('scrooloose/nerdtree', {on = {'NERDTreeToggle', 'NERDTreeFind'} }) --- file explorer
-Plug('Xuyuanp/nerdtree-git-plugin', {on = {'NERDTreeToggle', 'NERDTreeFind'} })  ---  git aware nerdtree
-
---- Utility
-Plug 'tpope/vim-abolish' --- smarter substitute and abbreviate
-Plug 'tpope/vim-fugitive' --- git integration
-Plug 'tpope/vim-repeat' --- repeat commands better
-Plug 'tpope/vim-surround' --- surround things better
-Plug 'tpope/vim-unimpaired' --- toggle mappings quicker
-Plug 'scrooloose/nerdcommenter' --- better comments
-Plug 'mhartington/oceanic-next' ---  colors
-Plug 'sheerun/vim-polyglot' --- various language support (js etc)
-Plug 'sjl/gundo.vim' --- viz undo tree
-Plug('neoclide/coc.nvim', {branch = 'release'})
-Plug 'Raimondi/delimitMate' --- closes brackets
-
-vim.call('plug#end')
+end)
 
 vim.cmd 'source ~/.config/nvim/lua/plug-todo.vim'
 
