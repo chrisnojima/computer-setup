@@ -235,17 +235,17 @@ table.insert(gls.left, {
         highlight = {colors.giticon, colors.bg}
     }
 })
-table.insert(gls.left, {
-    GitIcon = {
-        provider = function()
-            return ' '
-        end,
-        condition = condition.check_git_workspace,
-        separator = '',
-        separator_highlight = {'NONE', colors.giticon},
-        highlight = {colors.gitbg, colors.giticon}
-    }
-})
+-- table.insert(gls.left, {
+--     GitIcon = {
+--         provider = function()
+--             return ' '
+--         end,
+--         condition = condition.check_git_workspace,
+--         separator = '',
+--         separator_highlight = {'NONE', colors.giticon},
+--         highlight = {colors.gitbg, colors.giticon}
+--     }
+-- })
 table.insert(gls.left, {
     GitMid = {
         provider = function() return rightbracket .. ' ' end,
@@ -314,18 +314,18 @@ table.insert(gls.left, {
         highlight = {colors.lspicon, colors.bg}
     }
 })
-table.insert(gls.left, {
-    LspIcon = {
-        provider = function()
-            local name = ""
-            if gl.lspclient ~= nil then
-                name = gl.lspclient()
-            end
-            return '' .. name
-        end,
-        highlight = {colors.lspbg, colors.lspicon}
-    }
-})
+-- table.insert(gls.left, {
+--     LspIcon = {
+--         provider = function()
+--             local name = ""
+--             if gl.lspclient ~= nil then
+--                 name = gl.lspclient()
+--             end
+--             return '' .. name
+--         end,
+--         highlight = {colors.lspbg, colors.lspicon}
+--     }
+-- })
 table.insert(gls.left, {
     LspMid = {
         provider = function() return rightbracket .. ' ' end,
@@ -412,15 +412,15 @@ table.insert(gls.right, {
         highlight = {colors.typeicon, colors.bg}
     }
 })
-table.insert(gls.right, {
-    TypeFileFormatIcon = {
-        provider = function()
-            local icon = icons[vim.bo.fileformat] or ''
-            return string.format(' %s', icon)
-        end,
-        highlight = {colors.typebg, colors.typeicon}
-    }
-})
+-- table.insert(gls.right, {
+--     TypeFileFormatIcon = {
+--         provider = function()
+--             local icon = icons[vim.bo.fileformat] or ''
+--             return string.format(' %s', icon)
+--         end,
+--         highlight = {colors.typebg, colors.typeicon}
+--     }
+-- })
 table.insert(gls.right, {
     TypeMid = {
         provider = function() return rightbracket .. ' ' end,
@@ -428,54 +428,54 @@ table.insert(gls.right, {
     }
 })
 table.insert(gls.right, {
-    --[[ FileName = {
+    FileName = {
         provider = 'FileName',
         separator_highlight = {'NONE', colors.typebg},
         highlight = {colors.typetext, colors.typebg}
-    } ]]
-    FileName = {
-        provider = function()
-          if #vim.fn.expand '%:p' == 0 then
-            return ''
-          end
-          if vim.fn.winwidth(0) > 150 then
-            return vim.fn.expand '%:~' .. ' '
-          else
-            return vim.fn.expand '%:t' .. ' '
-          end
-        end,
-        separator_highlight = {'NONE', colors.typebg},
-        highlight = {colors.typetext, colors.typebg}
     }
+    -- FileName = {
+    --     provider = function()
+    --       if #vim.fn.expand '%:p' == 0 then
+    --         return ''
+    --       end
+    --       if vim.fn.winwidth(0) > 150 then
+    --         return vim.fn.expand '%:~' .. ' '
+    --       else
+    --         return vim.fn.expand '%:t' .. ' '
+    --       end
+    --     end,
+    --     separator_highlight = {'NONE', colors.typebg},
+    --     highlight = {colors.typetext, colors.typebg}
+    -- }
 })
-table.insert(gls.right, {
-    FileIcon = {
-        provider = 'FileIcon',
-        highlight = {colors.typeicon, colors.typebg}
-    }
-})
-table.insert(gls.right, {
-    BufferType = {
-        provider = 'FileTypeName',
-        highlight = {colors.typetext, colors.typebg}
-    }
-})
-table.insert(gls.right, {
-    FileSize = {
-        provider = 'FileSize',
-        separator = '  ',
-        separator_highlight = {colors.typeicon, colors.typebg},
-        highlight = {colors.typetext, colors.typebg}
-    }
-})
-table.insert(gls.right, {
-    FileEncode = {
-        provider = 'FileEncode',
-        separator = '',
-        separator_highlight = {colors.typeicon, colors.typebg},
-        highlight = {colors.typetext, colors.typebg}
-    }
-})
+-- table.insert(gls.right, {
+--     FileIcon = {
+--         provider = 'FileIcon',
+--         highlight = {colors.typeicon, colors.typebg}
+--     }
+-- })
+-- table.insert(gls.right, {
+--     BufferType = {
+--         provider = 'FileTypeName',
+--         highlight = {colors.typetext, colors.typebg}
+--     }
+-- })
+-- table.insert(gls.right, {
+--     FileSize = {
+--         provider = 'FileSize',
+--         separator = '  ',
+--         separator_highlight = {colors.typeicon, colors.typebg},
+--         highlight = {colors.typetext, colors.typebg}
+--     }
+-- })
+-- table.insert(gls.right, {
+--     FileEncode = {
+--         provider = 'FileEncode',
+--         separator = '',
+--         separator_highlight = {colors.typeicon, colors.typebg},
+--         highlight = {colors.typetext, colors.typebg}
+--     }
+-- })
 table.insert(gls.right, {
     TypeSectionEnd = {
         provider = function() return rightbracket end,
@@ -497,14 +497,14 @@ table.insert(gls.right, {
         highlight = {colors.statsicon, colors.bg}
     }
 })
-table.insert(gls.right, {
-    StatsIcon = {
-        provider = function()
-            return '⅑'
-        end,
-        highlight = {colors.statsbg, colors.statsicon}
-    }
-})
+-- table.insert(gls.right, {
+--     StatsIcon = {
+--         provider = function()
+--             return '⅑'
+--         end,
+--         highlight = {colors.statsbg, colors.statsicon}
+--     }
+-- })
 table.insert(gls.right, {
     StatsMid = {
         provider = function() return rightbracket .. ' ' end,
