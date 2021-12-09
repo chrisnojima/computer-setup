@@ -5,5 +5,7 @@ lua require('plug')
 lua require('colors')
 lua require('keys')
 
+" lua require('lsp.config')
+
 " Keybase specific
 :cd /Users/chrisnojima/go/src/github.com/keybase/client/shared

@@ -18,8 +18,8 @@ require('packer').startup(function()
   -- use 'junegunn/fzf.vim' --- fuzzy finder
 
   --- Files
-  use {'scrooloose/nerdtree', on = {'NERDTreeToggle', 'NERDTreeFind'}} --- file explorer
-  use {'Xuyuanp/nerdtree-git-plugin', on = {'NERDTreeToggle', 'NERDTreeFind'}}  ---  git aware nerdtree
+  -- use {'scrooloose/nerdtree', on = {'NERDTreeToggle', 'NERDTreeFind'}} --- file explorer
+  -- use {'Xuyuanp/nerdtree-git-plugin', on = {'NERDTreeToggle', 'NERDTreeFind'}}  ---  git aware nerdtree
 
   -- Treesitter
   use {'nvim-treesitter/nvim-treesitter',
@@ -39,17 +39,50 @@ require('packer').startup(function()
     }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  -- LSP
+  use {'neovim/nvim-lspconfig'}
+use {'hrsh7th/nvim-cmp', event = 'InsertEnter', config = "require('plugins.cmp')"}
+-- use {'hrsh7th/nvim-cmp', config = "require('plugins.cmp')"}
+use {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'}
+use {'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua'}
+use {'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp'}
+use {'hrsh7th/cmp-path', after = 'cmp-buffer'}
+use {'hrsh7th/cmp-calc', after = 'cmp-path'}
+use {'tami5/lspsaga.nvim', config = "require('plugins.saga')"}
+use {'onsails/lspkind-nvim'}
+use {'folke/lsp-trouble.nvim', config = "require('plugins.trouble')"}
+use {'SmiteshP/nvim-gps', config = "require('plugins.gps')", after = 'nvim-treesitter'}
+use {'jose-elias-alvarez/nvim-lsp-ts-utils', after = {'nvim-treesitter'}}
+use {'williamboman/nvim-lsp-installer', after = 'cmp-nvim-lsp', config = "require('lsp.installer')"}
+
   --- Utility
+  use {'numToStr/Comment.nvim', config = "require('plugins.comment')"}
+use {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter'}
+use {'folke/todo-comments.nvim'}
+use {'ggandor/lightspeed.nvim'}
+use {'glepnir/galaxyline.nvim', after = 'nvim-gps', config = "require('plugins.galaxyline')"}
+use {'romgrk/barbar.nvim', config = "require('plugins.barbar')"}
+use {'rcarriga/nvim-notify'}
+use {'windwp/nvim-autopairs', after = {'nvim-treesitter', 'nvim-cmp'}, config = "require('plugins.autopairs')"}
+use {'p00f/nvim-ts-rainbow', after = {'nvim-treesitter'}}
+use {'lukas-reineke/indent-blankline.nvim', config = "require('plugins.indent')"}
+use {'norcalli/nvim-colorizer.lua', config = "require('plugins.colorizer')"}
+use {'kyazdani42/nvim-tree.lua', config = "require('plugins.tree')"}
+use {'lewis6991/gitsigns.nvim',
+  requires = { 'nvim-lua/plenary.nvim' },
+  config = "require('plugins.gitsigns')",
+  event = "BufRead"
+}
   use 'tpope/vim-abolish' --- smarter substitute and abbreviate
   use 'tpope/vim-fugitive' --- git integration
   use 'tpope/vim-repeat' --- repeat commands better
   use 'tpope/vim-surround' --- surround things better
   use 'tpope/vim-unimpaired' --- toggle mappings quicker
-  use 'scrooloose/nerdcommenter' --- better comments
+  -- use 'scrooloose/nerdcommenter' --- better comments
   use 'mhartington/oceanic-next' ---  colors
   -- use 'sheerun/vim-polyglot' --- various language support (js etc)
   -- use 'sjl/gundo.vim' --- viz undo tree
-  use {'neoclide/coc.nvim', branch = 'release'}
+  -- use {'neoclide/coc.nvim', branch = 'release'}
   -- use 'Raimondi/delimitMate' --- closes brackets
 
 end)
