@@ -27,7 +27,8 @@ require('packer').startup(function()
 
     -- LSP
     use {'neovim/nvim-lspconfig'}
-    use {'hrsh7th/nvim-cmp', event = 'InsertEnter', config = "require('plugins.cmp')"}
+    use {'hrsh7th/nvim-cmp', config = "require('plugins.cmp')"}
+    -- use {'hrsh7th/nvim-cmp', event = 'InsertEnter', config = "require('plugins.cmp')"}
     use {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'}
     use {'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua'}
     use {'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp'}
@@ -38,7 +39,20 @@ require('packer').startup(function()
     use {'folke/lsp-trouble.nvim', config = "require('plugins.trouble')"}
     use {'SmiteshP/nvim-gps', config = "require('plugins.gps')", after = 'nvim-treesitter'}
     use {'jose-elias-alvarez/nvim-lsp-ts-utils', after = {'nvim-treesitter'}}
-    use {'williamboman/nvim-lsp-installer', after = 'cmp-nvim-lsp', config = "require('lsp.installer')"}
+    use {'williamboman/nvim-lsp-installer', after = 'cmp-nvim-lsp', config = "require('lsp.installer')", run = "require('lsp.config')"}
+
+    -- use({ "jose-elias-alvarez/null-ls.nvim",
+    -- config = function()
+    --     local null_ls = require("null-ls")
+    --     null_ls.config({sources = {
+    --         null_ls.builtins.formatting.prettier.with({
+    --              only_local = "node_modules/.bin",
+    --             }),
+    --         }})
+    --     require("lspconfig")["null-ls"].setup({})
+    -- end,
+    -- requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+    -- })
 
     --- Utility
     use {'numToStr/Comment.nvim', config = "require('plugins.comment')"} -- comments

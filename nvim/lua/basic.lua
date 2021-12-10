@@ -6,11 +6,12 @@ vim.g.guifont="Fira_Code_Regular_Nerd_Font_Complete:h14"
 vim.opt.ai = true
 vim.opt.autoread = true
 vim.opt.backspace = {"indent","start","eol"} --- better backspace
-vim.opt.clipboard = "unnamed" --- use system clipboard for yank
+vim.opt.clipboard = "unnamed,unnamedplus" --- use system clipboard for yank
 vim.opt.cmdheight = 2 --- set command height
 vim.opt.cursorline = true --- show current lint
 vim.opt.diffopt = "vertical" --- vertical diffs
 vim.opt.expandtab = true --- tabs turn into spaces
+vim.opt.emoji = false --- fix emoji display
 vim.opt.ffs = {"unix","dos","mac"} --- acceptable file formats
 vim.opt.foldcolumn = "0" --- how wide the fold column is
 vim.opt.foldlevelstart = 99 --- start unfolded
@@ -35,7 +36,6 @@ vim.opt.rnu = true --- show line numbers as hybrid relative
 vim.opt.shiftwidth = 4 --- tab width
 vim.opt.showcmd = true --- show current command on lower right, useful for leader
 vim.opt.showmatch = true --- show matching brackets
---- from coc
 vim.opt.shortmess = vim.opt.shortmess + "c"
 vim.opt.signcolumn = "yes"
 vim.opt.si = true --- smart indent
@@ -45,11 +45,15 @@ vim.opt.spell = true --- spellcheck
 vim.opt.suffixesadd = {".tsx", ".d.ts", ".js"}
 vim.opt.tabstop = 4 --- tabs
 vim.opt.termguicolors  = true --- full colors
+vim.opt.timeoutlen = 300 -- faster complete
 vim.opt.tm = 500 --- no sounds
 vim.opt.tw = 0 --- never linebreak
-vim.opt.updatetime = 300 --- faster refresh
+vim.opt.updatetime = 100 --- faster refresh
 vim.opt.virtualedit = "block" --- visual block anywhere
 vim.opt.wildmenu  = true ---  visual autocomplete for command menu
+vim.opt.wildignore = "*node_modules/**" -- ignore
 vim.opt.wrap  = true --- wrap lines
-
 vim.opt.encoding = "utf8"
+vim.opt.formatoptions:remove('c');
+vim.opt.formatoptions:remove('r');
+vim.opt.formatoptions:remove('o');
