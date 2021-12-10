@@ -34,7 +34,7 @@ map('', '<leader>q',  ':normal @q<CR>', {noremap = true})
 
 -- telescope
 vim.api.nvim_set_keymap("n", "<C-p>", "<CMD>Telescope git_files<CR>", { noremap = true })
--- vim.api.nvim_set_keymap("n", "<S-p>", "<CMD>Telescope live_grep<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-l>", "<CMD>Telescope live_grep<CR>", { noremap = true })
 -- fuzzy search
 -- map('n', '<c-p>',  ':Files<CR>', {noremap = true})
 -- map('n', '<c-l>',  ':Buffers<CR>', {noremap = true})

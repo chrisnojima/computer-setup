@@ -7,11 +7,6 @@ require('packer').startup(function()
     use 'nvim-lua/plenary.nvim' --- used by deps
     use 'kyazdani42/nvim-web-devicons' -- nice icons
 
-    use 'airblade/vim-gitgutter' --- show git changes in the gutter
-    use 'luochen1990/rainbow' ---  better rainbow
-    use 'nathanaelkane/vim-indent-guides' --- visually shows indents
-    use 'itchyny/lightline.vim' --- status bar / tabs
-
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter',
         config = "require('plugins.treesitter')",
@@ -46,19 +41,19 @@ require('packer').startup(function()
     use {'williamboman/nvim-lsp-installer', after = 'cmp-nvim-lsp', config = "require('lsp.installer')"}
 
     --- Utility
-    use {'numToStr/Comment.nvim', config = "require('plugins.comment')"}
-    use {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter'}
-    use {'folke/todo-comments.nvim'}
-    use {'ggandor/lightspeed.nvim'}
-    use {'glepnir/galaxyline.nvim', after = 'nvim-gps', config = "require('plugins.galaxyline')"}
-    use {'romgrk/barbar.nvim', config = "require('plugins.barbar')"}
-    use {'rcarriga/nvim-notify'}
-    use {'windwp/nvim-autopairs', after = {'nvim-treesitter', 'nvim-cmp'}, config = "require('plugins.autopairs')"}
-    use {'p00f/nvim-ts-rainbow', after = {'nvim-treesitter'}}
-    use {'lukas-reineke/indent-blankline.nvim', config = "require('plugins.indent')"}
-    use {'norcalli/nvim-colorizer.lua', config = "require('plugins.colorizer')"}
-    use {'kyazdani42/nvim-tree.lua', config = "require('plugins.tree')"}
-    use {'lewis6991/gitsigns.nvim',
+    use {'numToStr/Comment.nvim', config = "require('plugins.comment')"} -- comments
+    use {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter'} -- better comments in ts
+    use {'folke/todo-comments.nvim'} -- mark todo comments
+    use {'ggandor/lightspeed.nvim'} -- fast movements
+    use {'glepnir/galaxyline.nvim', after = 'nvim-gps', config = "require('plugins.galaxyline')"} -- status line
+    use {'romgrk/barbar.nvim', config = "require('plugins.barbar')"} -- better tabs
+    use {'rcarriga/nvim-notify'} -- popups
+    use {'windwp/nvim-autopairs', after = {'nvim-treesitter', 'nvim-cmp'}, config = "require('plugins.autopairs')"} -- inserts curlies
+    use {'p00f/nvim-ts-rainbow', after = {'nvim-treesitter'}} -- rainbow parens
+    use {'lukas-reineke/indent-blankline.nvim', config = "require('plugins.indent')"} -- indent marks
+    use {'norcalli/nvim-colorizer.lua', config = "require('plugins.colorizer')"} -- make colors show
+    use {'kyazdani42/nvim-tree.lua', config = "require('plugins.tree')"} -- file tree
+    use {'lewis6991/gitsigns.nvim', -- git markup in file tree
         requires = { 'nvim-lua/plenary.nvim' },
         config = "require('plugins.gitsigns')",
         event = "BufRead"
