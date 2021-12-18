@@ -46,17 +46,17 @@ lsp_installer.on_server_ready(function(server)
 
 
     -- (How to) Customize the options passed to the server
-    -- if server.name == "tsserver" then
-    --     -- opts.root_dir = function() ... end
-    --     opts.on_attach = function(client, bufnr) 
-    --         if client.resolved_capabilities.document_formatting then
-    --             vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-    --         end
-    --         on_attach(client, bufnr)
-    --     end
-    -- end
+    if server.name == "tsserver" then
+        opts.on_attach = function (client, bufnr)
+            require('lsp.servers.tsserver').on_attach(client, bufnr)
+            vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+        end
+        opts.capabilities = require('lsp.servers.tsserver').capabilities
+    end
 
     -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
     server:setup(opts)
     vim.cmd [[ do User LspAttachBuffers ]]
 end)
+
+require("lsp.config")

@@ -1,3 +1,4 @@
+local M = {}
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -14,10 +15,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
--- npm install -g typescript typescript-language-server
-require'lspconfig'.tsserver.setup({
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
+M.capabilities = capabilities
+M.on_attach = function(client, bufnr) 
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
 
@@ -64,4 +63,12 @@ require'lspconfig'.tsserver.setup({
 
     require("nvim-lsp-ts-utils").setup_client(client)
   end
+
+-- npm install -g typescript typhelp lspconfig-server-configurationsescript-language-server
+
+require'lspconfig'.tsserver.setup({
+  capabilities = capabilities,
+  on_attach = M.on_attach
 })
+
+return M
