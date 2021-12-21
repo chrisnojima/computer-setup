@@ -118,6 +118,7 @@ local mode_map = {
     ['R']        = {'#D16969', 'REPLACE'},
     ['c']        = {'#608B4E', 'COMMAND'},
     ['v']        = {'#C586C0', 'VISUAL'},
+    ['']        = {'#C586C0', 'VISUAL'},
     ['V']        = {'#C586C0', 'VIS-LN'},
     ['']       = {'#C586C0', 'VIS-BLK'},
     ['s']        = {'#FF8800', 'SELECT'},
@@ -194,6 +195,7 @@ table.insert(gls.left, {
         highlight = {colors.giticon, colors.bg}
     }
 })
+
 table.insert(gls.left, {
     ViModeLeft = {
         provider = function()
@@ -207,7 +209,6 @@ table.insert(gls.left, {
     ViModeIconAndText = {
         provider = function()
             highlight('GalaxyViMode', colors.modetext, mode_map[vim.fn.mode()][1])
-
             return icons['vim'] .. " " .. mode_map[vim.fn.mode()][2]
         end,
         highlight = 'GalaxyViMode'

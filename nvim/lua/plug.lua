@@ -57,7 +57,7 @@ require('packer').startup(function()
     use {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter'} -- better comments in ts
     use {'folke/todo-comments.nvim'} -- mark todo comments
     use {'ggandor/lightspeed.nvim'} -- fast movements
-    use {'glepnir/galaxyline.nvim', after = 'nvim-gps', config = "require('plugins.galaxyline')"} -- status line
+    use {'ecosse3/galaxyline.nvim', after = 'nvim-gps', config = "require('plugins.galaxyline')"} -- status line
     use {'romgrk/barbar.nvim', config = "require('plugins.barbar')"} -- better tabs
     use {'rcarriga/nvim-notify'} -- popups
     use {'windwp/nvim-autopairs', after = {'nvim-treesitter', 'nvim-cmp'}, config = "require('plugins.autopairs')"} -- inserts curlies
