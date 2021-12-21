@@ -75,6 +75,8 @@ require('packer').startup(function()
     use 'tpope/vim-repeat' --- repeat commands better
     use 'tpope/vim-surround' --- surround things better
     use 'tpope/vim-unimpaired' --- toggle mappings quicker
-    use 'mhartington/oceanic-next' ---  colors
+    -- colors
+    use {'bluz71/vim-nightfly-guicolors'}
+    use {'folke/tokyonight.nvim'}
 
 end)
