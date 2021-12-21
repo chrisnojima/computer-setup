@@ -1,5 +1,6 @@
 set shell=/bin/bash
 
+" largely based on https://github.com/ecosse3/nvim
 lua require('basic')
 lua require('plug')
 lua require('colors')
