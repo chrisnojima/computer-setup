@@ -432,7 +432,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
     FileName = {
         provider = function()
-            return '…/' .. vim.fn.expand '%:~:h:h:t' .. vim.fn.expand '%:~:h:t' .. '/' .. vim.fn.expand '%:~:t'
+            return '…/' .. vim.fn.expand '%:~:h:h:t' .. '/' .. vim.fn.expand '%:~:h:t' .. '/' .. vim.fn.expand '%:~:t'
         end,
         separator_highlight = {'NONE', colors.typebg},
         highlight = {colors.typetext, colors.typebg}
