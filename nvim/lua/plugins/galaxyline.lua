@@ -431,27 +431,12 @@ table.insert(gls.right, {
 -- })
 table.insert(gls.right, {
     FileName = {
-        -- provider = 'FileName',
         provider = function()
-            return vim.fn.expand '%:~' -- .. ' '
+            return '…/' .. vim.fn.expand '%:~:h:h:t' .. vim.fn.expand '%:~:h:t' .. '/' .. vim.fn.expand '%:~:t'
         end,
         separator_highlight = {'NONE', colors.typebg},
         highlight = {colors.typetext, colors.typebg}
     }
-    -- FileName = {
-    --     provider = function()
-    --       if #vim.fn.expand '%:p' == 0 then
-    --         return ''
-    --       end
-    --       if vim.fn.winwidth(0) > 150 then
-    --         return vim.fn.expand '%:~' .. ' '
-    --       else
-    --         return vim.fn.expand '%:t' .. ' '
-    --       end
-    --     end,
-    --     separator_highlight = {'NONE', colors.typebg},
-    --     highlight = {colors.typetext, colors.typebg}
-    -- }
 })
 -- table.insert(gls.right, {
 --     FileIcon = {
