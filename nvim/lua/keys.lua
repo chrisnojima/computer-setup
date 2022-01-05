@@ -13,9 +13,6 @@ map('n', ':cn', ':cn<CR>zz', {noremap = true})
 -- change dir
 map('', '<leader>cd', ':cd %:p:h<CR>', {noremap = true})
 -- map('', '<leader>n', '<c-w>w', {noremap = true})
--- nerdtree
-map('', '<leader>nf', ':NERDTreeFind<cr>', {noremap = true})
-map('', '<leader>nn', ':NERDTreeToggle<cr>', {noremap = true})
 -- close other
 map('', '<leader>o', '<c-w>o<cr>', {noremap = true})
 -- close current tab
@@ -35,11 +32,7 @@ map('', '<leader>q',  ':normal @q<CR>', {noremap = true})
 -- telescope
 vim.api.nvim_set_keymap("n", "<C-p>", "<CMD>Telescope git_files<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-l>", "<CMD>Telescope live_grep<CR>", { noremap = true })
--- fuzzy search
--- map('n', '<c-p>',  ':Files<CR>', {noremap = true})
--- map('n', '<c-l>',  ':Buffers<CR>', {noremap = true})
-
--- map('i', '<c-c>',  '<Esc>', {noremap = true})
+-- vim.api.nvim_set_keymap("n", "<C-m>", "<CMD>Telescope oldfiles<CR>", { noremap = true })
 
 map('n', '/',  '/\\v', {noremap = true})
 map('c', '%s/',  '%s/\\v', {noremap = true})

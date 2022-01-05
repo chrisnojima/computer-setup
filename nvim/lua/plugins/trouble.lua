@@ -1,7 +1,7 @@
 local icons = require('icons')
 
 require("trouble").setup {
-  height      = 10, -- height of the trouble list
+  height      = 15, -- height of the trouble list
   icons       = true, -- use dev-icons for filenames
   mode        = "workspace_diagnostics", -- "workspace" or "document"
   fold_open   = "", -- icon used for open folds
