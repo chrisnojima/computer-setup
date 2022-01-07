@@ -4,9 +4,11 @@ local builtin    = require('telescope.builtin')
 require('telescope').setup {
     defaults = {
         file_ignore_patterns = {
-            "node_modules",
+            "node_modules/",
             "ios/Pods",
-            "go"
+            "osx/",
+            "browser/",
+            "go/"
         },
         vimgrep_arguments = {
           'rg',
