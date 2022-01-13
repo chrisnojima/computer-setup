@@ -8,27 +8,15 @@ lvim.colorscheme = "nightfly"
 vim.g.nightflyCursorColor         = 1
 vim.g.nightflyUnderlineMatchParen = 0
 vim.g.nightflyNormalFloat         = 1
--- vim.cmd('colorscheme nightfly')
 
--- Errors
 vim.highlight.create('LspDiagnosticsVirtualTextError', { guifg = "Red", ctermfg = "Red", gui = "bold" }, false);
 vim.highlight.create('DiagnosticVirtualTextError', { guifg = "Red", ctermfg = "Red", gui = "bold" }, false);
-
--- Warnings
 vim.highlight.create('LspDiagnosticsVirtualTextWarning', { guifg = "Yellow", ctermfg = "Yellow" }, false);
 vim.highlight.create('DiagnosticVirtualTextWarn', { guifg = "Yellow", ctermfg = "Yellow" }, false);
-
--- Info & Hints
 vim.highlight.create('DiagnosticVirtualTextInfo', { guifg = "White", ctermfg = "White" }, false);
 vim.highlight.create('DiagnosticVirtualTextHint', { guifg = "White", ctermfg = "White" }, false);
-
--- Cursor line
 vim.highlight.create('CursorLineNR', { guifg = "Yellow", ctermfg = "Yellow", guibg = "None", cterm = "bold" }, false);
-
--- Comment in italics
 vim.highlight.create('Comment', { gui = "italic", cterm = "italic" }, false);
-
--- Change color of floating popup border
 vim.highlight.link('FloatBorder', 'NightflyRed', true);
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -59,38 +47,50 @@ map('', '<leader>j',  ':wincmd j<CR>', {noremap = true})
 map('', '<leader>k',  ':wincmd k<CR>', {noremap = true})
 map('', '<leader>l',  ':wincmd l<CR>', {noremap = true})
 
--- map('n', 's', '<Plug>Lightspeed_s', {noremap = true})
--- map('n', 'S', '<Plug>Lightspeed_S', {noremap = true})
-
 vim.cmd [[
     " Key maps
     :command! Q :qa!
     :command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
 ]]
--- add your own keymapping
--- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = false
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- local _, actions = pcall(require, "telescope.actions")
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.path_display = { shorten = 10 }
+lvim.builtin.telescope.defaults.file_ignore_patterns = {
+  "node_modules/",
+  "ios/Pods",
+  "osx/",
+  "browser/",
+  "go/",
+  ".circleci/",
+  "browser/",
+  "git%-hooks/",
+  "go/",
+  "media/",
+  "images/",
+  "osx/",
+  "%.png",
+  "packaging/",
+  "protocol/",
+  "pvl%-tools"
+}
+lvim.builtin.telescope.defaults.mappings = {
+  -- for input mode
+  i = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+    ["<C-n>"] = actions.move_selection_next,
+    ["<C-p>"] = actions.move_selection_previous,
+  },
+  -- for normal mode
+  n = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+    ["<C-n>"] = actions.move_selection_next,
+    ["<C-p>"] = actions.move_selection_previous,
+  },
+}
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -109,26 +109,24 @@ vim.cmd [[
 lvim.builtin.dashboard.active = false
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
+lvim.builtin.project.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
-lvim.builtin.treesitter.rainbow = {
-  enable = true
-
-}
+lvim.builtin.treesitter.rainbow = { enable = true }
+local components = require "lvim.core.lualine.components"
+local gps = require("nvim-gps")
+lvim.builtin.lualine.sections.lualine_b = { {"filename", path = 1, shorting_target = 100} }
+lvim.builtin.lualine.sections.lualine_c = { {gps.get_location, cond = gps.is_available }}
+lvim.builtin.lualine.sections.lualine_d = { }
+lvim.builtin.lualine.sections.lualine_x = { components.diagnostics }
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  -- "bash",
-  -- "c",
   "javascript",
   "json",
   "lua",
-  -- "python",
   "typescript",
   "css",
-  -- "rust",
-  -- "java",
-  "yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -240,13 +238,19 @@ lvim.plugins = {
   {'tpope/vim-repeat'}, --- repeat commands better
   {'tpope/vim-surround'}, --- surround things better
   {'tpope/vim-unimpaired'}, --- toggle mappings quicker
-  {'bluz71/vim-nightfly-guicolors'}
+  {'bluz71/vim-nightfly-guicolors'},
+  {'SmiteshP/nvim-gps', config = function() 
+    require("nvim-gps").setup({
+      icons = {
+        ["class-name"] = ' ',      -- Classes and class-like objects
+        ["function-name"] = ' ',   -- Functions
+        ["method-name"] = ' '      -- Methods (functions inside class-like objects)
+      },
+      languages = { ["html"] = false, },
+      separator = ' > ',
+    })
+  end
+    }
 }
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
-
 
 vim.cmd(":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared")
