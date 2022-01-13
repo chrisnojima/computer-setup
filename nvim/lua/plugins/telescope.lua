@@ -8,7 +8,16 @@ require('telescope').setup {
             "ios/Pods",
             "osx/",
             "browser/",
-            "go/"
+            "go/",
+            ".circleci/",
+            "browser/",
+            "git%-hooks/",
+            "go/",
+            "media/",
+            "osx/",
+            "packaging/",
+            "protocol/",
+            "pvl%-tools"
         },
         vimgrep_arguments = {
           'rg',
@@ -114,6 +123,28 @@ M.edit_neovim = function()
       prompt_position = "top",
     },
   }
+end
+
+M.git_files = function()
+  require "telescope.builtin".git_files(
+    {
+      previewer = false,
+      on_input_filter_cb = function(prompt)
+        local result = vim.split(prompt, " ")
+        print(prompt)
+        if #result == 2 then
+          return {
+            prompt = result[2] .. "." .. result[1]
+          }
+        else
+          return {
+            prompt = prompt .. ".tsx"
+          }
+        end
+        -- print(prompt:match("%s"))
+      end
+    }
+  )
 end
 
 return M

@@ -48,8 +48,9 @@ lsp_installer.on_server_ready(function(server)
     -- (How to) Customize the options passed to the server
     if server.name == "tsserver" then
         opts.on_attach = function (client, bufnr)
-            require('lsp.servers.tsserver').on_attach(client, bufnr)
+            print("tsserver on attach")
             vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+            require('lsp.servers.tsserver').on_attach(client, bufnr)
         end
         opts.capabilities = require('lsp.servers.tsserver').capabilities
     end
