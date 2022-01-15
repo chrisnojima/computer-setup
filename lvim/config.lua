@@ -8,7 +8,6 @@ lvim.colorscheme = "nightfly"
 vim.g.nightflyCursorColor         = 1
 vim.g.nightflyUnderlineMatchParen = 0
 vim.g.nightflyNormalFloat         = 1
-
 vim.highlight.create('LspDiagnosticsVirtualTextError', { guifg = "Red", ctermfg = "Red", gui = "bold" }, false);
 vim.highlight.create('DiagnosticVirtualTextError', { guifg = "Red", ctermfg = "Red", gui = "bold" }, false);
 vim.highlight.create('LspDiagnosticsVirtualTextWarning', { guifg = "Yellow", ctermfg = "Yellow" }, false);
@@ -19,33 +18,25 @@ vim.highlight.create('CursorLineNR', { guifg = "Yellow", ctermfg = "Yellow", gui
 vim.highlight.create('Comment', { gui = "italic", cterm = "italic" }, false);
 vim.highlight.link('FloatBorder', 'NightflyRed', true);
 
--- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = ","
 vim.g.mapleader = ','
-
--- center search
-local map = vim.api.nvim_set_keymap
-map('n', 'n', 'nzz', {noremap = true})
-map('n', 'N', 'Nzz', {noremap = true})
--- center opening results
-map('n', ':cn', ':cn<CR>zz', {noremap = true})
--- change dir
-map('', '<leader>cd', ':cd %:p:h<CR>', {noremap = true})
--- map('', '<leader>n', '<c-w>w', {noremap = true})
--- close other
-map('', '<leader>o', '<c-w>o<cr>', {noremap = true})
--- close current tab
-map('', '<leader>t', ':tabc<cr>', {noremap = true})
-
--- write
--- map('', '<leader>w',  ':w<cr>', {noremap = true})
--- close other tabs
-map('', '<leader>to',  ':tabo<cr>', {noremap = true})
--- window movement
-map('', '<leader>h',  ':wincmd h<CR>', {noremap = true})
-map('', '<leader>j',  ':wincmd j<CR>', {noremap = true})
-map('', '<leader>k',  ':wincmd k<CR>', {noremap = true})
-map('', '<leader>l',  ':wincmd l<CR>', {noremap = true})
+-- resize windows
+lvim.keys.normal_mode["<C-Up>"] = ":resize +2<CR>"
+lvim.keys.normal_mode["<C-Down>"] = ":resize -2<CR>"
+-- legacy keys
+lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope find_files<CR>"
+lvim.keys.normal_mode["<leader>nn"] = "<cmd>lua require'nvim-tree'.toggle()<CR>"
+-- center on serach
+lvim.keys.normal_mode["n"] = "nzz"
+lvim.keys.normal_mode["N"] = "Nzz"
+lvim.keys.normal_mode[":cn"] = ":cn<CR>zz"
+-- close tabs
+lvim.keys.normal_mode["<leader>o"] = "<c-w>o<cr>"
+lvim.keys.normal_mode["<leader>t"] = ":tabc<cr>"
+lvim.keys.normal_mode["<leader>to"] =  ":tabo<cr>"
+-- paste on top don't lose clipboard
+lvim.keys.visual_mode["p"] =  '"_dP'
+lvim.keys.visual_mode["P"] =  '"_dP'
 
 vim.cmd [[
     " Key maps
@@ -92,20 +83,6 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 
--- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
--- }
-
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = false
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
@@ -132,30 +109,6 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
--- generic LSP settings
-
--- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
-
--- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
--- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyright" })
-
--- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pylsp", opts)
-
--- -- you can set a custom on_attach function that will be used for all the language servers
--- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
-
--- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
@@ -167,7 +120,6 @@ formatters.setup {
   }
 }
 
--- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
@@ -179,7 +131,6 @@ linters.setup {
   }
 }
 
--- Additional Plugins
 lvim.plugins = {
   {
     "folke/trouble.nvim",
