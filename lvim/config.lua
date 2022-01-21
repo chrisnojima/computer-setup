@@ -26,7 +26,7 @@ lvim.keys.normal_mode["<C-Down>"] = ":resize -2<CR>"
 -- legacy keys
 lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope find_files<CR>"
 lvim.keys.normal_mode["<leader>nn"] = "<cmd>lua require'nvim-tree'.toggle()<CR>"
--- center on serach
+-- center on search
 lvim.keys.normal_mode["n"] = "nzz"
 lvim.keys.normal_mode["N"] = "Nzz"
 lvim.keys.normal_mode[":cn"] = ":cn<CR>zz"
@@ -34,6 +34,8 @@ lvim.keys.normal_mode[":cn"] = ":cn<CR>zz"
 lvim.keys.normal_mode["<leader>o"] = "<c-w>o<cr>"
 lvim.keys.normal_mode["<leader>t"] = ":tabc<cr>"
 lvim.keys.normal_mode["<leader>to"] =  ":tabo<cr>"
+
+lvim.keys.normal_mode["<leader>gt"] =  ":TroubleToggle<cr>"
 -- paste on top don't lose clipboard
 lvim.keys.visual_mode["p"] =  '"_dP'
 lvim.keys.visual_mode["P"] =  '"_dP'
@@ -49,22 +51,19 @@ vim.cmd [[
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.path_display = { shorten = 10 }
 lvim.builtin.telescope.defaults.file_ignore_patterns = {
-  "node_modules/",
-  "ios/Pods",
-  "osx/",
-  "browser/",
-  "go/",
-  ".circleci/",
-  "browser/",
-  "git%-hooks/",
-  "go/",
-  "media/",
-  "images/",
-  "osx/",
-  "%.png",
-  "packaging/",
-  "protocol/",
-  "pvl%-tools"
+  "^%.circleci/",
+  "^%.png$",
+  "^browser/",
+  "^git%-hooks/",
+  "^go/",
+  "^images/",
+  "^ios/Pods",
+  "^media/",
+  "^node_modules/",
+  "^osx/",
+  "^packaging/",
+  "^protocol/",
+  "^pvl%-tools"
 }
 lvim.builtin.telescope.defaults.mappings = {
   -- for input mode
@@ -108,6 +107,8 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+lvim.lsp.automatic_servers_installation = false
+lvim.lsp.null_ls.setup.debug = true
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
@@ -116,6 +117,7 @@ formatters.setup {
      filetypes = {
       "typescriptreact",
       "typescript",
+      "javascript",
     }
   }
 }
@@ -123,10 +125,11 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
-     exe = "eslint",
+     exe = "eslint_d",
      filetypes = {
       "typescriptreact",
       "typescript",
+      "javascript",
     }
   }
 }
@@ -137,7 +140,6 @@ lvim.plugins = {
     cmd = "TroubleToggle",
   },
   { "ggandor/lightspeed.nvim" },
-  { "p00f/nvim-ts-rainbow" },
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
@@ -190,7 +192,7 @@ lvim.plugins = {
   {'tpope/vim-surround'}, --- surround things better
   {'tpope/vim-unimpaired'}, --- toggle mappings quicker
   {'bluz71/vim-nightfly-guicolors'},
-  {'SmiteshP/nvim-gps', config = function() 
+  {'SmiteshP/nvim-gps', config = function()
     require("nvim-gps").setup({
       icons = {
         ["class-name"] = ' ',      -- Classes and class-like objects
