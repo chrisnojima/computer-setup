@@ -94,10 +94,21 @@ lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
 
 lvim.builtin.treesitter.rainbow = { enable = true }
+
+local treesitter = require('nvim-treesitter')
+local function treelocation()
+    return treesitter.statusline(
+        {
+            indicator_size = 70,
+            type_patterns = {'class', 'function', 'method'},
+            separator = '➜'
+        }
+    )
+end
+
 local components = require "lvim.core.lualine.components"
-local _, gps = pcall(require, "nvim-gps")
 lvim.builtin.lualine.sections.lualine_b = { {"filename", path = 1, shorting_target = 100} }
-lvim.builtin.lualine.sections.lualine_c = { {gps.get_location, cond = gps.is_available }}
+lvim.builtin.lualine.sections.lualine_c = { {treelocation} }
 lvim.builtin.lualine.sections.lualine_d = { }
 lvim.builtin.lualine.sections.lualine_x = { components.diagnostics }
 
@@ -192,19 +203,7 @@ lvim.plugins = {
   {'tpope/vim-repeat'}, --- repeat commands better
   {'tpope/vim-surround'}, --- surround things better
   {'tpope/vim-unimpaired'}, --- toggle mappings quicker
-  {'bluz71/vim-nightfly-guicolors'},
-  {'SmiteshP/nvim-gps', config = function()
-    require("nvim-gps").setup({
-      icons = {
-        ["class-name"] = ' ',      -- Classes and class-like objects
-        ["function-name"] = ' ',   -- Functions
-        ["method-name"] = ' '      -- Methods (functions inside class-like objects)
-      },
-      languages = { ["html"] = false, },
-      separator = ' > ',
-    })
-  end
-    }
+  {'bluz71/vim-nightfly-guicolors'}, -- color scheme
 }
 
 local options = {
