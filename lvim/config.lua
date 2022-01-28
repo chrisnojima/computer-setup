@@ -5,6 +5,7 @@ lvim.format_on_save = {
     timeout = 10000,
 }
 lvim.colorscheme = "nightfly"
+
 vim.g.nightflyCursorColor         = 1
 vim.g.nightflyUnderlineMatchParen = 0
 vim.g.nightflyNormalFloat         = 1
@@ -84,13 +85,17 @@ lvim.builtin.telescope.defaults.mappings = {
 
 lvim.builtin.dashboard.active = false
 lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
+lvim.builtin.terminal.active = false
 lvim.builtin.project.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
+
+-- don't cwd to the current file
+lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
+
 lvim.builtin.treesitter.rainbow = { enable = true }
 local components = require "lvim.core.lualine.components"
-local gps = require("nvim-gps")
+local _, gps = pcall(require, "nvim-gps")
 lvim.builtin.lualine.sections.lualine_b = { {"filename", path = 1, shorting_target = 100} }
 lvim.builtin.lualine.sections.lualine_c = { {gps.get_location, cond = gps.is_available }}
 lvim.builtin.lualine.sections.lualine_d = { }
@@ -135,10 +140,6 @@ linters.setup {
 }
 
 lvim.plugins = {
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
   { "ggandor/lightspeed.nvim" },
   {
     "ray-x/lsp_signature.nvim",
@@ -231,6 +232,7 @@ local options = {
   suffixesadd = {".tsx", ".native.tsx", ".d.ts", ".js"},
   tabstop = 4, -- tabs
   termguicolors = true, -- full colors
+  timeoutlen = 500, -- defer which key some
   textwidth = 0, -- never linebreak
   virtualedit = "block", -- visual block anywhere
   visualbell = false, -- no sounds
