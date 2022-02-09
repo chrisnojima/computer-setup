@@ -41,6 +41,13 @@ lvim.keys.normal_mode["<leader>gt"] =  ":TroubleToggle<cr>"
 lvim.keys.visual_mode["p"] =  '"_dP'
 lvim.keys.visual_mode["P"] =  '"_dP'
 
+lvim.builtin.which_key.mappings["S"]= {
+    name = "Session",
+    c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+    l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+    Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+  }
+
 vim.cmd [[
     " Key maps
     :command! Q :qa!
@@ -52,19 +59,19 @@ vim.cmd [[
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.path_display = { shorten = 10 }
 lvim.builtin.telescope.defaults.file_ignore_patterns = {
-  "^%.circleci/",
-  "^%.png$",
-  "^browser/",
-  "^git%-hooks/",
-  "^go/",
-  "^images/",
-  "^ios/Pods",
-  "^media/",
-  "^node_modules/",
-  "^osx/",
-  "^packaging/",
-  "^protocol/",
-  "^pvl%-tools"
+  "%.circleci/",
+  "%.png$",
+  -- "/browser/",
+  "git%-hooks/",
+  "go/",
+  "images/",
+  "ios/Pods/",
+  "media/",
+  "node_modules/",
+  "osx/",
+  "packaging/",
+  "protocol/",
+  "pvl%-tools"
 }
 lvim.builtin.telescope.defaults.mappings = {
   -- for input mode
@@ -86,12 +93,13 @@ lvim.builtin.telescope.defaults.mappings = {
 lvim.builtin.dashboard.active = false
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = false
-lvim.builtin.project.active = false
+-- lvim.builtin.project.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- don't cwd to the current file
-lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
+-- lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
+-- lvim.builtin.nvimtree.setup.update_to_buf_dir.enable = true
 
 lvim.builtin.treesitter.rainbow = { enable = true }
 
@@ -198,6 +206,17 @@ lvim.plugins = {
       )
     end
   }, -- make colors show
+{
+  "folke/persistence.nvim", -- save sessions
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    module = "persistence",
+    config = function()
+      require("persistence").setup {
+        dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+        options = { "buffers", "curdir", "tabpages", "winsize" },
+      }
+  end,
+},
   {'tpope/vim-abolish'}, --- smarter substitute and abbreviate
   {'tpope/vim-fugitive'}, --- git integration
   {'tpope/vim-repeat'}, --- repeat commands better
