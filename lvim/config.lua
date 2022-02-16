@@ -36,7 +36,9 @@ lvim.keys.normal_mode["<leader>o"] = "<c-w>o<cr>"
 lvim.keys.normal_mode["<leader>t"] = ":tabc<cr>"
 lvim.keys.normal_mode["<leader>to"] =  ":tabo<cr>"
 
-lvim.keys.normal_mode["<leader>gt"] =  ":TroubleToggle<cr>"
+-- useful telescope resume last search
+lvim.keys.normal_mode["<leader>su"] = "<cmd>Telescope resume<CR>"
+
 -- paste on top don't lose clipboard
 lvim.keys.visual_mode["p"] =  '"_dP'
 lvim.keys.visual_mode["P"] =  '"_dP'
