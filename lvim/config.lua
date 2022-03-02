@@ -31,6 +31,8 @@ lvim.keys.normal_mode["<leader>nn"] = "<cmd>lua require'nvim-tree'.toggle()<CR>"
 lvim.keys.normal_mode["n"] = "nzz"
 lvim.keys.normal_mode["N"] = "Nzz"
 lvim.keys.normal_mode[":cn"] = ":cn<CR>zz"
+-- close other splits
+lvim.keys.normal_mode["<leader>o"] = ":only<CR>"
 
 -- useful telescope resume last search
 lvim.keys.normal_mode["<leader>su"] = "<cmd>Telescope resume<CR>"
