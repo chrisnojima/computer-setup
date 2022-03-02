@@ -31,13 +31,10 @@ lvim.keys.normal_mode["<leader>nn"] = "<cmd>lua require'nvim-tree'.toggle()<CR>"
 lvim.keys.normal_mode["n"] = "nzz"
 lvim.keys.normal_mode["N"] = "Nzz"
 lvim.keys.normal_mode[":cn"] = ":cn<CR>zz"
--- close tabs
-lvim.keys.normal_mode["<leader>o"] = "<c-w>o<cr>"
-lvim.keys.normal_mode["<leader>t"] = ":tabc<cr>"
-lvim.keys.normal_mode["<leader>to"] =  ":tabo<cr>"
 
 -- useful telescope resume last search
 lvim.keys.normal_mode["<leader>su"] = "<cmd>Telescope resume<CR>"
+lvim.keys.normal_mode["<leader>sd"] = "<cmd>Telescope diagnostics<CR>"
 
 -- paste on top don't lose clipboard
 lvim.keys.visual_mode["p"] =  '"_dP'
@@ -49,6 +46,16 @@ lvim.builtin.which_key.mappings["S"]= {
     l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
     Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
   }
+
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
 
 vim.cmd [[
     " Key maps
@@ -63,17 +70,15 @@ lvim.builtin.telescope.defaults.path_display = { shorten = 10 }
 lvim.builtin.telescope.defaults.file_ignore_patterns = {
   "%.circleci/",
   "%.png$",
-  -- "/browser/",
-  "git%-hooks/",
-  "go/",
-  "images/",
-  "ios/Pods/",
-  "media/",
-  "node_modules/",
-  "osx/",
-  "packaging/",
-  "protocol/",
-  "pvl%-tools"
+  "/git%-hooks/",
+  "/images/",
+  "/ios/Pods/",
+  "/media/",
+  "/node_modules/",
+  "/osx/",
+  "/packaging/",
+  "/protocol/",
+  "/pvl%-tools"
 }
 lvim.builtin.telescope.defaults.mappings = {
   -- for input mode
@@ -95,7 +100,6 @@ lvim.builtin.telescope.defaults.mappings = {
 lvim.builtin.dashboard.active = false
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = false
--- lvim.builtin.project.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
