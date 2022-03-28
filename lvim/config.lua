@@ -123,6 +123,7 @@ local function treelocation()
 end
 
 local components = require "lvim.core.lualine.components"
+lvim.builtin.lualine.options.globalstatus = true
 lvim.builtin.lualine.sections.lualine_b = { {"filename", path = 1, shorting_target = 100} }
 lvim.builtin.lualine.sections.lualine_c = { {treelocation} }
 lvim.builtin.lualine.sections.lualine_d = { }
