@@ -99,7 +99,7 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 
-lvim.builtin.dashboard.active = false
+lvim.builtin.alpha.mode = "startify"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -123,7 +123,7 @@ local function treelocation()
 end
 
 local components = require "lvim.core.lualine.components"
-lvim.builtin.lualine.options.globalstatus = true
+-- lvim.builtin.lualine.options.globalstatus = true
 lvim.builtin.lualine.sections.lualine_b = { {"filename", path = 1, shorting_target = 100} }
 lvim.builtin.lualine.sections.lualine_c = { {treelocation} }
 lvim.builtin.lualine.sections.lualine_d = { }
@@ -185,7 +185,7 @@ lvim.plugins = {
       vim.cmd [[highlight IndentBlanklineIndent2 guifg=#333333  gui=nocombine]]
       require("indent_blankline").setup {
         buftype_exclude = {"terminal", "telescope"},
-        filetype_exclude = {"help", "dashboard", "packer", "NvimTree", "Trouble"},
+        filetype_exclude = {"help", "packer", "NvimTree", "Trouble", "alpha"},
         show_current_context = false,
         show_end_of_line = true,
         use_treesitter = true,
