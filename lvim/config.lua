@@ -59,11 +59,8 @@ lvim.builtin.which_key.mappings["t"] = {
     r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
 
-vim.cmd [[
-    " Key maps
-    :command! Q :qa!
-    :command! -nargs=1 S Rg -g '*.tsx' -g '*.d.ts' <q-args> ..
-]]
+-- fast quit all
+vim.api.nvim_create_user_command("Q", ":qa!", {})
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
