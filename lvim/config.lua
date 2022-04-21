@@ -108,21 +108,11 @@ lvim.builtin.nvimtree.show_icons.git = 0
 
 lvim.builtin.treesitter.rainbow = { enable = true }
 
-local treesitter = require('nvim-treesitter')
-local function treelocation()
-    return treesitter.statusline(
-        {
-            indicator_size = 70,
-            type_patterns = { 'class', 'function', 'method' },
-            separator = '➜'
-        }
-    )
-end
-
+local gps = require("nvim-gps")
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.options.globalstatus = true
 lvim.builtin.lualine.sections.lualine_b = { { "filename", path = 1, shorting_target = 100 } }
-lvim.builtin.lualine.sections.lualine_c = { { treelocation } }
+lvim.builtin.lualine.sections.lualine_c = { { gps.get_location, cond = gps.is_available } }
 lvim.builtin.lualine.sections.lualine_d = {}
 lvim.builtin.lualine.sections.lualine_x = { components.diagnostics }
 
@@ -132,6 +122,7 @@ lvim.builtin.treesitter.ensure_installed = {
     "json",
     "lua",
     "typescript",
+    "tsx",
     "css",
 }
 
@@ -171,6 +162,13 @@ lvim.plugins = {
         event = "BufRead",
         config = function()
             require "lsp_signature".setup()
+        end
+    },
+    {
+        "SmiteshP/nvim-gps",
+        requires = "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require "nvim-gps".setup()
         end
     },
     {
