@@ -266,3 +266,4 @@ for k, v in pairs(options) do
 end
 
 vim.cmd(":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared")
+vim.api.nvim_create_user_command("Kdebug", ":e ~/Library/Logs/Keybase.app.debug ", {})
