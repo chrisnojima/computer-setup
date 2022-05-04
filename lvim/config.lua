@@ -36,7 +36,7 @@ lvim.keys.normal_mode["<leader>o"] = ":only<CR>"
 
 -- useful telescope resume last search
 lvim.keys.normal_mode["<leader>su"] = "<cmd>Telescope resume<CR>"
-lvim.keys.normal_mode["<leader>sd"] = "<cmd>Telescope diagnostics<CR>"
+lvim.keys.normal_mode["<leader>sd"] = "<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>"
 
 -- paste on top don't lose clipboard
 lvim.keys.visual_mode["p"] = '"_dP'
@@ -198,15 +198,15 @@ lvim.plugins = {
             require 'colorizer'.setup(
                 { '*' },
                 {
-                    RGB      = true; -- #RGB hex codes
-                    RRGGBB   = true; -- #RRGGBB hex codes
-                    names    = true; -- "Name" codes like Blue
-                    RRGGBBAA = true; -- #RRGGBBAA hex codes
-                    rgb_fn   = true; -- CSS rgb() and rgba() functions
-                    hsl_fn   = true; -- CSS hsl() and hsla() functions
-                    css      = true; -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-                    css_fn   = true; -- Enable all CSS *functions*: rgb_fn, hsl_fn
-                }
+                RGB      = true; -- #RGB hex codes
+                RRGGBB   = true; -- #RRGGBB hex codes
+                names    = true; -- "Name" codes like Blue
+                RRGGBBAA = true; -- #RRGGBBAA hex codes
+                rgb_fn   = true; -- CSS rgb() and rgba() functions
+                hsl_fn   = true; -- CSS hsl() and hsla() functions
+                css      = true; -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+                css_fn   = true; -- Enable all CSS *functions*: rgb_fn, hsl_fn
+            }
             )
         end
     }, -- make colors show
