@@ -34,4 +34,10 @@ alias "aon=adb reverse tcp:8081 tcp:8081; adb reverse tcp:7007 tcp:7007; adb rev
 alias "/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools/systrace/systrace.py --time=10 -o ~/trace.html sched gfx view -a io.keybase.ossifrage"
 
 ssh-add -A 2> /dev/null
-PROMPT="%F{green}%~%F{white}%(?.. %F{red}[%?]%F{white})> "
+
+parse_git_branch() {
+    git symbolic-ref --short HEAD 2> /dev/null
+}
+
+setopt PROMPT_SUBST
+PROMPT='%~%{%F{green}%} $(parse_git_branch)%{%F{none}%}%(?.. %F{red}[%?]%F{white})> '
