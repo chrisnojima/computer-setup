@@ -1,4 +1,7 @@
 bindkey -v
+bindkey '^R' history-incremental-search-backward
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
 
 export ANDROID_HOME=/Users/chrisnojima/Library/Android/sdk
 export NDK_VER=23.1.7779620
@@ -7,6 +10,7 @@ export ANDROID_NDK=$ANDROID_NDK_HOME
 export EDITOR=lvim
 export GOPATH=/Users/chrisnojima/go
 export KEYBASE_RUN_MODE=prod
+export KEYBASE_DEV_TOOL_ROOTS="/Users/chrisnojima/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi"
 export REACT_EDITOR=lvim
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Users/chrisnojima/.config/yarn/global/node_modules/.bin
@@ -27,7 +31,6 @@ alias "vim=lvim"
 alias "c=cd $GOPATH/src/github.com/keybase/client"
 alias "s=cd $GOPATH/src/github.com/keybase/client/shared"
 alias "m=git co master"
-alias "m=cd /users/chrisnojima/code"
 alias "cleanvim=vim -u NONE"
 alias "aoff=adb reverse --remove-all"
 alias "aon=adb reverse tcp:8081 tcp:8081; adb reverse tcp:7007 tcp:7007; adb reverse tcp:8097 tcp:8097"
@@ -40,4 +43,4 @@ parse_git_branch() {
 }
 
 setopt PROMPT_SUBST
-PROMPT='%~%{%F{green}%} $(parse_git_branch)%{%F{none}%}%(?.. %F{red}[%?]%F{white})> '
+PROMPT='%~ %{%F{green}%}$(parse_git_branch)%{%F{none}%}%(?.. %F{red}[%?]%F{white})> '
