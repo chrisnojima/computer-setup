@@ -104,24 +104,12 @@ lvim.builtin.alpha.mode = "startify"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
-
--- don't cwd to the current file
--- lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
--- lvim.builtin.nvimtree.setup.update_to_buf_dir.enable = true
-
 lvim.builtin.treesitter.rainbow = { enable = true }
 
 local _, gps = pcall(require, "nvim-gps")
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.options.globalstatus = true
 lvim.builtin.lualine.sections.lualine_b = { { "filename", path = 1, shorting_target = 100 } }
-
--- local current_signature = function()
---     if not pcall(require, 'lsp_signature') then return [[]] end
---     local sig = require("lsp_signature").status_line()
---     return sig.label .. "🐼" .. sig.hint
--- end
--- lvim.builtin.lualine.sections.lualine_c = { current_signature }
 lvim.builtin.lualine.sections.lualine_c = { { gps.get_location, cond = gps.is_available } }
 lvim.builtin.lualine.sections.lualine_d = {}
 lvim.builtin.lualine.sections.lualine_x = { components.diagnostics }
@@ -133,10 +121,16 @@ lvim.builtin.treesitter.ensure_installed = {
     "lua",
     "typescript",
     "tsx",
-    "css",
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.ignore_install = {
+    "haskell",
+    "java",
+    "c",
+    "bash",
+    "css",
+    "yaml"
+}
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.lsp.installer.setup.automatic_installation = false
 
