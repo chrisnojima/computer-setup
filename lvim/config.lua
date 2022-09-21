@@ -139,31 +139,13 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.lsp.installer.setup.automatic_installation = false
-lvim.lsp.null_ls.setup.debug = true
 
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-    {
-        exe = "prettier",
-        filetypes = {
-            "typescriptreact",
-            "typescript",
-            "javascript",
-        }
-    }
-}
-
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-    {
-        exe = "eslint_d",
-        filetypes = {
-            "typescriptreact",
-            "typescript",
-            "javascript",
-        }
-    }
-}
+require("null-ls").setup({
+    sources = {
+        require("null-ls").builtins.diagnostics.eslint_d,
+        require("null-ls").builtins.formatting.prettier,
+    },
+})
 
 lvim.plugins = {
     { "ggandor/lightspeed.nvim" },
