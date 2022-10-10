@@ -9,15 +9,6 @@ lvim.colorscheme = "nightfly"
 vim.g.nightflyCursorColor         = 1
 vim.g.nightflyUnderlineMatchParen = 0
 vim.g.nightflyNormalFloat         = 1
-vim.highlight.create('LspDiagnosticsVirtualTextError', { guifg = "Red", ctermfg = "Red", gui = "bold" }, false);
-vim.highlight.create('DiagnosticVirtualTextError', { guifg = "Red", ctermfg = "Red", gui = "bold" }, false);
-vim.highlight.create('LspDiagnosticsVirtualTextWarning', { guifg = "Yellow", ctermfg = "Yellow" }, false);
-vim.highlight.create('DiagnosticVirtualTextWarn', { guifg = "Yellow", ctermfg = "Yellow" }, false);
-vim.highlight.create('DiagnosticVirtualTextInfo', { guifg = "White", ctermfg = "White" }, false);
-vim.highlight.create('DiagnosticVirtualTextHint', { guifg = "White", ctermfg = "White" }, false);
-vim.highlight.create('CursorLineNR', { guifg = "Yellow", ctermfg = "Yellow", guibg = "None", cterm = "bold" }, false);
-vim.highlight.create('Comment', { gui = "italic", cterm = "italic" }, false);
-vim.highlight.link('FloatBorder', 'NightflyRed', true);
 
 lvim.leader = ","
 vim.g.mapleader = ','
@@ -101,7 +92,7 @@ lvim.builtin.telescope.defaults.mappings = {
 }
 
 lvim.builtin.alpha.mode = "startify"
-lvim.builtin.notify.active = true
+lvim.builtin.notify.active = false
 lvim.builtin.terminal.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.treesitter.rainbow = { enable = true }
@@ -131,7 +122,7 @@ lvim.builtin.treesitter.ignore_install = {
     "css",
     "yaml"
 }
-lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.highlight.enabled = false
 lvim.lsp.installer.setup.automatic_installation = false
 
 require("null-ls").setup({
@@ -141,8 +132,11 @@ require("null-ls").setup({
     },
 })
 
+
 lvim.plugins = {
-    { "ggandor/lightspeed.nvim" },
+    { "ggandor/leap.nvim",
+        config = function() require('leap').set_default_keymaps() end,
+    },
     {
         "ray-x/lsp_signature.nvim",
         config = function() require "lsp_signature".on_attach() end,
@@ -158,21 +152,13 @@ lvim.plugins = {
     {
         'lukas-reineke/indent-blankline.nvim',
         config = function()
-            vim.opt.listchars = { space = "⋅", eol = "↴", }
-            vim.opt.termguicolors = true
-            vim.cmd [[highlight IndentBlanklineIndent1 guifg=#555555  gui=nocombine]]
-            vim.cmd [[highlight IndentBlanklineIndent2 guifg=#333333  gui=nocombine]]
             require("indent_blankline").setup {
                 buftype_exclude = { "terminal", "telescope" },
                 filetype_exclude = { "help", "packer", "NvimTree", "Trouble", "alpha" },
-                show_current_context = false,
-                show_end_of_line = true,
+                show_end_of_line = false,
+                show_current_context = true,
+                show_current_context_start = true,
                 use_treesitter = true,
-                space_char_blankline = " ",
-                char_highlight_list = {
-                    "IndentBlanklineIndent1",
-                    "IndentBlanklineIndent2",
-                },
             }
         end
     }, -- indent marks
