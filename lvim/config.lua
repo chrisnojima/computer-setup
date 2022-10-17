@@ -97,11 +97,9 @@ lvim.builtin.terminal.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.treesitter.rainbow = { enable = true }
 
-local _, gps = pcall(require, "nvim-gps")
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.options.globalstatus = true
 lvim.builtin.lualine.sections.lualine_b = { { "filename", path = 1, shorting_target = 100 } }
-lvim.builtin.lualine.sections.lualine_c = { { gps.get_location, cond = gps.is_available } }
 lvim.builtin.lualine.sections.lualine_d = {}
 lvim.builtin.lualine.sections.lualine_x = { components.diagnostics }
 
@@ -125,13 +123,15 @@ lvim.builtin.treesitter.ignore_install = {
 lvim.builtin.treesitter.highlight.enabled = false
 lvim.lsp.installer.setup.automatic_installation = false
 
-require("null-ls").setup({
-    sources = {
-        require("null-ls").builtins.diagnostics.eslint_d,
-        require("null-ls").builtins.formatting.prettier,
-    },
-})
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+    { command = "prettier" },
+}
 
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+    { command = "eslint_d" },
+}
 
 lvim.plugins = {
     { "ggandor/leap.nvim",
@@ -149,19 +149,6 @@ lvim.plugins = {
             require "nvim-gps".setup()
         end
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        config = function()
-            require("indent_blankline").setup {
-                buftype_exclude = { "terminal", "telescope" },
-                filetype_exclude = { "help", "packer", "NvimTree", "Trouble", "alpha" },
-                show_end_of_line = false,
-                show_current_context = true,
-                show_current_context_start = true,
-                use_treesitter = true,
-            }
-        end
-    }, -- indent marks
     {
         "folke/persistence.nvim", -- save sessions
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -185,6 +172,7 @@ local options = {
     autoindent = true,
     autoread = true,
     backspace = { "indent", "start", "eol" },
+    cmdheight = 0,
     diffopt = "vertical",
     errorbells = false,
     hidden = true,
