@@ -1,6 +1,8 @@
 vim.opt.shell = "/bin/sh"
+-- lvim.log.level = "debug"
 lvim.log.level = "warn"
 lvim.format_on_save = {
+    enabled = true,
     pattern = "*",
     timeout = 10000,
 }
@@ -92,7 +94,6 @@ lvim.builtin.telescope.defaults.mappings = {
 }
 
 lvim.builtin.alpha.mode = "startify"
-lvim.builtin.notify.active = false
 lvim.builtin.terminal.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.treesitter.rainbow = { enable = true }
@@ -125,29 +126,19 @@ lvim.lsp.installer.setup.automatic_installation = false
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-    { command = "prettier" },
+  {
+    command = "prettierd",
+  },
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-    { command = "eslint_d" },
+  { command = "eslint_d" },
 }
 
 lvim.plugins = {
     { "ggandor/leap.nvim",
         config = function() require('leap').set_default_keymaps() end,
-    },
-    {
-        "ray-x/lsp_signature.nvim",
-        config = function() require "lsp_signature".on_attach() end,
-        event = "BufRead"
-    },
-    {
-        "SmiteshP/nvim-gps",
-        requires = "nvim-treesitter/nvim-treesitter",
-        config = function()
-            require "nvim-gps".setup()
-        end
     },
     {
         "folke/persistence.nvim", -- save sessions
