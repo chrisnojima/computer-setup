@@ -38,9 +38,10 @@ alias "/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools/systrace/systrace.p
 
 ssh-add -A 2> /dev/null
 
-parse_git_branch() {
-    git symbolic-ref --short HEAD 2> /dev/null
-}
-
-setopt PROMPT_SUBST
-PROMPT='%~ %{%F{green}%}$(parse_git_branch)%{%F{none}%}%(?.. %F{red}[%?]%F{white})> '
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+zstyle ':vcs_info:git:*' formats '%b'
+PROMPT='%~ %{%F{none}%}%(?..%F{red}[%?]%F{white})> '
+RPROMPT='%{%F{green}%}$vcs_info_msg_0_'
