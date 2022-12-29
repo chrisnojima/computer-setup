@@ -122,6 +122,9 @@ lvim.builtin.treesitter.ignore_install = {
     "yaml"
 }
 lvim.builtin.treesitter.highlight.enabled = false
+lvim.builtin.treesitter.incremental_selection = {
+    enable= true,
+}
 lvim.lsp.installer.setup.automatic_installation = false
 
 local formatters = require "lvim.lsp.null-ls.formatters"
