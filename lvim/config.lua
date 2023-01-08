@@ -127,17 +127,14 @@ lvim.builtin.treesitter.incremental_selection = {
 }
 lvim.lsp.installer.setup.automatic_installation = false
 
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  {
-    command = "prettierd",
-  },
-}
+local null_ls = require("null-ls")
 
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { command = "eslint_d" },
-}
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.prettierd,
+        null_ls.builtins.diagnostics.eslint_d,
+    },
+})
 
 lvim.plugins = {
     { "ggandor/leap.nvim",

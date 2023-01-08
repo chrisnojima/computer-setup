@@ -32,7 +32,7 @@ alias "vim=lvim"
 alias "c=cd $GOPATH/src/github.com/keybase/client"
 alias "s=cd $GOPATH/src/github.com/keybase/client/shared"
 alias "m=git co master"
-alias "cleanvim=vim -u NONE"
+alias "cleanvim=lvim --noplugin"
 alias "aoff=adb reverse --remove-all"
 alias "aon=adb reverse tcp:8081 tcp:8081; adb reverse tcp:7007 tcp:7007; adb reverse tcp:8097 tcp:8097"
 alias "/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools/systrace/systrace.py --time=10 -o ~/trace.html sched gfx view -a io.keybase.ossifrage"
@@ -46,3 +46,6 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%b'
 PROMPT='%~ %{%F{none}%}%(?..%F{red}[%?]%F{white})> '
 RPROMPT='%{%F{green}%}$vcs_info_msg_0_'
+
+# goto our path
+s
