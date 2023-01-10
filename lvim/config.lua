@@ -19,17 +19,10 @@ lvim.keys.normal_mode["<C-Up>"] = ":resize +2<CR>"
 lvim.keys.normal_mode["<C-Down>"] = ":resize -2<CR>"
 -- legacy keys
 lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope find_files<CR>"
-lvim.keys.normal_mode["<leader>nn"] = "<cmd>lua require'nvim-tree'.toggle()<CR>"
 -- center on search
 lvim.keys.normal_mode["n"] = "nzz"
 lvim.keys.normal_mode["N"] = "Nzz"
 lvim.keys.normal_mode[":cn"] = ":cn<CR>zz"
--- close other splits
-lvim.keys.normal_mode["<leader>o"] = ":only<CR>"
-
--- useful telescope resume last search
-lvim.keys.normal_mode["<leader>su"] = "<cmd>Telescope resume<CR>"
-lvim.keys.normal_mode["<leader>sd"] = "<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>"
 
 -- keep old buffer changes
 lvim.keys.normal_mode["<S-h>"] = "<cmd>BufferLineCyclePrev<cr>"
@@ -38,6 +31,13 @@ lvim.keys.normal_mode["<S-l>"] = "<cmd>BufferLineCycleNext<cr>"
 -- paste on top don't lose clipboard
 lvim.keys.visual_mode["p"] = '"_dP'
 lvim.keys.visual_mode["P"] = '"_dP'
+
+lvim.builtin.which_key.mappings["o"] = {"<cmd>only<CR>", "Close other panes"}
+lvim.builtin.which_key.mappings["nn"] = {"<cmd>lua require'nvim-tree'.toggle()<CR>", "Open tree"}
+
+lvim.builtin.which_key.mappings["s"]["c"] = {"<cmd>lua require('telescope.builtin').live_grep({cwd = 'chat'})<CR>", "Grep chat" }
+lvim.builtin.which_key.mappings["s"]["u"] = {"<cmd>Telescope resume<CR>", "Last search" }
+lvim.builtin.which_key.mappings["s"]["d"] = {"<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>", "LSP errors" }
 
 lvim.builtin.which_key.mappings["S"] = {
     name = "Session",
