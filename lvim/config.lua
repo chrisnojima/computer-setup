@@ -138,12 +138,12 @@ null_ls.setup({
 
 lvim.plugins = {
     { "ggandor/leap.nvim",
+        lazy = true,
         config = function() require('leap').set_default_keymaps() end,
     },
     {
         "folke/persistence.nvim", -- save sessions
-        event = "BufReadPre", -- this will only start session saving when an actual file was opened
-        module = "persistence",
+        lazy=true,
         config = function()
             require("persistence").setup {
                 dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
@@ -151,12 +151,12 @@ lvim.plugins = {
             }
         end,
     },
-    { 'tpope/vim-abolish' }, --- smarter substitute and abbreviate
-    { 'tpope/vim-fugitive' }, --- git integration
-    { 'tpope/vim-repeat' }, --- repeat commands better
-    { 'tpope/vim-surround' }, --- surround things better
-    { 'tpope/vim-unimpaired' }, --- toggle mappings quicker
-    { 'bluz71/vim-nightfly-guicolors' }, -- color scheme
+    { 'tpope/vim-abolish', lazy=true }, --- smarter substitute and abbreviate
+    { 'tpope/vim-fugitive', lazy=true }, --- git integration
+    { 'tpope/vim-repeat', lazy=true }, --- repeat commands better
+    { 'tpope/vim-surround', lazy=true }, --- surround things better
+    { 'tpope/vim-unimpaired', lazy=true }, --- toggle mappings quicker
+    { 'bluz71/vim-nightfly-guicolors'}, -- color scheme
 }
 
 local options = {
@@ -198,4 +198,5 @@ end
 
 vim.cmd(":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared")
 vim.api.nvim_create_user_command("Kdebug", ":e ~/Library/Logs/Keybase.app.debug ", {})
+vim.api.nvim_create_user_command("ZSH", ":e ~/.zshrc", {})
 vim.api.nvim_create_user_command("JSON", ":set ft=json|:%! jq .", {})
