@@ -95,6 +95,7 @@ lvim.builtin.telescope.defaults.mappings = {
 
 lvim.builtin.alpha.mode = "startify"
 lvim.builtin.terminal.active = false
+lvim.builtin.dap.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.treesitter.rainbow = { enable = true }
 
@@ -142,6 +143,7 @@ lvim.plugins = {
     },
     {
         "folke/persistence.nvim", -- save sessions
+        event = "VeryLazy",
         config = function()
             require("persistence").setup {
                 dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
