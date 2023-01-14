@@ -11,7 +11,7 @@ export EDITOR=lvim
 export GOPATH=/Users/chrisnojima/go
 export KEYBASE_RUN_MODE=prod
 # export KEYBASE_DEV_TOOL_ROOTS="/Users/chrisnojima/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi"
-# export KEYBASE_DEV_TOOL_EXTENSIONS="/Users/chrisnojima/code/react/packages/react-devtools-extensions/chrome/build/unpacked"
+export KEYBASE_DEV_TOOL_EXTENSIONS="/Users/chrisnojima/code/react/packages/react-devtools-extensions/chrome/build/unpacked"
 export REACT_EDITOR=lvim
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Users/chrisnojima/.config/yarn/global/node_modules/.bin
@@ -36,7 +36,6 @@ alias "cleanvim=lvim -u NONE"
 alias "nopluginvim=lvim --noplugin"
 alias "aoff=adb reverse --remove-all"
 alias "aon=adb reverse tcp:8081 tcp:8081; adb reverse tcp:7007 tcp:7007; adb reverse tcp:8097 tcp:8097"
-alias "/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools/systrace/systrace.py --time=10 -o ~/trace.html sched gfx view -a io.keybase.ossifrage"
 
 ssh-add -A 2> /dev/null
 

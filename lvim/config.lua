@@ -138,12 +138,10 @@ null_ls.setup({
 
 lvim.plugins = {
     { "ggandor/leap.nvim",
-        lazy = true,
         config = function() require('leap').set_default_keymaps() end,
     },
     {
         "folke/persistence.nvim", -- save sessions
-        lazy=true,
         config = function()
             require("persistence").setup {
                 dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
@@ -151,11 +149,11 @@ lvim.plugins = {
             }
         end,
     },
-    { 'tpope/vim-abolish', lazy=true }, --- smarter substitute and abbreviate
-    { 'tpope/vim-fugitive', lazy=true }, --- git integration
-    { 'tpope/vim-repeat', lazy=true }, --- repeat commands better
-    { 'tpope/vim-surround', lazy=true }, --- surround things better
-    { 'tpope/vim-unimpaired', lazy=true }, --- toggle mappings quicker
+    { 'tpope/vim-abolish'}, --- smarter substitute and abbreviate
+    { 'tpope/vim-fugitive'}, --- git integration
+    { 'tpope/vim-repeat'}, --- repeat commands better
+    { 'tpope/vim-surround'}, --- surround things better
+    { 'tpope/vim-unimpaired'}, --- toggle mappings quicker
     { 'bluz71/vim-nightfly-guicolors'}, -- color scheme
 }
 
