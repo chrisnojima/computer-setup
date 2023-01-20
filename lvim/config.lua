@@ -162,35 +162,18 @@ lvim.plugins = {
 }
 
 local options = {
-    autoindent = true,
-    autoread = true,
-    backspace = { "indent", "start", "eol" },
     cmdheight = 0,
-    diffopt = "vertical",
     errorbells = false,
-    hidden = true,
     history = 700,
     inccommand = "split", -- realtime replace
-    incsearch = true, -- incremental search
-    laststatus = 2, -- always show the statusbar
-    lazyredraw = true, -- buffers screen updates
-    linebreak = true, -- linebreak
-    magic = true, -- magic regexp options
     relativenumber = true, -- set relative numbered lines
     shiftwidth = 4, -- tab width
-    showcmd = true, -- show current command on lower right, useful for leader
-    showmatch = true, -- show matching brackets
-    sidescrolloff = 8,
     spell = true, -- spellcheck
-    splitbelow = false,
-    splitright = false,
     suffixesadd = { ".tsx", ".native.tsx", ".d.ts", ".js" },
     tabstop = 4, -- tabs
     termguicolors = true, -- full colors
     timeoutlen = 500, -- defer which key some
-    textwidth = 0, -- never linebreak
     virtualedit = "block", -- visual block anywhere
-    visualbell = false, -- no sounds
     wildignore = "*node_modules/**", -- ignore
 }
 
