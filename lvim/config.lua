@@ -32,12 +32,14 @@ lvim.keys.normal_mode["<S-l>"] = "<cmd>BufferLineCycleNext<cr>"
 lvim.keys.visual_mode["p"] = '"_dP'
 lvim.keys.visual_mode["P"] = '"_dP'
 
-lvim.builtin.which_key.mappings["o"] = {"<cmd>only<CR>", "Close other panes"}
-lvim.builtin.which_key.mappings["nn"] = {"<cmd>lua require'nvim-tree'.toggle()<CR>", "Open tree"}
+lvim.builtin.which_key.mappings["o"] = { "<cmd>only<CR>", "Close other panes" }
+lvim.builtin.which_key.mappings["nn"] = { "<cmd>lua require'nvim-tree'.toggle()<CR>", "Open tree" }
 
-lvim.builtin.which_key.mappings["s"]["c"] = {"<cmd>lua require('telescope.builtin').live_grep({cwd = 'chat'})<CR>", "Grep chat" }
-lvim.builtin.which_key.mappings["s"]["u"] = {"<cmd>Telescope resume<CR>", "Last search" }
-lvim.builtin.which_key.mappings["s"]["d"] = {"<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>", "LSP errors" }
+lvim.builtin.which_key.mappings["s"]["c"] = { "<cmd>lua require('telescope.builtin').live_grep({cwd = 'chat'})<CR>",
+    "Grep chat" }
+lvim.builtin.which_key.mappings["s"]["u"] = { "<cmd>Telescope resume<CR>", "Last search" }
+lvim.builtin.which_key.mappings["s"]["d"] = { "<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>",
+    "LSP errors" }
 
 lvim.builtin.which_key.mappings["S"] = {
     name = "Session",
@@ -124,7 +126,7 @@ lvim.builtin.treesitter.ignore_install = {
 }
 lvim.builtin.treesitter.highlight.enabled = false
 lvim.builtin.treesitter.incremental_selection = {
-    enable= true,
+    enable = true,
 }
 lvim.lsp.installer.setup.automatic_installation = false
 
@@ -151,12 +153,12 @@ lvim.plugins = {
             }
         end,
     },
-    { 'tpope/vim-abolish'}, --- smarter substitute and abbreviate
-    { 'tpope/vim-fugitive'}, --- git integration
-    { 'tpope/vim-repeat'}, --- repeat commands better
-    { 'tpope/vim-surround'}, --- surround things better
-    { 'tpope/vim-unimpaired'}, --- toggle mappings quicker
-    { 'bluz71/vim-nightfly-guicolors'}, -- color scheme
+    { 'tpope/vim-abolish' }, --- smarter substitute and abbreviate
+    { 'tpope/vim-fugitive' }, --- git integration
+    { 'tpope/vim-repeat' }, --- repeat commands better
+    { 'tpope/vim-surround' }, --- surround things better
+    { 'tpope/vim-unimpaired' }, --- toggle mappings quicker
+    { 'bluz71/vim-nightfly-guicolors' }, -- color scheme
 }
 
 local options = {

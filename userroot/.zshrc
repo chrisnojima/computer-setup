@@ -36,6 +36,7 @@ alias "cleanvim=lvim -u NONE"
 alias "nopluginvim=lvim --noplugin"
 alias "aoff=adb reverse --remove-all"
 alias "aon=adb reverse tcp:8081 tcp:8081; adb reverse tcp:7007 tcp:7007; adb reverse tcp:8097 tcp:8097"
+alias "gd=GIT_EXTERNAL_DIFF=difft git diff"
 
 ssh-add -A 2> /dev/null
 
