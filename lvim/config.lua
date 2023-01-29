@@ -176,10 +176,11 @@ local options = {
     virtualedit = "block", -- visual block anywhere
     wildignore = "*node_modules/**", -- ignore
 }
-
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
+vim.opt.diffopt:append('vertical')
 
 vim.cmd(":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared")
 vim.api.nvim_create_user_command("Kdebug", ":e ~/Library/Logs/Keybase.app.debug ", {})
