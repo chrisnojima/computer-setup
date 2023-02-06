@@ -153,6 +153,11 @@ lvim.plugins = {
             }
         end,
     },
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "BufRead",
+        config = function() require "lsp_signature".on_attach() end,
+    },
     { 'tpope/vim-abolish' }, --- smarter substitute and abbreviate
     { 'tpope/vim-fugitive' }, --- git integration
     { 'tpope/vim-repeat' }, --- repeat commands better
