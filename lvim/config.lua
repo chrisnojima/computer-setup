@@ -1,54 +1,55 @@
-vim.opt.shell = "/bin/sh"
+vim.opt.shell                             = "/bin/sh"
 -- lvim.log.level = "debug"
-lvim.log.level = "warn"
-lvim.format_on_save = {
+lvim.log.level                            = "warn"
+lvim.format_on_save                       = {
     enabled = true,
     pattern = "*",
     timeout = 10000,
 }
-lvim.colorscheme = "nightfly"
+lvim.colorscheme                          = "nightfly"
 
-vim.g.nightflyCursorColor         = 1
-vim.g.nightflyUnderlineMatchParen = 0
-vim.g.nightflyNormalFloat         = 1
+vim.g.nightflyCursorColor                 = 1
+vim.g.nightflyUnderlineMatchParen         = 0
+vim.g.nightflyNormalFloat                 = 1
 
-lvim.leader = ","
-vim.g.mapleader = ','
+lvim.leader                               = ","
+vim.g.mapleader                           = ','
 -- resize windows
-lvim.keys.normal_mode["<C-Up>"] = ":resize +2<CR>"
-lvim.keys.normal_mode["<C-Down>"] = ":resize -2<CR>"
+lvim.keys.normal_mode["<C-Up>"]           = ":resize +2<CR>"
+lvim.keys.normal_mode["<C-Down>"]         = ":resize -2<CR>"
 -- legacy keys
-lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope find_files<CR>"
+lvim.keys.normal_mode["<C-p>"]            = "<cmd>Telescope find_files<CR>"
 -- center on search
-lvim.keys.normal_mode["n"] = "nzz"
-lvim.keys.normal_mode["N"] = "Nzz"
-lvim.keys.normal_mode[":cn"] = ":cn<CR>zz"
+lvim.keys.normal_mode["n"]                = "nzz"
+lvim.keys.normal_mode["N"]                = "Nzz"
+lvim.keys.normal_mode[":cn"]              = ":cn<CR>zz"
 
 -- keep old buffer changes
-lvim.keys.normal_mode["<S-h>"] = "<cmd>BufferLineCyclePrev<cr>"
-lvim.keys.normal_mode["<S-l>"] = "<cmd>BufferLineCycleNext<cr>"
+lvim.keys.normal_mode["<S-h>"]            = "<cmd>BufferLineCyclePrev<cr>"
+lvim.keys.normal_mode["<S-l>"]            = "<cmd>BufferLineCycleNext<cr>"
 
 -- paste on top don't lose clipboard
-lvim.keys.visual_mode["p"] = '"_dP'
-lvim.keys.visual_mode["P"] = '"_dP'
+lvim.keys.visual_mode["p"]                = '"_dP'
+lvim.keys.visual_mode["P"]                = '"_dP'
 
-lvim.builtin.which_key.mappings["o"] = { "<cmd>only<CR>", "Close other panes" }
-lvim.builtin.which_key.mappings["nn"] = { "<cmd>lua require'nvim-tree'.toggle()<CR>", "Open tree" }
+lvim.builtin.which_key.mappings["o"]      = { "<cmd>only<CR>", "Close other panes" }
+lvim.builtin.which_key.mappings["nn"]     = { "<cmd>lua require'nvim-tree'.toggle()<CR>", "Open tree" }
 
 lvim.builtin.which_key.mappings["s"]["c"] = { "<cmd>lua require('telescope.builtin').live_grep({cwd = 'chat'})<CR>",
     "Grep chat" }
 lvim.builtin.which_key.mappings["s"]["u"] = { "<cmd>Telescope resume<CR>", "Last search" }
-lvim.builtin.which_key.mappings["s"]["d"] = { "<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>",
+lvim.builtin.which_key.mappings["s"]["d"] = {
+    "<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>",
     "LSP errors" }
 
-lvim.builtin.which_key.mappings["S"] = {
+lvim.builtin.which_key.mappings["S"]      = {
     name = "Session",
     c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
     l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
     Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
 }
 
-lvim.builtin.which_key.mappings["t"] = {
+lvim.builtin.which_key.mappings["t"]      = {
     name = "Diagnostics",
     t = { "<cmd>TroubleToggle<cr>", "trouble" },
     w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace" },
@@ -140,7 +141,8 @@ null_ls.setup({
 })
 
 lvim.plugins = {
-    { "ggandor/leap.nvim",
+    {
+        "ggandor/leap.nvim",
         config = function() require('leap').set_default_keymaps() end,
     },
     {
@@ -158,27 +160,68 @@ lvim.plugins = {
         event = "BufRead",
         config = function() require "lsp_signature".on_attach() end,
     },
-    { 'tpope/vim-abolish' }, --- smarter substitute and abbreviate
-    { 'tpope/vim-fugitive' }, --- git integration
-    { 'tpope/vim-repeat' }, --- repeat commands better
-    { 'tpope/vim-surround' }, --- surround things better
-    { 'tpope/vim-unimpaired' }, --- toggle mappings quicker
+    { 'tpope/vim-abolish' },             --- smarter substitute and abbreviate
+    { 'tpope/vim-fugitive' },            --- git integration
+    { 'tpope/vim-repeat' },              --- repeat commands better
+    { 'tpope/vim-surround' },            --- surround things better
+    { 'tpope/vim-unimpaired' },          --- toggle mappings quicker
     { 'bluz71/vim-nightfly-guicolors' }, -- color scheme
+    -- {
+    --     "github/copilot.vim",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         -- copilot assume mapped
+    --         vim.g.copilot_assume_mapped = true
+    --         vim.g.copilot_no_tab_map = true
+    --     end,
+    -- },
+    -- {
+    --     "hrsh7th/cmp-copilot",
+    --     config = function()
+    --         lvim.builtin.cmp.formatting.source_names["copilot"] = "()"
+    --         -- table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
+    --         -- lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+    --         table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
+    --     end,
+    -- },
+    {
+        "zbirenbaum/copilot.lua",
+        event = { "VimEnter" },
+        config = function()
+            vim.defer_fn(function()
+                require("copilot").setup {
+                    plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+                    suggestion = { enabled = false, auto_trigger = true },
+                    panel = { enabled = false, auto_refresh = true },
+                }
+            end, 100)
+        end,
+    },
+    {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+            require("copilot_cmp").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+            })
+        end,
+        after = { "copilot.lua", "nvim-cmp" },
+    },
 }
 
 local options = {
     cmdheight = 0,
     errorbells = false,
     history = 700,
-    inccommand = "split", -- realtime replace
-    relativenumber = true, -- set relative numbered lines
-    shiftwidth = 4, -- tab width
-    spell = true, -- spellcheck
+    inccommand = "split",            -- realtime replace
+    relativenumber = true,           -- set relative numbered lines
+    shiftwidth = 4,                  -- tab width
+    spell = true,                    -- spellcheck
     suffixesadd = { ".tsx", ".native.tsx", ".d.ts", ".js" },
-    tabstop = 4, -- tabs
-    termguicolors = true, -- full colors
-    timeoutlen = 500, -- defer which key some
-    virtualedit = "block", -- visual block anywhere
+    tabstop = 4,                     -- tabs
+    termguicolors = true,            -- full colors
+    timeoutlen = 500,                -- defer which key some
+    virtualedit = "block",           -- visual block anywhere
     wildignore = "*node_modules/**", -- ignore
 }
 for k, v in pairs(options) do
