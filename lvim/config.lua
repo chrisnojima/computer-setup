@@ -210,7 +210,7 @@ lvim.plugins = {
 }
 
 local options = {
-    cmdheight = 0,
+    cmdheight = 1,
     errorbells = false,
     history = 700,
     inccommand = "split",            -- realtime replace
