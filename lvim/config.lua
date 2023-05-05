@@ -102,11 +102,27 @@ lvim.builtin.dap.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.treesitter.rainbow = { enable = true }
 
-local components = require "lvim.core.lualine.components"
+lvim.builtin.lualine.active = true
 lvim.builtin.lualine.options.globalstatus = true
-lvim.builtin.lualine.sections.lualine_b = { { "filename", path = 1, shorting_target = 100 } }
-lvim.builtin.lualine.sections.lualine_d = {}
-lvim.builtin.lualine.sections.lualine_x = { components.diagnostics }
+lvim.builtin.lualine.sections = {
+    lualine_a = {
+        { "fancy_mode", width = 1 }
+    },
+    lualine_b = {
+        { "branch" },
+        { "fancy_diff" },
+    },
+    lualine_c = { { "filename", path = 1, shorting_target = 100 } },
+    lualine_d = {},
+    lualine_x = {
+        { "fancy_macro" },
+        { "fancy_diagnostics" },
+        { "location" },
+    },
+    lualine_y = {},
+    lualine_z = { "progress" },
+}
+
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -166,24 +182,6 @@ lvim.plugins = {
     { 'tpope/vim-surround' },            --- surround things better
     { 'tpope/vim-unimpaired' },          --- toggle mappings quicker
     { 'bluz71/vim-nightfly-guicolors' }, -- color scheme
-    -- {
-    --     "github/copilot.vim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         -- copilot assume mapped
-    --         vim.g.copilot_assume_mapped = true
-    --         vim.g.copilot_no_tab_map = true
-    --     end,
-    -- },
-    -- {
-    --     "hrsh7th/cmp-copilot",
-    --     config = function()
-    --         lvim.builtin.cmp.formatting.source_names["copilot"] = "()"
-    --         -- table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
-    --         -- lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
-    --         table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
-    --     end,
-    -- },
     {
         "zbirenbaum/copilot.lua",
         event = { "VimEnter" },
@@ -207,6 +205,7 @@ lvim.plugins = {
         end,
         after = { "copilot.lua", "nvim-cmp" },
     },
+    { "meuter/lualine-so-fancy.nvim" },
 }
 
 local options = {
