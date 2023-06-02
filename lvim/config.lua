@@ -109,7 +109,7 @@ lvim.builtin.lualine.sections = {
         { "fancy_mode", width = 1 }
     },
     lualine_b = {
-        { "branch" },
+        { "fancy_branch" },
         { "fancy_diff" },
     },
     lualine_c = { { "filename", path = 1, shorting_target = 100 } },
@@ -117,7 +117,7 @@ lvim.builtin.lualine.sections = {
     lualine_x = {
         { "fancy_macro" },
         { "fancy_diagnostics" },
-        { "location" },
+        { "fancy_location" },
     },
     lualine_y = {},
     lualine_z = { "progress" },
@@ -205,7 +205,7 @@ lvim.plugins = {
         end,
         after = { "copilot.lua", "nvim-cmp" },
     },
-    { "meuter/lualine-so-fancy.nvim" },
+    { "meuter/lualine-so-fancy.nvim" }
 }
 
 local options = {
@@ -233,3 +233,5 @@ vim.cmd(":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared")
 vim.api.nvim_create_user_command("Kdebug", ":e ~/Library/Logs/Keybase.app.debug ", {})
 vim.api.nvim_create_user_command("ZSH", ":e ~/.zshrc", {})
 vim.api.nvim_create_user_command("JSON", ":set ft=json|:%! jq .", {})
+vim.api.nvim_create_user_command("Kcd", ":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared", {})
+vim.cmd(":Kcd")
