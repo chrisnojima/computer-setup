@@ -41,6 +41,9 @@ lvim.builtin.which_key.mappings["s"]["u"] = { "<cmd>Telescope resume<CR>", "Last
 lvim.builtin.which_key.mappings["s"]["d"] = {
     "<cmd>lua require('telescope.builtin').diagnostics({default_text = ':error:'})<CR>",
     "LSP errors" }
+lvim.builtin.which_key.mappings["s"]["w"] = {
+    "<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({postfix = ' -F -i'})<CR>",
+    "Search word under cusor" }
 
 lvim.builtin.which_key.mappings["S"]      = {
     name = "Session",
@@ -141,6 +144,7 @@ lvim.builtin.treesitter.ignore_install = {
     "css",
     "yaml"
 }
+lvim.builtin.cmp.cmdline.enable = false
 lvim.builtin.treesitter.highlight.enabled = false
 lvim.builtin.treesitter.incremental_selection = {
     enable = true,
@@ -205,7 +209,14 @@ lvim.plugins = {
         end,
         after = { "copilot.lua", "nvim-cmp" },
     },
-    { "meuter/lualine-so-fancy.nvim" }
+    { "meuter/lualine-so-fancy.nvim" },
+    {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        config = function()
+            require("telescope").load_extension("live_grep_args")
+        end,
+        after = { "nvim-telescope/telescope.nvim", }
+    },
 }
 
 local options = {
@@ -235,3 +246,20 @@ vim.api.nvim_create_user_command("ZSH", ":e ~/.zshrc", {})
 vim.api.nvim_create_user_command("JSON", ":set ft=json|:%! jq .", {})
 vim.api.nvim_create_user_command("Kcd", ":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared", {})
 vim.cmd(":Kcd")
+
+function find_and_open_buffers(pattern)
+    -- Step 1: Get the list of files containing the pattern using Ripgrep (rg -l)
+    local command = string.format("rg -i -l '%s'", pattern)
+    local output = vim.fn.systemlist(command)
+
+    -- Step 2: Open the files as buffers using :next
+    if #output > 0 then
+        local buffer_list = table.concat(output, " ")
+        vim.cmd("next " .. buffer_list)
+    else
+        print("No matching files found.")
+    end
+end
+
+-- Define a command that calls our Lua function
+vim.api.nvim_command("command! -nargs=1 Rg lua find_and_open_buffers(<q-args>)")
