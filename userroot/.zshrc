@@ -26,9 +26,9 @@ export FZF_DEFAULT_OPTS="
 --color info:150,prompt:110,spinner:150,pointer:167,marker:174 \
 "
 
-alias "lvim=/Users/chrisnojima/.local/bin/lvim"
-alias "nvim=lvim"
-alias "vim=lvim"
+#alias "lvim=/Users/chrisnojima/.local/bin/lvim"
+# alias "nvim=lvim"
+alias "vim=nvim"
 alias "c=cd $GOPATH/src/github.com/keybase/client"
 alias "s=cd $GOPATH/src/github.com/keybase/client/shared"
 alias "m=git co master"
