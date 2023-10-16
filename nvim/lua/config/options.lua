@@ -6,6 +6,7 @@ vim.g.mapleader = ","
 
 local options = {
   cmdheight = 0,
+  conceallevel = 0, -- don't hide quotes in json etc
   errorbells = false,
   history = 700,
   inccommand = "split", -- realtime replace
