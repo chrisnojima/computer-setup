@@ -10,4 +10,4 @@ vim.keymap.set("n", "<leader>bl", "<cmd>BufferLineCloseRight<cr>")
 vim.keymap.set("n", "<leader>bh", "<cmd>BufferLineCloseLeft<cr>")
 
 -- TODO use ,xx
-vim.keymap.set("n", "<leader>gl", "<cmd>TroubleToggle document_diagnostics<cr>")
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })

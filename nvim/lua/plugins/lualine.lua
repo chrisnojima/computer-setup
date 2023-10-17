@@ -49,7 +49,7 @@ return {
         },
       }
       opts.sections.lualine_y = {
-        { "progress", separator = "", padding = { left = 0, right = 0 } },
+        { "progress", separator = " ", padding = { left = 0, right = 0 } },
         { "location", padding = { left = 0, right = 0 } },
       }
       opts.sections.lualine_z = {}

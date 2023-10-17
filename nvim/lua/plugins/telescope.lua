@@ -41,6 +41,7 @@ return {
       local actions = require("telescope.actions")
       return {
         defaults = {
+          path_display = { shorten = 3 },
           file_ignore_patterns = {
             "%.circleci/",
             "%.png$",
