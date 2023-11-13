@@ -31,6 +31,10 @@ return {
           filter = { event = "msg_show", find = "search hit" },
           opts = { skip = true },
         },
+        {
+          filter = { kind = "" },
+          view = "mini",
+        },
       },
     },
   },
