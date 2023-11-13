@@ -29,7 +29,7 @@ vim.api.nvim_create_user_command("Kdebug", ":e ~/Library/Logs/Keybase.app.debug 
 vim.api.nvim_create_user_command("ZSH", ":e ~/.zshrc", {})
 vim.api.nvim_create_user_command("JSON", ":set ft=json|:%! jq .", {})
 vim.api.nvim_create_user_command("Kcd", ":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared", {})
-vim.cmd(":Kcd")
+-- vim.cmd(":Kcd")
 
 function find_and_open_buffers(pattern)
   -- Step 1: Get the list of files containing the pattern using Ripgrep (rg -l)

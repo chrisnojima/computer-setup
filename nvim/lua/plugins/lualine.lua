@@ -35,11 +35,6 @@ return {
           color = Util.ui.fg("Constant"),
         },
         {
-          require("lazy.status").updates,
-          cond = require("lazy.status").has_updates,
-          color = Util.ui.fg("Special"),
-        },
-        {
           "diff",
           symbols = {
             added = icons.git.added,
