@@ -13,7 +13,7 @@ local options = {
   relativenumber = true, -- set relative numbered lines
   shiftwidth = 4, -- tab width
   spell = true, -- spellcheck
-  suffixesadd = { ".tsx", ".native.tsx", ".d.ts", ".js" },
+  suffixesadd = { ".tsx", ".native.tsx", ".d.ts", ".js", "/index.tsx" },
   tabstop = 4, -- tabs
   termguicolors = true, -- full colors
   timeoutlen = 500, -- defer which key some
@@ -23,6 +23,8 @@ local options = {
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
+
+vim.cmd(":packadd cfilter")
 
 vim.api.nvim_create_user_command("Q", ":qa!", {})
 vim.api.nvim_create_user_command("Kdebug", ":e ~/Library/Logs/Keybase.app.debug ", {})
