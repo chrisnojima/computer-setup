@@ -25,12 +25,14 @@ for k, v in pairs(options) do
 end
 
 vim.cmd(":packadd cfilter")
+vim.cmd([[autocmd FileType typescript,typescriptreact compiler tsc | setlocal makeprg=yarn\ tsc]])
 
 vim.api.nvim_create_user_command("Q", ":qa!", {})
 vim.api.nvim_create_user_command("Kdebug", ":e ~/Library/Logs/Keybase.app.debug ", {})
 vim.api.nvim_create_user_command("ZSH", ":e ~/.zshrc", {})
 vim.api.nvim_create_user_command("JSON", ":set ft=json|:%! jq .", {})
 vim.api.nvim_create_user_command("Kcd", ":cd /Users/chrisnojima/go/src/github.com/keybase/client/shared", {})
+
 -- vim.cmd(":Kcd")
 
 function find_and_open_buffers(pattern)
