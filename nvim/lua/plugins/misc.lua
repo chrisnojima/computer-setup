@@ -1,14 +1,10 @@
 return {
   { "bluz71/vim-nightfly-guicolors" }, -- color scheme
-  {
-    "LazyVim/LazyVim",
-    opts = { colorscheme = "nightfly" },
-  },
+  { "LazyVim/LazyVim", opts = { colorscheme = "nightfly" } },
   { "echasnovski/mini.comment", version = "*" },
-  {
-    "rcarriga/nvim-notify",
-    opts = { render = "compact" },
-  },
+  { "rcarriga/nvim-notify", opts = { render = "compact" } },
+  { "echasnovski/mini.pairs", enabled = false },
+  { "folke/todo-comments.nvim", enabled = false },
   {
     "folke/flash.nvim",
     opts = {
@@ -18,7 +14,6 @@ return {
       },
     },
   },
-  { "folke/todo-comments.nvim", enabled = false },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
