@@ -10,6 +10,7 @@ local options = {
   errorbells = false,
   history = 700,
   inccommand = "split", -- realtime replace
+  mouse = "", -- disable mouse
   relativenumber = true, -- set relative numbered lines
   shiftwidth = 4, -- tab width
   spell = true, -- spellcheck

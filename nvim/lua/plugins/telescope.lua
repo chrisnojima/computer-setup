@@ -38,6 +38,8 @@ return {
               ["<C-k>"] = actions.move_selection_previous,
               ["<C-n>"] = actions.move_selection_next,
               ["<C-p>"] = actions.move_selection_previous,
+              ["<C-Down>"] = actions.cycle_history_next,
+              ["<C-Up>"] = actions.cycle_history_prev,
             },
             -- for normal mode
             n = {
@@ -45,28 +47,12 @@ return {
               ["<C-k>"] = actions.move_selection_previous,
               ["<C-n>"] = actions.move_selection_next,
               ["<C-p>"] = actions.move_selection_previous,
+              ["<C-Down>"] = actions.cycle_history_next,
+              ["<C-Up>"] = actions.cycle_history_prev,
             },
           },
         },
       }
     end,
-  },
-  {
-    "nvim-telescope/telescope-live-grep-args.nvim",
-    config = function()
-      require("telescope").load_extension("live_grep_args")
-    end,
-    after = { "nvim-telescope/telescope.nvim" },
-  },
-  -- add telescope-fzf-native
-  {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-    },
   },
 }

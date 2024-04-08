@@ -36,6 +36,10 @@ alias "cleanvim=lvim -u NONE"
 alias "nopluginvim=lvim --noplugin"
 alias "aoff=adb reverse --remove-all"
 alias "aon=adb reverse tcp:8081 tcp:8081; adb reverse tcp:7007 tcp:7007; adb reverse tcp:8097 tcp:8097"
+alias "kbservice=keybase -d --log-file=/Users/chrisnojima/Library/Logs/keybase.service.log service"
+alias "kbservicelocal=/Users/chrisnojima/go/bin/keybase -d --log-file=/Users/chrisnojima/Library/Logs/keybase.service.log service"
+alias "makekbfs=cd /Users/chrisnojima/go/src/github.com/keybase/client/go/kbfs/kbfsfuse; go build -tags production && KEYBASE_DEBUG=true ./kbfsfuse -debug -mount-type=none"
+alias "lsbig=ls -laRd ./**/*(.) | sort -k5 -rn | head -n 40"
 
 ssh-add -A 2> /dev/null
 
