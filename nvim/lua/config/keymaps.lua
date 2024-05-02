@@ -11,3 +11,9 @@ vim.keymap.set("n", "<leader>bh", "<cmd>BufferLineCloseLeft<cr>")
 
 -- TODO use ,xx
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
+-- stop ,w from showing this window
+vim.keymap.del("n", "<leader>w-")
+vim.keymap.del("n", "<leader>w|")
+vim.keymap.del("n", "<leader>wd")
+vim.keymap.del("n", "<leader>ww")
