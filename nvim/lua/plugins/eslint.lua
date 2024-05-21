@@ -1,3 +1,4 @@
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/linting/eslint.lua
 return {
   {
     "neovim/nvim-lspconfig",
@@ -8,24 +9,25 @@ return {
         eslint = {
           settings = {
             -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-            workingDirectory = { mode = "auto" },
+            workingDirectories = { mode = "auto" },
+            codeActionOnSave = { enable = false },
+            format = false,
           },
         },
       },
       setup = {
         eslint = function()
           local function get_client(buf)
-            return require("lazyvim.util").lsp.get_clients({ name = "eslint", bufnr = buf })[1]
+            return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
           end
 
-          local formatter = require("lazyvim.util").lsp.formatter({
+          local formatter = LazyVim.lsp.formatter({
             name = "eslint: lsp",
             primary = false,
             priority = 200,
             filter = "eslint",
           })
 
-          -- dont auto fix
           -- Use EslintFixAll on Neovim < 0.10.0
           -- if not pcall(require, "vim.lsp._dynamic") then
           --   formatter.name = "eslint: EslintFixAll"
@@ -45,7 +47,7 @@ return {
           -- end
 
           -- register the formatter with LazyVim
-          require("lazyvim.util").format.register(formatter)
+          LazyVim.format.register(formatter)
         end,
       },
     },
