@@ -41,6 +41,13 @@ return {
           opts = { skip = true },
         },
         {
+          filter = {
+            event = "notify",
+            find = "Request textDocument/inlayHint failed",
+          },
+          opts = { skip = true },
+        },
+        {
           filter = { kind = "" },
           view = "mini",
         },

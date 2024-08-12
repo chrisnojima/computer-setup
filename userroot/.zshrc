@@ -10,7 +10,7 @@ export ANDROID_NDK=$ANDROID_NDK_HOME
 export EDITOR=nvim
 export GOPATH=/Users/chrisnojima/go
 export KEYBASE_RUN_MODE=prod
-# export KEYBASE_DEV_TOOL_ROOTS="/Users/chrisnojima/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi"
+#export KEYBASE_DEV_TOOL_ROOTS="/Users/chrisnojima/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi"
 export KEYBASE_DEV_TOOL_EXTENSIONS="/Users/chrisnojima/code/react/packages/react-devtools-extensions/chrome/build/unpacked"
 export REACT_EDITOR=nvim
 export PATH=$PATH:$GOPATH/bin
@@ -40,6 +40,8 @@ alias "kbservice=keybase -d --log-file=/Users/chrisnojima/Library/Logs/keybase.s
 alias "kbservicelocal=/Users/chrisnojima/go/bin/keybase -d --log-file=/Users/chrisnojima/Library/Logs/keybase.service.log service"
 alias "makekbfs=cd /Users/chrisnojima/go/src/github.com/keybase/client/go/kbfs/kbfsfuse; go build -tags production && KEYBASE_DEBUG=true ./kbfsfuse -debug -mount-type=none"
 alias "lsbig=ls -laRd ./**/*(.) | sort -k5 -rn | head -n 40"
+alias "reposwitch=yarn pod-clean ; rm -rf node_modules ; yarn modules ; yarn pod-install"
+alias "ll=eza -l --icons --no-user --no-permissions"
 
 ssh-add -A 2> /dev/null
 
