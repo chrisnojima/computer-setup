@@ -4,7 +4,10 @@ bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
 export ANDROID_HOME=/Users/chrisnojima/Library/Android/sdk
-export NDK_VER=23.1.7779620
+#master build
+#export NDK_VER=23.1.7779620
+export NDK_VER=26.1.10909125
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/$NDK_VER
 export ANDROID_NDK=$ANDROID_NDK_HOME
 export EDITOR=nvim
@@ -52,6 +55,38 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%b'
 PROMPT='%~ %{%F{none}%}%(?..%F{red}[%?]%F{white})> '
 RPROMPT='%{%F{green}%}$vcs_info_msg_0_'
+
+bold() {
+  echo -e "\e[31m$1\e[0m"
+}
+green() {
+  echo -e "\e[32m$1\e[0m"
+}
+
+check_deps() {
+  # Extract all dependencies (both regular and dev)
+  local dependencies=$(jq -r '.dependencies, .devDependencies | to_entries[] | .key' package.json)
+  
+  # Read each dependency
+  echo "$dependencies" | while read -r dep; do
+    # Get the current version from package.json
+    local current_version=$(jq -r --arg dep "$dep" '.dependencies[$dep] // .devDependencies[$dep]' package.json)
+    local latest_version=$(yarn info "$dep" versions --json |  jq -r '.data .[-1]')
+    # Check if current version is not the latest and is not in the list of available versions
+    if [[ "$current_version" != "$latest_version" ]]; then
+      echo "Package not latest: $dep"
+      echo -n "Current version: "
+      bold $current_version
+      echo -n "Latest: "
+      green $latest_version
+      local dist_version=$(yarn info "$dep" dist-tags --json |  jq -r '.data.latest')
+      if [[ "$current_version" != "$dist_version" ]]; then
+        echo -n "Dist: "
+        green $dist_version
+      fi
+    fi
+  done
+}
 
 # goto our path
 s

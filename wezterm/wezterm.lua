@@ -29,6 +29,19 @@ config.keys = {
 		mods = "CMD",
 		action = act.ClearScrollback("ScrollbackAndViewport"),
 	},
+	{
+		key = "f",
+		mods = "CMD",
+		action = act.Search({ CaseInSensitiveString = "" }),
+	},
+}
+
+config.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
 }
 
 wezterm.on("gui-startup", function(cmd)
