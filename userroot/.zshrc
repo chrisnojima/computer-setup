@@ -90,3 +90,4 @@ check_deps() {
 
 # goto our path
 s
+ulimit -n 128000

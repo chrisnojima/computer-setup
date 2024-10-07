@@ -14,8 +14,24 @@ return {
             format = false,
           },
         },
+        ts_ls = {
+          enabled = false,
+        },
+        vtsls = {
+          settings = {
+            vtsls = {
+              experimental = {
+                maxInlayHintLength = 20,
+              },
+            },
+          },
+        },
       },
       setup = {
+        ts_ls = function()
+          -- disable tsserver
+          return true
+        end,
         eslint = function()
           local function get_client(buf)
             return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
