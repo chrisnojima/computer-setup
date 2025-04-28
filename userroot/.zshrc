@@ -21,13 +21,13 @@ export PATH=$PATH:/Users/chrisnojima/.config/yarn/global/node_modules/.bin
 export PATH=$PATH:/Users/chrisnojima/.yarn/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/Users/chrisnojima/.local/bin
-export FZF_DEFAULT_COMMAND="rg . -g \'!**/Pods/**\' -i --files --color=never"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="
---color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229 \
---color info:150,prompt:110,spinner:150,pointer:167,marker:174 \
-"
+# export FZF_DEFAULT_COMMAND="rg . -g \'!**/Pods/**\' -i --files --color=never"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_DEFAULT_OPTS="
+# --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229 \
+# --color info:150,prompt:110,spinner:150,pointer:167,marker:174 \
+# "
 
 #alias "lvim=/Users/chrisnojima/.local/bin/lvim"
 # alias "nvim=lvim"
@@ -91,3 +91,5 @@ check_deps() {
 # goto our path
 s
 ulimit -n 128000
+export PATH="/usr/local/opt/go@1.21/bin:$PATH"
+source <(fzf --zsh)

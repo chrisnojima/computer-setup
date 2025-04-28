@@ -3,6 +3,7 @@
 -- Add any additional options here
 vim.opt.shell = "/bin/sh"
 vim.g.mapleader = ","
+vim.g.snacks_animate = false
 
 local options = {
   cmdheight = 0,

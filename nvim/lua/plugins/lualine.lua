@@ -32,7 +32,7 @@ return {
           cond = function()
             return package.loaded["noice"] and require("noice").api.status.mode.has()
           end,
-          color = Util.ui.fg("Constant"),
+          -- color = Util.ui.fg("Constant"),
         },
         {
           "diff",
