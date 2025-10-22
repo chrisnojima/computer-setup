@@ -5,7 +5,9 @@ bindkey '^[[B' down-line-or-search
 
 export ANDROID_HOME=/Users/chrisnojima/Library/Android/sdk
 #master build
+#echo 'loading old ndk TEMP zshrc'
 #export NDK_VER=23.1.7779620
+# new ver
 export NDK_VER=26.1.10909125
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/$NDK_VER
@@ -14,13 +16,18 @@ export EDITOR=nvim
 export GOPATH=/Users/chrisnojima/go
 export KEYBASE_RUN_MODE=prod
 #export KEYBASE_DEV_TOOL_ROOTS="/Users/chrisnojima/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi"
-export KEYBASE_DEV_TOOL_EXTENSIONS="/Users/chrisnojima/code/react/packages/react-devtools-extensions/chrome/build/unpacked"
+#export KEYBASE_DEV_TOOL_EXTENSIONS="/Users/chrisnojima/code/react/packages/react-devtools-extensions/chrome/build/unpacked"
 export REACT_EDITOR=nvim
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Users/chrisnojima/.config/yarn/global/node_modules/.bin
 export PATH=$PATH:/Users/chrisnojima/.yarn/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/Users/chrisnojima/.local/bin
+#export PATH=/usr/local/opt/go@1.22/bin:$PATH
+# we have a bugfix in a go fork in kb
+export GOROOT=/Users/chrisnojima/code/go
+export PATH=$GOROOT/bin:$PATH
+
 # export FZF_DEFAULT_COMMAND="rg . -g \'!**/Pods/**\' -i --files --color=never"
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -91,5 +98,4 @@ check_deps() {
 # goto our path
 s
 ulimit -n 128000
-export PATH="/usr/local/opt/go@1.21/bin:$PATH"
 source <(fzf --zsh)
