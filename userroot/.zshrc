@@ -52,6 +52,7 @@ alias "makekbfs=cd /Users/chrisnojima/go/src/github.com/keybase/client/go/kbfs/k
 alias "lsbig=ls -laRd ./**/*(.) | sort -k5 -rn | head -n 40"
 alias "reposwitch=yarn pod-clean ; rm -rf node_modules ; yarn modules ; yarn pod-install"
 alias "ll=eza -l --icons --no-user --no-permissions"
+alias "linttemp=yarn tsc > temp.log ; yarn lint >> temp.log"
 
 ssh-add -A 2> /dev/null
 
