@@ -27,6 +27,7 @@ export PATH=$PATH:/Users/chrisnojima/.local/bin
 # we have a bugfix in a go fork in kb
 export GOROOT=/Users/chrisnojima/code/go
 export PATH=$GOROOT/bin:$PATH
+#export KB_ENABLE_REMOTE_DEBUG=1
 
 # export FZF_DEFAULT_COMMAND="rg . -g \'!**/Pods/**\' -i --files --color=never"
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -41,6 +42,7 @@ export PATH=$GOROOT/bin:$PATH
 alias "vim=nvim"
 alias "c=cd $GOPATH/src/github.com/keybase/client"
 alias "s=cd $GOPATH/src/github.com/keybase/client/shared"
+alias "c2=cd $GOPATH/src/github.com/keybase/client2"
 alias "m=git co master"
 alias "cleanvim=lvim -u NONE"
 alias "nopluginvim=lvim --noplugin"
@@ -100,3 +102,4 @@ check_deps() {
 s
 ulimit -n 128000
 source <(fzf --zsh)
+export PATH=$PATH:$HOME/.maestro/bin
