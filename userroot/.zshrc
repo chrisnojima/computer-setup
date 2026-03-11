@@ -3,7 +3,7 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
-export ANDROID_HOME=/Users/chrisnojima/Library/Android/sdk
+export ANDROID_HOME=$HOME/Library/Android/sdk
 #master build
 #echo 'loading old ndk TEMP zshrc'
 #export NDK_VER=23.1.7779620
@@ -13,16 +13,16 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/$NDK_VER
 export ANDROID_NDK=$ANDROID_NDK_HOME
 export EDITOR=nvim
-export GOPATH=/Users/chrisnojima/go
+export GOPATH=$HOME/go
 export KEYBASE_RUN_MODE=prod
 #export KEYBASE_DEV_TOOL_ROOTS="/Users/chrisnojima/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi"
 #export KEYBASE_DEV_TOOL_EXTENSIONS="/Users/chrisnojima/code/react/packages/react-devtools-extensions/chrome/build/unpacked"
 export REACT_EDITOR=nvim
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/Users/chrisnojima/.config/yarn/global/node_modules/.bin
-export PATH=$PATH:/Users/chrisnojima/.yarn/bin
+export PATH=$PATH:$HOME/.config/yarn/global/node_modules/.bin
+export PATH=$PATH:$HOME/.yarn/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:/Users/chrisnojima/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 #export PATH=/usr/local/opt/go@1.22/bin:$PATH
 # we have a bugfix in a go fork in kb
 #export GOROOT=/Users/chrisnojima/code/go
@@ -45,13 +45,13 @@ alias "c=cd $GOPATH/src/github.com/keybase/client"
 alias "s=cd $GOPATH/src/github.com/keybase/client/shared"
 alias "c2=cd $GOPATH/src/github.com/keybase/client2"
 alias "m=git co master"
-alias "cleanvim=lvim -u NONE"
-alias "nopluginvim=lvim --noplugin"
+alias "cleanvim=nvim -u NONE"
+alias "nopluginvim=nvim --noplugin"
 alias "aoff=adb reverse --remove-all"
 alias "aon=adb reverse tcp:8081 tcp:8081; adb reverse tcp:7007 tcp:7007; adb reverse tcp:8097 tcp:8097"
-alias "kbservice=keybase -d --log-file=/Users/chrisnojima/Library/Logs/keybase.service.log service"
-alias "kbservicelocal=/Users/chrisnojima/go/bin/keybase -d --log-file=/Users/chrisnojima/Library/Logs/keybase.service.log service"
-alias "makekbfs=cd /Users/chrisnojima/go/src/github.com/keybase/client/go/kbfs/kbfsfuse; go build -tags production && KEYBASE_DEBUG=true ./kbfsfuse -debug -mount-type=none"
+alias "kbservice=keybase -d --log-file=$HOME/Library/Logs/keybase.service.log service"
+alias "kbservicelocal=$HOME/go/bin/keybase -d --log-file=$HOME/Library/Logs/keybase.service.log service"
+alias "makekbfs=cd $HOME/go/src/github.com/keybase/client/go/kbfs/kbfsfuse; go build -tags production && KEYBASE_DEBUG=true ./kbfsfuse -debug -mount-type=none"
 alias "lsbig=ls -laRd ./**/*(.) | sort -k5 -rn | head -n 40"
 alias "reposwitch=yarn pod-clean ; rm -rf node_modules ; yarn modules ; yarn pod-install"
 alias "ll=eza -l --icons --no-user --no-permissions"
