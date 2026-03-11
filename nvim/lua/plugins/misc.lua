@@ -5,15 +5,7 @@ return {
   { "rcarriga/nvim-notify", opts = { render = "compact" } },
   { "nvim-mini/mini.pairs", enabled = false },
   { "folke/todo-comments.nvim", enabled = false },
-  {
-    "folke/flash.nvim",
-    opts = {
-      modes = {
-        search = { enabled = false },
-        char = { enabled = false },
-      },
-    },
-  },
+  { "folke/flash.nvim", enabled = false },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
