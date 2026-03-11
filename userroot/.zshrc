@@ -26,7 +26,7 @@ export PATH=$PATH:/Users/chrisnojima/.local/bin
 #export PATH=/usr/local/opt/go@1.22/bin:$PATH
 # we have a bugfix in a go fork in kb
 #export GOROOT=/Users/chrisnojima/code/go
-export GOROOT=/usr/local/Cellar/go/1.25.6/libexec
+export GOROOT="$(brew --prefix go)/libexec"
 #export PATH=$GOROOT/bin:$PATH
 #export KB_ENABLE_REMOTE_DEBUG=1
 
