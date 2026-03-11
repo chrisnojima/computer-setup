@@ -28,18 +28,7 @@ export PATH=$PATH:$HOME/.local/bin
 #export GOROOT=/Users/chrisnojima/code/go
 export GOROOT="$(brew --prefix go)/libexec"
 #export PATH=$GOROOT/bin:$PATH
-#export KB_ENABLE_REMOTE_DEBUG=1
 
-# export FZF_DEFAULT_COMMAND="rg . -g \'!**/Pods/**\' -i --files --color=never"
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-# export FZF_DEFAULT_OPTS="
-# --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229 \
-# --color info:150,prompt:110,spinner:150,pointer:167,marker:174 \
-# "
-
-#alias "lvim=/Users/chrisnojima/.local/bin/lvim"
-# alias "nvim=lvim"
 alias "vim=nvim"
 alias "c=cd $GOPATH/src/github.com/keybase/client"
 alias "s=cd $GOPATH/src/github.com/keybase/client/shared"
@@ -72,31 +61,6 @@ bold() {
 }
 green() {
   echo -e "\e[32m$1\e[0m"
-}
-
-check_deps() {
-  # Extract all dependencies (both regular and dev)
-  local dependencies=$(jq -r '.dependencies, .devDependencies | to_entries[] | .key' package.json)
-  
-  # Read each dependency
-  echo "$dependencies" | while read -r dep; do
-    # Get the current version from package.json
-    local current_version=$(jq -r --arg dep "$dep" '.dependencies[$dep] // .devDependencies[$dep]' package.json)
-    local latest_version=$(yarn info "$dep" versions --json |  jq -r '.data .[-1]')
-    # Check if current version is not the latest and is not in the list of available versions
-    if [[ "$current_version" != "$latest_version" ]]; then
-      echo "Package not latest: $dep"
-      echo -n "Current version: "
-      bold $current_version
-      echo -n "Latest: "
-      green $latest_version
-      local dist_version=$(yarn info "$dep" dist-tags --json |  jq -r '.data.latest')
-      if [[ "$current_version" != "$dist_version" ]]; then
-        echo -n "Dist: "
-        green $dist_version
-      fi
-    fi
-  done
 }
 
 # goto our path
