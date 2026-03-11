@@ -25,8 +25,9 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/Users/chrisnojima/.local/bin
 #export PATH=/usr/local/opt/go@1.22/bin:$PATH
 # we have a bugfix in a go fork in kb
-export GOROOT=/Users/chrisnojima/code/go
-export PATH=$GOROOT/bin:$PATH
+#export GOROOT=/Users/chrisnojima/code/go
+export GOROOT=/usr/local/Cellar/go/1.25.6/libexec
+#export PATH=$GOROOT/bin:$PATH
 #export KB_ENABLE_REMOTE_DEBUG=1
 
 # export FZF_DEFAULT_COMMAND="rg . -g \'!**/Pods/**\' -i --files --color=never"
