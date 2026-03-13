@@ -15,7 +15,7 @@
     bclean1 = "!f() { git branch --no-color --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
     bclean2 = !git branch -vv --no-color | grep ' gone' | cut -d' ' -f1-3 | xargs -n 1 git branch -D
     bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
-    tohub = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\" && open \"https://github.com/keybase/$(basename `git rev-parse --show-toplevel`)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1&diff=unified&name=$(git rev-parse --abbrev-ref HEAD)\""
+	tohub = "!f() { BRANCH=\"$(git rev-parse --abbrev-ref HEAD)\"; REPO=\"$(git remote get-url origin | sed -e 's|.*github.com[:/]||' -e 's|\\.git$||')\"; BASE=\"master\"; BEST=999999; for b in $(git for-each-ref --sort=creatordate --format='%(refname:short)' refs/heads/); do [ \"$b\" = \"$BRANCH\" ] && continue; if git merge-base --is-ancestor \"$b\" HEAD 2>/dev/null; then D=$(git rev-list --count \"$b\"..HEAD); if [ \"$D\" -lt \"$BEST\" ] && [ \"$D\" -gt 0 ]; then BEST=$D; BASE=$b; fi; fi; done; echo \"Opening PR: $BRANCH -> $BASE ($REPO)\"; git push --set-upstream origin \"$BRANCH\" && open \"https://github.com/$REPO/compare/$BASE...$BRANCH?expand=1&diff=unified\"; }; f"
     suicide = !git clean -fd && git reset --hard
     hardsuicide = !git clean -fdx && git reset --hard
     migrate = "!f(){ CURRENT=$(git symbolic-ref --short HEAD); git checkout -b $1 && git branch --force $CURRENT ${3-\"$CURRENT@{u}\"} && git rebase --onto ${2-master} $CURRENT; }; f"
@@ -26,11 +26,17 @@
     recent = "!r() { refbranch=$1 count=$2; git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)|%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always --count=${count:-20} | while read line; do branch=$(echo \"$line\" | awk 'BEGIN { FS = \"|\" }; { print $1 }' | tr -d '*'); ahead=$(git rev-list --count \"${refbranch:-origin/master}..${branch}\"); behind=$(git rev-list --count \"${branch}..${refbranch:-origin/master}\"); colorline=$(echo \"$line\" | sed 's/^[^|]*|//'); echo \"$ahead|$behind|$colorline\" | awk -F'|' -vOFS='|' '{$5=substr($5,1,70)}1' ; done | ( echo \"ahead|behind||branch|lastcommit|message|author\\n\" && cat) | column -ts'|';}; r"
     recentremote = "!r() { refbranch=$1 count=$2; git for-each-ref --sort=-committerdate refs/remotes/origin --format='%(refname:short)|%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always --count=${count:-20} | while read line; do fullbranch=$(echo \"$line\" | awk 'BEGIN { FS = \"|\" }; { print $1 }'); branch=${fullbranch#origin/}; ahead=$(git rev-list --count \"${refbranch:-origin/master}..${fullbranch}\"); behind=$(git rev-list --count \"${fullbranch}..${refbranch:-origin/master}\"); colorline=$(echo \"$line\" | sed 's/^[^|]*|//; s|origin/||'); echo \"$ahead|$behind|$colorline\" | awk -F'|' -vOFS='|' '{$5=substr($5,1,70)}1'; done | ( echo \"ahead|behind||branch|lastcommit|message|author\\n\" && cat) | column -ts'|'; }; r"
     wp = !git wip && git push
+    cleandiff = !git diff --no-ext-diff
+    treeswap = "!f() { HERE=\"$(git rev-parse --show-toplevel)\"; OTHER=\"$(git worktree list --porcelain | grep '^worktree ' | sed 's/^worktree //' | grep -vx \"$HERE\" | head -1)\"; if [ -z \"$OTHER\" ]; then echo 'Error: no other worktree found'; exit 1; fi; B1=\"$(git -C \"$HERE\" symbolic-ref --short HEAD)\"; B2=\"$(git -C \"$OTHER\" symbolic-ref --short HEAD)\"; if [ \"$B1\" = \"$B2\" ]; then echo \"Both worktrees already on same branch: $B1\"; exit 1; fi; echo \"Swapping: $B1 <-> $B2\"; git -C \"$OTHER\" checkout --detach HEAD --quiet && git -C \"$HERE\" checkout \"$B2\" --quiet && git -C \"$OTHER\" checkout \"$B1\" --quiet && echo \"Done! $(basename \"$HERE\") -> $B2, $(basename \"$OTHER\") -> $B1\"; }; f"
 [push]
 	default = simple
+[user]
+    name = chrisnojima
+    email = cnojima@keyba.se
+    signingkey = E49ED968
 [diff]
-    ; external = difft
-    ; tool = difftastic
+    external = difft
+    tool = difftastic
 [difftool]
     prompt = false
 [difftool "difftastic"]
@@ -76,3 +82,7 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
